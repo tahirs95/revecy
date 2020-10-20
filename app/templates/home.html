@@ -133,17 +133,17 @@
                     <form class="d-flex justify-content-center" onsubmit="validateCaptcha()">
                         <div class="form-row">
                             <div class="form-group mt-3 col-12">
-                                <input type="text" class="form-control" placeholder="Name" required>
+                                <input type="text" class="form-control" placeholder="Name" id="name" required>
                             </div>
                             <div class="form-group mt-3 col-12">
-                                <input type="email" class="form-control" placeholder="Email" required>
+                                <input type="email" class="form-control" placeholder="Email" id="email" required>
                             </div>
                             <div class="form-group mt-3 col-12">
-                                <input type="text" class="form-control" placeholder="Phone (xxx-xxx-xxxx)"   pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="Pattern xxx-xxx-xxxx" required>
+                                <input type="text" class="form-control" placeholder="Phone (xxx-xxx-xxxx)" id="phone"   pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="Pattern xxx-xxx-xxxx" required>
                             </div>
                             <div class="form-group mt-3 col-12">
                                 <div class="form-group">
-                                    <textarea class="form-control" rows = "3" placeholder="Message" required></textarea>
+                                    <textarea class="form-control" rows = "3" placeholder="Message" id="message" required></textarea>
                                 </div>
                             </div>  
                             <div class="form-group col-12" id="captcha-design">
@@ -196,8 +196,8 @@
         </div>
       </div>
 
-    <script src="/static/js/jquery-3.5.1.slim.min.js"></script>
-    <script src="/static/js/popper.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="/static/js/popper.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
 
 
@@ -232,7 +232,15 @@
         event.preventDefault();
         debugger
         if (document.getElementById("cpatchaTextBox").value == code) {
-            // alert("Valid Captcha")
+            var settings = {
+  "url": "http://127.0.0.1:8000/email",
+  "method": "POST",
+  "data": JSON.stringify({"name":document.getElementById("name").value,"phone":document.getElementById("phone").value,"email":document.getElementById("email").value,"message":document.getElementById("message").value}),
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
           document.getElementById("btn").click()
         }else{
             alert("Invalid Captcha. try Again");

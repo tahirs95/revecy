@@ -30,7 +30,7 @@ def send_email(request, *args, **kwargs):
         email = body['email']
         message = body['message']
         message = "Name:{}. Phone:{}. Email:{}. Message:{}"
-        email("Registration Completed", message, ["tahirs95@hotmail.com"])
+        email("Registration Completed", message, ["inquiry@revecy.com"])
         return JsonResponse({"message":"only POST request is entertained"})
 
 

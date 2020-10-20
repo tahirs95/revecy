@@ -22,22 +22,7 @@ def email(subject, message, recipient_list):
     send_mail(subject, message, email_from, recipient_list)
 
 @csrf_exempt
-def send_email(request, *args, **kwargs):
-    if request.method == 'POST':
-        body = json.loads(request.body)
-        name = body['name']
-        phone = body['phone']
-        email = body['email']
-        message = body['message']
-        message = "Name:{}. Phone:{}. Email:{}. Message:{}"
-        email("Registration Completed", message, ["inquiry@revecy.com"])
-        return JsonResponse({"message":"only POST request is entertained"})
-
-
-from django.views.decorators.csrf import csrf_exempt
-
-@csrf_exempt
-def my_view(request):
+def send_email(request):
     if request.method == 'POST':
         body = json.loads(request.body)
         name = body['name']
@@ -45,5 +30,5 @@ def my_view(request):
         user_email = body['email']
         message = body['message']
         message = "Name:{}. Phone:{}. Email:{}. Message:{}".format(name, phone, user_email, message)
-        email("Registration Completed", message, ["tahirs95@hotmail.com"])
+        email("Registration Completed", message, ["inquiry@revecy.com"])
         return JsonResponse({"message":"only POST request is entertained"})

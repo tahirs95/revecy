@@ -316,3 +316,6 @@
   .btn-outline-light:hover,.btn-outline-light:not(:disabled):not(.disabled).active, .btn-outline-light:not(:disabled):not(.disabled):active, .show>.btn-outline-light.dropdown-toggle {
     color: #212529 !important;
 }
+.icon{
+    width: 36px;
+}

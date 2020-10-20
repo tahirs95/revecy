@@ -313,3 +313,6 @@
       -webkit-animation: colored-circle 0.6s ease-in-out 0.7s backwards;
       animation: colored-circle 0.6s ease-in-out 0.7s backwards;
   } 
+  .btn-outline-light:hover,.btn-outline-light:not(:disabled):not(.disabled).active, .btn-outline-light:not(:disabled):not(.disabled):active, .show>.btn-outline-light.dropdown-toggle {
+    color: #212529 !important;
+}

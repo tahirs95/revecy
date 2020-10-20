@@ -1,0 +1,212 @@
+@font-face {
+    font-family: Montserrat-Regular;
+    src: url(../fonts/Montserrat/Montserrat-Regular.ttf);
+}
+@font-face {
+    font-family: Montserrat-Bold;
+    src: url(../fonts/Montserrat/Montserrat-Bold.ttf);
+}
+@font-face {
+    font-family: Montserrat-Light;
+    src: url(../fonts/Montserrat/Montserrat-Light.ttf);
+}
+@font-face {
+    font-family: Montserrat-SemiBold;
+    src: url(../fonts/Montserrat/Montserrat-SemiBold.ttf);
+}
+@font-face {
+    font-family: Glacial-Indifference-Regular;
+    src: url(../fonts/Glacial_Indifference_Font_Family/Glacial-Indifference-Regular.otf);
+}
+@font-face {
+    font-family: GlacialIndifference-Bold;
+    src: url(../fonts/Glacial_Indifference_Font_Family/GlacialIndifference-Bold.otf);
+}
+
+.bg-clr{
+    background-color: #262c37;
+}
+.revecy{
+    padding: 0px 50px;
+}
+
+.banner h1{
+    font-family: Montserrat-Bold;
+    font-size: 48px !important;
+}
+.banner p{
+    font-size: 24px;
+    font-family: Montserrat-Regular;
+}
+.banner .btn{
+    font-size: 25px;
+    font-family: Montserrat-Regular;
+    border: 1px solid #fff;
+}
+.strategicimg img{
+    background-color: black;
+}
+.bg-img{
+    position: relative;
+}
+.headingtwo{
+    position: absolute;
+    top: 90px;
+}
+.strategic-challenge .headingtwo h2{
+    font-family: Montserrat-SemiBold;
+    font-size: 40px !important;
+    text-align: center;
+    width: 100%;
+    color: black;
+}
+.headingtwo h2 span{
+    color: #1056c7;
+}
+.strategic-challenge .headingtwo p{
+    font-size: 20.6px;
+    text-align: justify;
+    font-family: Glacial-Indifference-Regular;
+}
+.bridging-perception h2{
+    font-size: 40px !important;
+    font-family: GlacialIndifference-Bold;
+}
+.bridging-perception h2 span{
+    color: #1056c7;
+}
+.bridging-perception h3{
+    color: #1056c7;
+    font-size: 40px !important;
+    font-family: GlacialIndifference-Bold;
+}
+.bridgingimg img{
+    position: relative;    
+}
+.bridgingimg h3{
+    position: absolute;
+    top: 20px;
+    right: -65px;
+}
+.getintouch h3{
+    font-family: Montserrat-Regular;
+}
+.getintouch h3 span{
+    color: #1056c7;
+}
+.form-group .form-control{
+    padding: .375rem .75rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.5;
+    border: 1px solid black;
+    box-shadow: 0px 0px 1px 1px #8080807d;
+}
+.form-group input::placeholder {
+    color: black;
+    font-family: Montserrat-Regular;
+}
+.form-group textarea::placeholder{
+    color: black;
+    font-family: Montserrat-Regular;
+}
+.getintouch .form-row{
+    width: 90%;
+}
+
+
+/* Media Query */
+@media screen and (min-width: 769px) and (max-width: 1024px){
+    .headingtwo {
+        position: absolute;
+        top: 40px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .banner .w-75{
+        width: 100% !important;
+    }
+    .headingtwo {
+        position: absolute;
+        top: 20px;
+    }
+    .headingtwo .w-75{
+        font-size: 16px !important;
+        width: 100%!important;
+        padding: 25px;
+    }
+    .bannerright{
+        display: flex !important;
+        justify-content: center !important;
+    }
+    .bridging-perception h2{
+        width: 100% !important;
+        padding-bottom: 20px;
+    }
+    .bridging-perception h3{
+        font-size: 30px !important;
+    }
+    .bridgingimg h3{
+        right: -35px;
+    }
+    .getintouch h3{
+        padding-top: 30px;
+    }
+}
+
+@media screen and (max-width: 525px){
+    .navbar-brand img{
+        width: 75% !important;
+    }
+    .banner h1{
+        font-size: 30px !important;
+    }
+    .banner .w-75{
+        width: 100% !important;
+    }
+    .banner .btn{
+        margin-bottom: 20px !important;
+    }
+    .bridging-perception h2{
+        font-size: 25px !important;
+    }
+    .bridging-perception h3{
+        font-size: 25px !important;
+    }
+    .getintouch h3{
+        font-size: 40px;
+    }
+    
+}
+
+@media screen and (min-width: 300px) and (max-width: 500px){
+    .revecy {
+        padding: 0px 15px 0px 15px;
+    }
+    .bannerimg img{
+        padding-right: 15px;
+    }
+    .bridgingimg h3{
+        right: 20px;
+        top: 5px;
+    }
+    .row{
+        margin-right: 0px;
+    }
+    .strategic-challenge .headingtwo h2{
+        font-size: 24px !important;
+    }
+    .headingtwo .w-75 {
+        font-size: 14px !important;
+        width: 100%!important;
+        padding: 15px;
+    }
+    .getintouch .form-row {
+        width: 100%;
+    }
+}
+#captcha-design{
+    padding-right: 5px;
+    padding-left: 5px;
+}

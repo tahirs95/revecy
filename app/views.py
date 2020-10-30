@@ -32,3 +32,6 @@ def send_email(request):
         message = "Name:{}. Phone:{}. Email:{}. Message:{}".format(name, phone, user_email, message)
         email("Registration Completed", message, ["inquiry@revecy.com"])
         return JsonResponse({"message":"only POST request is entertained"})
+
+def visualization(request):
+    return render(request, "visualization.html")

@@ -174,14 +174,11 @@
                             <table class="table">
                                 <thead>
                                 <tr class="d-flex white-space" id="table_heading">
-                                    <th class="left-heading">Field 1</th>
-                                    <th class="middle-heading">Field 1</th>
-                                    <th class="right-heading">Field 1</th>
-                                    <th class="right-heading">Field 3</th>
+                                   
                                 </tr>
                                 </thead>
-                                <tbody">
-                                <tr class="d-flex white-space">
+                                <tbody id="table_body">
+                                <!-- <tr class="d-flex white-space">
                                     <td class="filterable-cell left-data">Data</td>
                                     <td class="filterable-cell middle-data">Data</td>
                                     <td class="filterable-cell right-data">Data</td>
@@ -204,11 +201,11 @@
                                     <td class="filterable-cell data">Data</td>
                                     <td class="filterable-cell data ml-8 border-bottom-l-l">Data</td>
                                     <td class="filterable-cell right-data">Data</td>
-                                </tr>
+                                </tr> -->
                                 </tbody>
                             </table>
 
-                            <table class="table ml-12">
+                            <!-- <table class="table ml-12">
                                 <thead>
                                 <tr class="d-flex white-space">
                                     <th class="left-heading">Field 1</th>
@@ -430,7 +427,7 @@
                                     <td class="filterable-cell data ml-8 border-bottom-l-l">Data</td>
                                 </tr>
                                 </tbody>
-                            </table>
+                            </table> -->
                         </div>
                     </div>
                 </div>
@@ -459,7 +456,8 @@
                                     <p>{{shape.1}}</p>
                                 </div>
                             </div>
-                            <div class="summary-content">
+                            <div id="data_count">
+                            <!-- <div class="summary-content">
                                 <div class="summary-data">
                                     <p>Data Type 1</p>
                                 </div>
@@ -482,7 +480,8 @@
                                 <div class="summary-data">
                                     <p>1</p>
                                 </div>
-                            </div>
+                            </div> -->
+                        </div>
                             <div class="summary-content">
                                 <div class="summary-data">
                                     <p>Memory Used</p>
@@ -889,12 +888,41 @@ var layout = {
   }
 };
 Plotly.newPlot('heatmap', data,layout,config);
-// var csv =  {{sample_data|safe}};
 
-// Object.keys(csv).forEach(function(key) {
-//   console.log(key,csv[key])
-// })
-console.log({{corr_data|safe}})
+var data_count =  {{data_types_dict_count|safe}};
+   
+ Object.keys(data_count).forEach(function(key) {
+     $("#data_count").append(`
+     <div class="summary-content">
+                                <div class="summary-data">
+                                    <p>`+key+`</p>
+                                </div>
+                                <div class="summary-data">
+                                    <p>`+data_count[key]+`</p>
+                                </div>
+                            </div>
+     `)
+
+ })
+
+ var csv =  {{top_rows|safe}};
+var counter = 0;
+Object.keys(csv).forEach(function(key) {
+    $("#table_heading").append(`<th class="right-heading">`+key+`</th>`)
+    $("#table_body").append(`<tr class="d-flex white-space" id=row`+counter+`></tr>`)
+    counter++;
+})
+counter = 0;
+Object.keys(csv).forEach(function(key) {
+  console.log(csv[key])
+    Object.keys(csv[key]).forEach(function(key2) {
+$("#row"+counter).append(`<td class="filterable-cell right-data">`+csv[key][key2]+`</td>`)
+counter++;
+if(counter == 10){
+    counter =0;
+}
+    })
+})
     </script>
 </body>
 </html>

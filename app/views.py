@@ -181,4 +181,4 @@ def visualization(request):
         # pie chart (5 fields from str hierarchy)
         gb4 = data.groupby([parent]).agg({numerical_field: ['sum']})
 
-        return render(request, "visualization.html", {'sample_data':sample_data, 'shape':shape, 'file_name':file_name, 'corr_data':corr_data})
+        return render(request, "visualization.html", {'sample_data':sample_data, 'shape':shape, 'memory':memory, 'file_name':file_name, 'corr_data':corr_data})

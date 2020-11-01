@@ -64,15 +64,16 @@
                 </div>
             </div>
             <div class="row revecy mt-5">
-                <div class="col-lg-4 d-flex justify-content-center">
+                <div class="col-lg-4 d-flex justify-content-center mt-3">
                     <div class="button">
-                        <button type="button" class="btn">Get Data</button>
+                        <button type="button" class="btn" id="file_btn">Get Data</button>
+                        <input type="file" id="theFile"/>
                         <div class="icon">
                             <img src="/static/images/right-arrow.jpg">
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 d-flex justify-content-center">
+                <div class="col-lg-4 d-flex justify-content-center mt-3">
                     <div class="button">
                         <button type="button" class="btn">Try Sample</button>
                         <div class="icon">
@@ -80,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 d-flex justify-content-center">
+                <div class="col-lg-4 d-flex justify-content-center mt-3">
                     <div class="button">
                         <button id="mapButton" type="button" class="btn">Map Data</button>
                         <div class="icon">
@@ -92,116 +93,72 @@
             <!-- Table-->
             <div class="row revecy mt-5">
                 <div id="mapData">
-                    <div class="row select-options">
-                        <div class="col-lg-4 mb-5">
-                            <label class="select-name">Select Field</label>
-                            <div class="select">
-                                <select name="slct" id="slct">
-                                    <option selected disabled>Choose an option</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
-                                </select>
+                    <form action = "javascript:;" id="add_map_data_row_form">
+                        <div class="row select-options">
+                            <div class="col-lg-4 mb-5">
+                                <label class="select-name">Select Field</label>
+                                <div class="select">
+                                    <select name="select_field" id="slct_field" required>
+                                        <option selected disabled>Choose an option</option>
+                                        <option value="Field 1">Option 1</option>
+                                        <option value="Field 2">Option 2</option>
+                                        <option value="Field 3">Option 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 mb-5">
+                                <label class="select-name">Select Type</label>
+                                <div class="select">
+                                    <select name="select_type" id="slct_type" required>
+                                        <option selected disabled>Choose an option</option>
+                                        <option value="Type">Option 1</option>
+                                        <option value="Type">Option 2</option>
+                                        <option value="Type">Option 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 mb-5">
+                                <label class="select-name">Transformation</label>
+                                <div class="select">
+                                    <select name="select_transformation" id="slct_transformation" required>
+                                        <option selected disabled>Choose an option</option>
+                                        <option value="Transformation 1">Option 1</option>
+                                        <option value="Transformation 2">Option 2</option>
+                                        <option value="Transformation 3">Option 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 text-center">
+                                <button type="submit" class="btn btn-primary border-0 mb-4">Add Data</button>
                             </div>
                         </div>
-                        <div class="col-lg-4 mb-5">
-                            <label class="select-name">Select Type</label>
-                            <div class="select">
-                                <select name="slct" id="slct">
-                                    <option selected disabled>Choose an option</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mb-5">
-                            <label class="select-name">Transformation</label>
-                            <div class="select">
-                                <select name="slct" id="slct">
-                                    <option selected disabled>Choose an option</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                     <div class="blue-table-scroll" id="style-scroll">
                         <div class="row">
                             <div class="col-lg-12">
                                 <table class="table">
-                                    <tbody">
-                                    <tr class="d-flex white-space">
-                                        <td class="filterable-cell">Field 1</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Type</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Transformation</td>
-                                    </tr>
-                                    <tr class="d-flex white-space">
-                                        <td class="filterable-cell">Field 1</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Type</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Transformation</td>
-                                    </tr>
-                                    <tr class="d-flex white-space">
-                                        <td class="filterable-cell">Field 1</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Type</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Transformation</td>
-                                    </tr>
-                                    <tr class="d-flex white-space">
-                                        <td class="filterable-cell">Field 1</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Type</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Transformation</td>
-                                    </tr>
-                                    <tr class="d-flex white-space">
-                                        <td class="filterable-cell">Field 1</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Type</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Transformation</td>
-                                    </tr>
-                                    <tr class="d-flex white-space">
-                                        <td class="filterable-cell">Field 1</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Type</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Transformation</td>
-                                    </tr>
-                                    <tr class="d-flex white-space">
-                                        <td class="filterable-cell">Field 1</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Type</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Transformation</td>
-                                    </tr>
-                                    <tr class="d-flex white-space">
-                                        <td class="filterable-cell">Field 1</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Type</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Transformation</td>
-                                    </tr>
-                                    <tr class="d-flex white-space">
-                                        <td class="filterable-cell">Field 1</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Type</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Transformation</td>
-                                    </tr>
-                                    <tr class="d-flex white-space">
-                                        <td class="filterable-cell">Field 1</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Type</td>
-                                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                                        <td class="filterable-cell">Transformation</td>
-                                    </tr>
+                                    <tbody id="map_data_table">
+                                        <!-- <tr class="d-flex white-space">
+                                            <td class="filterable-cell">Field 1</td>
+                                            <td class="filterable-cell"><img src="images/arrow.png"></td>
+                                            <td class="filterable-cell">Type</td>
+                                            <td class="filterable-cell"><img src="images/arrow.png"></td>
+                                            <td class="filterable-cell">Transformation</td>
+                                        </tr>
+                                        <tr class="d-flex white-space">
+                                            <td class="filterable-cell">Field 1</td>
+                                            <td class="filterable-cell"><img src="images/arrow.png"></td>
+                                            <td class="filterable-cell">Type</td>
+                                            <td class="filterable-cell"><img src="images/arrow.png"></td>
+                                            <td class="filterable-cell">Transformation</td>
+                                        </tr>
+                                        <tr class="d-flex white-space">
+                                            <td class="filterable-cell">Field 1</td>
+                                            <td class="filterable-cell"><img src="images/arrow.png"></td>
+                                            <td class="filterable-cell">Type</td>
+                                            <td class="filterable-cell"><img src="images/arrow.png"></td>
+                                            <td class="filterable-cell">Transformation</td>
+                                        </tr> -->
                                     </tbody>
                                 </table>
                                 <div class="submit">
@@ -535,252 +492,254 @@
                 <div class="col-lg-6">
                     <h2 class="white text-center">CoreRelations</h2>
                     <div class="graph text-center mt-5">
-                       <div id="heatmap"></div>
+                        <div id="heatmap"></div>
                     </div>
                 </div>
             </div>
         </div>
-<div class="py-5">
-<div class="row">
-<div class="col-lg-2">
 
-</div>
-<div class="col-lg-2">
-    <div class="select w-100">
-        <select name="slct" id="slct">
-            <option value="1">Field 1</option>
-            <option value="2">Field 2</option>
-            <option value="3">Field 3</option>
-        </select>
-    </div>
-    <h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
-   <table class="table table-borderless">
-   <tbody>
-       <tr>
-           <td>Americans</td>
-           <td>3.00</td>
-       </tr>
-       <tr>
-        <td>Cappuccino</td>
-        <td>3.00</td>
-    </tr>
-    <tr>
-        <td>Double Espresso</td>
-        <td>3.00</td>
-    </tr>
-    <tr>
-        <td>Latte</td>
-        <td>3.00</td>
-    </tr>
-    <tr>
-        <td>Macchiato</td>
-        <td>3.00</td>
-    </tr>
-    <tr>
-        <td>Mint Chocolate</td>
-        <td>3.00</td>
-    </tr>
-    <tr>
-        <td>Mocha</td>
-        <td>3.00</td>
-    </tr>
-    <tr>
-        <td>White Mocha</td>
-        <td>3.00</td>
-    </tr>
-   </tbody>
-   </table>
-</div>
-<div class="col-lg-2">
-    <div class="select w-100">
-    <select name="slct" id="slct">
-        <option value="1">Field 1</option>
-        <option value="2">Field 2</option>
-        <option value="3">Field 3</option>
-    </select>
-</div>
-<h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
-<table class="table table-borderless">
-    <tbody>
-        <tr>
-            <td>Americans</td>
-            <td>3.00</td>
-        </tr>
-        <tr>
-         <td>Cappuccino</td>
-         <td>3.00</td>
-     </tr>
-     <tr>
-         <td>Double Espresso</td>
-         <td>3.00</td>
-     </tr>
-     <tr>
-         <td>Latte</td>
-         <td>3.00</td>
-     </tr>
-     <tr>
-         <td>Macchiato</td>
-         <td>3.00</td>
-     </tr>
-     <tr>
-         <td>Mint Chocolate</td>
-         <td>3.00</td>
-     </tr>
-     <tr>
-         <td>Mocha</td>
-         <td>3.00</td>
-     </tr>
-     <tr>
-         <td>White Mocha</td>
-         <td>3.00</td>
-     </tr>
-    </tbody>
-    </table>
-</div>
-<div class="col-lg-2">
-    <div class="select w-100">
-    <select name="slct" id="slct">
-        <option value="1">Field 1</option>
-        <option value="2">Field 2</option>
-        <option value="3">Field 3</option>
-    </select>
-</div>
-<h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
-<table class="table table-borderless">
-    <tbody>
-        <tr>
-            <td>Americans</td>
-            <td>3.00</td>
-        </tr>
-        <tr>
-         <td>Cappuccino</td>
-         <td>3.00</td>
-     </tr>
-     <tr>
-         <td>Double Espresso</td>
-         <td>3.00</td>
-     </tr>
-     <tr>
-         <td>Latte</td>
-         <td>3.00</td>
-     </tr>
-     <tr>
-         <td>Macchiato</td>
-         <td>3.00</td>
-     </tr>
-     <tr>
-         <td>Mint Chocolate</td>
-         <td>3.00</td>
-     </tr>
-     <tr>
-         <td>Mocha</td>
-         <td>3.00</td>
-     </tr>
-     <tr>
-         <td>White Mocha</td>
-         <td>3.00</td>
-     </tr>
-    </tbody>
-    </table>
-</div>
-<div class="col-lg-2">
-    <div class="select w-100">
-        <select name="slct" id="slct">
-            <option value="1">Field 1</option>
-            <option value="2">Field 2</option>
-            <option value="3">Field 3</option>
-        </select>
-    </div>
-    <h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
-    <table class="table table-borderless">
-        <tbody>
-            <tr>
-                <td>Americans</td>
-                <td>3.00</td>
-            </tr>
-            <tr>
-             <td>Cappuccino</td>
-             <td>3.00</td>
-         </tr>
-         <tr>
-             <td>Double Espresso</td>
-             <td>3.00</td>
-         </tr>
-         <tr>
-             <td>Latte</td>
-             <td>3.00</td>
-         </tr>
-         <tr>
-             <td>Macchiato</td>
-             <td>3.00</td>
-         </tr>
-         <tr>
-             <td>Mint Chocolate</td>
-             <td>3.00</td>
-         </tr>
-         <tr>
-             <td>Mocha</td>
-             <td>3.00</td>
-         </tr>
-         <tr>
-             <td>White Mocha</td>
-             <td>3.00</td>
-         </tr>
-        </tbody>
-        </table>
-</div>
-<div class="col-lg-2">
-    <div class="select w-100">
-        <select name="slct" id="slct">
-            <option value="1">Field 1</option>
-            <option value="2">Field 2</option>
-            <option value="3">Field 3</option>
-        </select>
-    </div>
-    <h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
-    <table class="table table-borderless">
-        <tbody>
-            <tr>
-                <td>Americans</td>
-                <td>3.00</td>
-            </tr>
-            <tr>
-             <td>Cappuccino</td>
-             <td>3.00</td>
-         </tr>
-         <tr>
-             <td>Double Espresso</td>
-             <td>3.00</td>
-         </tr>
-         <tr>
-             <td>Latte</td>
-             <td>3.00</td>
-         </tr>
-         <tr>
-             <td>Macchiato</td>
-             <td>3.00</td>
-         </tr>
-         <tr>
-             <td>Mint Chocolate</td>
-             <td>3.00</td>
-         </tr>
-         <tr>
-             <td>Mocha</td>
-             <td>3.00</td>
-         </tr>
-         <tr>
-             <td>White Mocha</td>
-             <td>3.00</td>
-         </tr>
-        </tbody>
-        </table>
-</div>
+        <div class="py-5">
+            <div class="row">
+            <div class="col-lg-2">
+            
+            </div>
+            <div class="col-lg-2">
+                <div class="select w-100">
+                    <select name="slct" id="slct">
+                        <option value="1">Field 1</option>
+                        <option value="2">Field 2</option>
+                        <option value="3">Field 3</option>
+                    </select>
+                </div>
+                <h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
+               <table class="table table-borderless">
+               <tbody>
+                   <tr>
+                       <td>Americans</td>
+                       <td>3.00</td>
+                   </tr>
+                   <tr>
+                    <td>Cappuccino</td>
+                    <td>3.00</td>
+                </tr>
+                <tr>
+                    <td>Double Espresso</td>
+                    <td>3.00</td>
+                </tr>
+                <tr>
+                    <td>Latte</td>
+                    <td>3.00</td>
+                </tr>
+                <tr>
+                    <td>Macchiato</td>
+                    <td>3.00</td>
+                </tr>
+                <tr>
+                    <td>Mint Chocolate</td>
+                    <td>3.00</td>
+                </tr>
+                <tr>
+                    <td>Mocha</td>
+                    <td>3.00</td>
+                </tr>
+                <tr>
+                    <td>White Mocha</td>
+                    <td>3.00</td>
+                </tr>
+               </tbody>
+               </table>
+            </div>
+            <div class="col-lg-2">
+                <div class="select w-100">
+                <select name="slct" id="slct">
+                    <option value="1">Field 1</option>
+                    <option value="2">Field 2</option>
+                    <option value="3">Field 3</option>
+                </select>
+            </div>
+            <h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td>Americans</td>
+                        <td>3.00</td>
+                    </tr>
+                    <tr>
+                     <td>Cappuccino</td>
+                     <td>3.00</td>
+                 </tr>
+                 <tr>
+                     <td>Double Espresso</td>
+                     <td>3.00</td>
+                 </tr>
+                 <tr>
+                     <td>Latte</td>
+                     <td>3.00</td>
+                 </tr>
+                 <tr>
+                     <td>Macchiato</td>
+                     <td>3.00</td>
+                 </tr>
+                 <tr>
+                     <td>Mint Chocolate</td>
+                     <td>3.00</td>
+                 </tr>
+                 <tr>
+                     <td>Mocha</td>
+                     <td>3.00</td>
+                 </tr>
+                 <tr>
+                     <td>White Mocha</td>
+                     <td>3.00</td>
+                 </tr>
+                </tbody>
+                </table>
+            </div>
+            <div class="col-lg-2">
+                <div class="select w-100">
+                <select name="slct" id="slct">
+                    <option value="1">Field 1</option>
+                    <option value="2">Field 2</option>
+                    <option value="3">Field 3</option>
+                </select>
+            </div>
+            <h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td>Americans</td>
+                        <td>3.00</td>
+                    </tr>
+                    <tr>
+                     <td>Cappuccino</td>
+                     <td>3.00</td>
+                 </tr>
+                 <tr>
+                     <td>Double Espresso</td>
+                     <td>3.00</td>
+                 </tr>
+                 <tr>
+                     <td>Latte</td>
+                     <td>3.00</td>
+                 </tr>
+                 <tr>
+                     <td>Macchiato</td>
+                     <td>3.00</td>
+                 </tr>
+                 <tr>
+                     <td>Mint Chocolate</td>
+                     <td>3.00</td>
+                 </tr>
+                 <tr>
+                     <td>Mocha</td>
+                     <td>3.00</td>
+                 </tr>
+                 <tr>
+                     <td>White Mocha</td>
+                     <td>3.00</td>
+                 </tr>
+                </tbody>
+                </table>
+            </div>
+            <div class="col-lg-2">
+                <div class="select w-100">
+                    <select name="slct" id="slct">
+                        <option value="1">Field 1</option>
+                        <option value="2">Field 2</option>
+                        <option value="3">Field 3</option>
+                    </select>
+                </div>
+                <h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td>Americans</td>
+                            <td>3.00</td>
+                        </tr>
+                        <tr>
+                         <td>Cappuccino</td>
+                         <td>3.00</td>
+                     </tr>
+                     <tr>
+                         <td>Double Espresso</td>
+                         <td>3.00</td>
+                     </tr>
+                     <tr>
+                         <td>Latte</td>
+                         <td>3.00</td>
+                     </tr>
+                     <tr>
+                         <td>Macchiato</td>
+                         <td>3.00</td>
+                     </tr>
+                     <tr>
+                         <td>Mint Chocolate</td>
+                         <td>3.00</td>
+                     </tr>
+                     <tr>
+                         <td>Mocha</td>
+                         <td>3.00</td>
+                     </tr>
+                     <tr>
+                         <td>White Mocha</td>
+                         <td>3.00</td>
+                     </tr>
+                    </tbody>
+                    </table>
+            </div>
+            <div class="col-lg-2">
+                <div class="select w-100">
+                    <select name="slct" id="slct">
+                        <option value="1">Field 1</option>
+                        <option value="2">Field 2</option>
+                        <option value="3">Field 3</option>
+                    </select>
+                </div>
+                <h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td>Americans</td>
+                            <td>3.00</td>
+                        </tr>
+                        <tr>
+                         <td>Cappuccino</td>
+                         <td>3.00</td>
+                     </tr>
+                     <tr>
+                         <td>Double Espresso</td>
+                         <td>3.00</td>
+                     </tr>
+                     <tr>
+                         <td>Latte</td>
+                         <td>3.00</td>
+                     </tr>
+                     <tr>
+                         <td>Macchiato</td>
+                         <td>3.00</td>
+                     </tr>
+                     <tr>
+                         <td>Mint Chocolate</td>
+                         <td>3.00</td>
+                     </tr>
+                     <tr>
+                         <td>Mocha</td>
+                         <td>3.00</td>
+                     </tr>
+                     <tr>
+                         <td>White Mocha</td>
+                         <td>3.00</td>
+                     </tr>
+                    </tbody>
+                    </table>
+            </div>
+            
+            </div>
+            </div>
 
-</div>
-</div>
         <div class="revecy banner py-5">
             <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12 bannerleft d-flex align-items-center">
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 bannerleft d-flex align-items-center">
                     <div>
                         <h1 class="text-white">Simple Business<br> Insights</h1>
                     <div class="w-100">
@@ -789,39 +748,57 @@
                     <div class="btn btn-lg mt-2 text-white">Learn More</div>
                     </div>
                 </div>
-                <div class="col-lg-8 col-md-8 col-sm-12 bannerright d-flex justify-content-end">
+                <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 bannerright d-flex justify-content-end">
                     <div class="bannerimg w-100 pt-5 pb-5">
-                        <div class="row mt-5">
-                            <div class="col-lg-4">
-                                <button type="button" class="circle-btn"><img src="/static/images/button-bg.png">Load Score</button>
+                        <div class="row mt-4">
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <div class="btn-img">
+                                    <button type="button" class="circle-btn">Load Score</button>
+                                </div>
                             </div>
-                            <div class="col-lg-4">
-                                <button type="button" class="circle-btn"><img src="/static/images/button-bg.png">Load Score</button>
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <div class="btn-img">
+                                    <button type="button" class="circle-btn">Load Score</button>
+                                </div>
                             </div>
-                            <div class="col-lg-4">
-                                <button type="button" class="circle-btn"><img src="/static/images/button-bg.png">Load Score</button>
-                            </div>
-                        </div>
-                        <div class="row mt-5">
-                            <div class="col-lg-4 mt-5">
-                                <button type="button" class="circle-btn"><img src="/static/images/button-bg.png">Load Score</button>
-                            </div>
-                            <div class="col-lg-4 mt-5">
-                                <button type="button" class="circle-btn"><img src="/static/images/button-bg.png">Load Score</button>
-                            </div>
-                            <div class="col-lg-4 mt-5">
-                                <button type="button" class="circle-btn"><img src="/static/images/button-bg.png">Load Score</button>
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <div class="btn-img">
+                                    <button type="button" class="circle-btn">Load Score</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="row mt-5">
-                            <div class="col-lg-4 mt-5">
-                                <button type="button" class="circle-btn"><img src="/static/images/button-bg.png">Load Score</button>
+                        <div class="row mt-4">
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <div class="btn-img">
+                                    <button type="button" class="circle-btn">Load Score</button>
+                                </div>
                             </div>
-                            <div class="col-lg-4 mt-5">
-                                <button type="button" class="circle-btn"><img src="/static/images/button-bg.png">Load Score</button>
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <div class="btn-img">
+                                    <button type="button" class="circle-btn">Load Score</button>
+                                </div>
                             </div>
-                            <div class="col-lg-4 mt-5">
-                                <button type="button" class="circle-btn"><img src="/static/images/button-bg.png">Load Score</button>
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <div class="btn-img">
+                                    <button type="button" class="circle-btn">Load Score</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <div class="btn-img">
+                                    <button type="button" class="circle-btn">Load Score</button>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <div class="btn-img">
+                                    <button type="button" class="circle-btn">Load Score</button>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                <div class="btn-img">
+                                    <button type="button" class="circle-btn">Load Score</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -838,8 +815,10 @@
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
+
     <script>
-   var labels = []
+        
+        var labels = []
    var data_heat=[];
     var arr = []
     var data = {'ORDERNUMBER': {'ORDERNUMBER': 1.0, 'QUANTITYORDERED': 0.06554315678908781, 'PRICEEACH': -0.002934540306915754, 'ORDERLINENUMBER': -0.05555006371502087, 'SALES': 0.03991928223495511, 'QTR_ID': -0.051383367892455845, 'MONTH_ID': -0.03972320713540048, 'YEAR_ID': 0.9045955731432019, 'MSRP': -0.010279632787411012}, 'QUANTITYORDERED': {'ORDERNUMBER': 0.06554315678908781, 'QUANTITYORDERED': 1.0, 'PRICEEACH': 0.005564033259239794, 'ORDERLINENUMBER': -0.0183966552164774, 'SALES': 0.5514261919183577, 'QTR_ID': -0.035323464366989195, 'MONTH_ID': -0.03904834674589691, 'YEAR_ID': 0.06953488241608814, 'MSRP': 0.01788096182424362}, 'PRICEEACH': {'ORDERNUMBER': -0.002934540306915754, 'QUANTITYORDERED': 0.005564033259239794, 'PRICEEACH': 1.0, 'ORDERLINENUMBER': -0.0209645609772058, 'SALES': 0.6578409283176792, 'QTR_ID': 0.008712266409627096, 'MONTH_ID': 0.005151966789452798, 'YEAR_ID': -0.00593847026163298, 'MSRP': 0.6706249491694573}, 'ORDERLINENUMBER': {'ORDERNUMBER': -0.05555006371502087, 'QUANTITYORDERED': -0.0183966552164774, 'PRICEEACH': -0.0209645609772058, 'ORDERLINENUMBER': 1.0, 'SALES': -0.058400382723383604, 'QTR_ID': 0.04071553452594049, 'MONTH_ID': 0.034016219584712945, 'YEAR_ID': -0.05736706188982879, 'MSRP': -0.02106746810552837}, 'SALES': {'ORDERNUMBER': 0.03991928223495511, 'QUANTITYORDERED': 0.5514261919183577, 'PRICEEACH': 0.6578409283176792, 'ORDERLINENUMBER': -0.058400382723383604, 'SALES': 1.0, 'QTR_ID': -0.006796085377388929, 'MONTH_ID': -0.0096051856926935, 'YEAR_ID': 0.035646893086006604, 'MSRP': 0.6352394340572496}, 'QTR_ID': {'ORDERNUMBER': -0.051383367892455845, 'QUANTITYORDERED': -0.035323464366989195, 'PRICEEACH': 0.008712266409627096, 'ORDERLINENUMBER': 0.04071553452594049, 'SALES': -0.006796085377388929, 'QTR_ID': 1.0, 'MONTH_ID': 0.979299856461712, 'YEAR_ID': -0.4330518597168206, 'MSRP': 0.010234175024358349}, 'MONTH_ID': {'ORDERNUMBER': -0.03972320713540048, 'QUANTITYORDERED': -0.03904834674589691, 'PRICEEACH': 0.005151966789452798, 'ORDERLINENUMBER': 0.034016219584712945, 'SALES': -0.0096051856926935, 'QTR_ID': 0.979299856461712, 'MONTH_ID': 1.0, 'YEAR_ID': -0.4301630745374967, 'MSRP': 0.008170346287851531}, 'YEAR_ID': {'ORDERNUMBER': 0.9045955731432019, 'QUANTITYORDERED': 0.06953488241608814, 'PRICEEACH': -0.00593847026163298, 'ORDERLINENUMBER': -0.05736706188982879, 'SALES': 0.035646893086006604, 'QTR_ID': -0.4330518597168206, 'MONTH_ID': -0.4301630745374967, 'YEAR_ID': 1.0, 'MSRP': -0.014309835290257207}, 'MSRP': {'ORDERNUMBER': -0.010279632787411012, 'QUANTITYORDERED': 0.01788096182424362, 'PRICEEACH': 0.6706249491694573, 'ORDERLINENUMBER': -0.02106746810552837, 'SALES': 0.6352394340572496, 'QTR_ID': 0.010234175024358349, 'MONTH_ID': 0.008170346287851531, 'YEAR_ID': -0.014309835290257207, 'MSRP': 1.0}}
@@ -858,6 +837,38 @@
             $("#mapButton").click(function(){
                 $("#mapData").show();
             });
+
+            /* Add data*/
+            $('#add_map_data_row_form').submit(function() {
+                // get all the inputs into an array.
+                var $inputs = $('#add_map_data_row_form :input');
+
+                // not sure if you wanted this, but I thought I'd add it.
+                // get an associative array of just the values.
+                var values = {};
+                $inputs.each(function() {
+                    values[this.name] = $(this).val();
+                });
+                console.log(values);
+                $("#map_data_table").append(`
+                    <tr class="d-flex white-space">
+                        <td class="filterable-cell">${values.select_field}</td>
+                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
+                        <td class="filterable-cell">${values.select_type}</td>
+                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
+                        <td class="filterable-cell">${values.select_transformation}</td>
+                        <td class="filterable-cell"><button type="button" class="btn btn-sm btn-danger map-data-dlt">Delete</button></td>
+                    </tr>
+                `);
+            });
+            $(document).on("click",'.map-data-dlt',function(){
+                $(this).parent().parent().remove();
+            });
+            $("#file_btn").click(function(){
+                var elem = $("#theFile");
+                elem.click();
+            });
+            
         });
         var data = [
   {

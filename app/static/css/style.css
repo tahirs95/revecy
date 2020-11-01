@@ -347,6 +347,9 @@ html,body{
     .getintouch .form-row,#contact {
         width: 100% !important;
     }
+    .btn-img{
+        margin-left: 30px;
+    }
 }
 #captcha-design{
     padding-right: 5px;
@@ -675,4 +678,16 @@ select {
     padding: 12px 40px;
     font-size: 18px;
     color: #fff;
+}
+#theFile{
+    opacity: 0;
+    position: absolute;
+}
+
+
+.btn-img{
+    background-image: url(/static/images/button-bg.png);
+    background-size: 200px;
+    background-repeat: no-repeat;
+    height: 110px;
 }

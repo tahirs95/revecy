@@ -142,7 +142,7 @@ def visualization(request):
         unique_items_count_for_str_fields_sorted = dict(sorted(unique_items_count_for_str_fields.items(), key=lambda x: x[1]))
         unique_items_count_for_str_fields_sorted
 
-        # print(data.corr(method ='pearson'))
+        corr_data = data.corr(method ='pearson').to_dict()
 
         field_summary
 
@@ -181,4 +181,4 @@ def visualization(request):
         # pie chart (5 fields from str hierarchy)
         gb4 = data.groupby([parent]).agg({numerical_field: ['sum']})
 
-        return render(request, "visualization.html", {'sample_data':sample_data, 'shape':shape, 'file_name':file_name})
+        return render(request, "visualization.html", {'sample_data':sample_data, 'shape':shape, 'file_name':file_name, 'corr_data':corr_data})

@@ -47,11 +47,11 @@ def visualization(request):
         csv_file = 'dataset.csv'
         data = pd.read_csv(csv_file, encoding = 'unicode_escape')
         file_name = '222.csv'
+        data = data.fillna(0)
         data.to_csv(file_name, index=False)
-        sample_data = data.head(10).to_dict()
+        top_rows = data.head(10).to_dict()
         shape = list(data.shape)
         memory = (sys.getsizeof(data) / 1024) / 1024
-        print(memory)
 
         data_types = data.dtypes
         data_types.to_dict() 
@@ -181,4 +181,4 @@ def visualization(request):
         # pie chart (5 fields from str hierarchy)
         gb4 = data.groupby([parent]).agg({numerical_field: ['sum']})
 
-        return render(request, "visualization.html", {'sample_data':sample_data, 'shape':shape, 'memory':memory, 'file_name':file_name, 'corr_data':corr_data, 'data_types_dict_count':data_types_dict_count})
+        return render(request, "visualization.html", {'top_rows':top_rows, 'shape':shape, 'memory':memory, 'file_name':file_name, 'corr_data':corr_data, 'data_types_dict_count':dict(data_types_dict_count)})

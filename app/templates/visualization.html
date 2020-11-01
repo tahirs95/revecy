@@ -173,10 +173,11 @@
                         <div class="col-lg-12 d-flex">
                             <table class="table">
                                 <thead>
-                                <tr class="d-flex white-space">
+                                <tr class="d-flex white-space" id="table_heading">
                                     <th class="left-heading">Field 1</th>
                                     <th class="middle-heading">Field 1</th>
                                     <th class="right-heading">Field 1</th>
+                                    <th class="right-heading">Field 3</th>
                                 </tr>
                                 </thead>
                                 <tbody">
@@ -184,21 +185,25 @@
                                     <td class="filterable-cell left-data">Data</td>
                                     <td class="filterable-cell middle-data">Data</td>
                                     <td class="filterable-cell right-data">Data</td>
+                                    <td class="filterable-cell right-data">Data</td>
                                 </tr>
                                 <tr class="d-flex white-space">
                                     <td class="filterable-cell data mr-8">Data</td>
                                     <td class="filterable-cell data">Data</td>
                                     <td class="filterable-cell data ml-8">Data</td>
+                                    <td class="filterable-cell right-data">Data</td>
                                 </tr>
                                 <tr class="d-flex white-space">
                                     <td class="filterable-cell data mr-8">Data</td>
                                     <td class="filterable-cell data">Data</td>
                                     <td class="filterable-cell data ml-8">Data</td>
+                                    <td class="filterable-cell right-data">Data</td>
                                 </tr>
                                 <tr class="d-flex white-space">
                                     <td class="filterable-cell data mr-8 border-bottom-l-r">Data</td>
                                     <td class="filterable-cell data">Data</td>
                                     <td class="filterable-cell data ml-8 border-bottom-l-l">Data</td>
+                                    <td class="filterable-cell right-data">Data</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -443,7 +448,7 @@
                                     <p>Rows</p>
                                 </div>
                                 <div class="summary-data">
-                                    <p>3</p>
+                                    <p >{{shape.0}}</p>
                                 </div>
                             </div>
                             <div class="summary-content">
@@ -451,7 +456,7 @@
                                     <p>Columns</p>
                                 </div>
                                 <div class="summary-data">
-                                    <p>4</p>
+                                    <p>{{shape.1}}</p>
                                 </div>
                             </div>
                             <div class="summary-content">
@@ -483,7 +488,7 @@
                                     <p>Memory Used</p>
                                 </div>
                                 <div class="summary-data">
-                                    <p>4Mb</p>
+                                    <p>{{memory}} MB</p>
                                 </div>
                             </div>
                         </div>
@@ -821,7 +826,7 @@
         var labels = []
    var data_heat=[];
     var arr = []
-    var data = {'ORDERNUMBER': {'ORDERNUMBER': 1.0, 'QUANTITYORDERED': 0.06554315678908781, 'PRICEEACH': -0.002934540306915754, 'ORDERLINENUMBER': -0.05555006371502087, 'SALES': 0.03991928223495511, 'QTR_ID': -0.051383367892455845, 'MONTH_ID': -0.03972320713540048, 'YEAR_ID': 0.9045955731432019, 'MSRP': -0.010279632787411012}, 'QUANTITYORDERED': {'ORDERNUMBER': 0.06554315678908781, 'QUANTITYORDERED': 1.0, 'PRICEEACH': 0.005564033259239794, 'ORDERLINENUMBER': -0.0183966552164774, 'SALES': 0.5514261919183577, 'QTR_ID': -0.035323464366989195, 'MONTH_ID': -0.03904834674589691, 'YEAR_ID': 0.06953488241608814, 'MSRP': 0.01788096182424362}, 'PRICEEACH': {'ORDERNUMBER': -0.002934540306915754, 'QUANTITYORDERED': 0.005564033259239794, 'PRICEEACH': 1.0, 'ORDERLINENUMBER': -0.0209645609772058, 'SALES': 0.6578409283176792, 'QTR_ID': 0.008712266409627096, 'MONTH_ID': 0.005151966789452798, 'YEAR_ID': -0.00593847026163298, 'MSRP': 0.6706249491694573}, 'ORDERLINENUMBER': {'ORDERNUMBER': -0.05555006371502087, 'QUANTITYORDERED': -0.0183966552164774, 'PRICEEACH': -0.0209645609772058, 'ORDERLINENUMBER': 1.0, 'SALES': -0.058400382723383604, 'QTR_ID': 0.04071553452594049, 'MONTH_ID': 0.034016219584712945, 'YEAR_ID': -0.05736706188982879, 'MSRP': -0.02106746810552837}, 'SALES': {'ORDERNUMBER': 0.03991928223495511, 'QUANTITYORDERED': 0.5514261919183577, 'PRICEEACH': 0.6578409283176792, 'ORDERLINENUMBER': -0.058400382723383604, 'SALES': 1.0, 'QTR_ID': -0.006796085377388929, 'MONTH_ID': -0.0096051856926935, 'YEAR_ID': 0.035646893086006604, 'MSRP': 0.6352394340572496}, 'QTR_ID': {'ORDERNUMBER': -0.051383367892455845, 'QUANTITYORDERED': -0.035323464366989195, 'PRICEEACH': 0.008712266409627096, 'ORDERLINENUMBER': 0.04071553452594049, 'SALES': -0.006796085377388929, 'QTR_ID': 1.0, 'MONTH_ID': 0.979299856461712, 'YEAR_ID': -0.4330518597168206, 'MSRP': 0.010234175024358349}, 'MONTH_ID': {'ORDERNUMBER': -0.03972320713540048, 'QUANTITYORDERED': -0.03904834674589691, 'PRICEEACH': 0.005151966789452798, 'ORDERLINENUMBER': 0.034016219584712945, 'SALES': -0.0096051856926935, 'QTR_ID': 0.979299856461712, 'MONTH_ID': 1.0, 'YEAR_ID': -0.4301630745374967, 'MSRP': 0.008170346287851531}, 'YEAR_ID': {'ORDERNUMBER': 0.9045955731432019, 'QUANTITYORDERED': 0.06953488241608814, 'PRICEEACH': -0.00593847026163298, 'ORDERLINENUMBER': -0.05736706188982879, 'SALES': 0.035646893086006604, 'QTR_ID': -0.4330518597168206, 'MONTH_ID': -0.4301630745374967, 'YEAR_ID': 1.0, 'MSRP': -0.014309835290257207}, 'MSRP': {'ORDERNUMBER': -0.010279632787411012, 'QUANTITYORDERED': 0.01788096182424362, 'PRICEEACH': 0.6706249491694573, 'ORDERLINENUMBER': -0.02106746810552837, 'SALES': 0.6352394340572496, 'QTR_ID': 0.010234175024358349, 'MONTH_ID': 0.008170346287851531, 'YEAR_ID': -0.014309835290257207, 'MSRP': 1.0}}
+    var data = {{corr_data|safe}}
     Object.keys(data).forEach(function(key) {
     labels.push(key);
      arr = [];
@@ -829,10 +834,7 @@
     arr.push(data[key][key2]);
     })
     data_heat.push(arr)
-    // console.log(arr)
-
     })
-    console.log(data_heat)
         $(document).ready(function(){
             $("#mapButton").click(function(){
                 $("#mapData").show();
@@ -887,8 +889,12 @@ var layout = {
   }
 };
 Plotly.newPlot('heatmap', data,layout,config);
+// var csv =  {{sample_data|safe}};
+
+// Object.keys(csv).forEach(function(key) {
+//   console.log(key,csv[key])
+// })
+console.log({{corr_data|safe}})
     </script>
-
-
 </body>
 </html>

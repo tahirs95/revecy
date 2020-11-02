@@ -67,7 +67,11 @@
                 <div class="col-lg-4 d-flex justify-content-center mt-3">
                     <div class="button">
                         <button type="button" class="btn" id="file_btn">Get Data</button>
-                        <input type="file" id="theFile"/>
+                        <form method="post" action="/visualization" id="form" enctype="multipart/form-data">    
+                            {% csrf_token %}   
+                            <input type ="text" name="file_name" id="random_name" style="display:none">                  
+                            <input type="file" id="theFile" name="csv_file" accept=".csv"/>
+                        </form>
                         <div class="icon">
                             <img src="/static/images/right-arrow.jpg">
                         </div>
@@ -821,19 +825,7 @@
 
 
     <script>
-        
-        var labels = []
-   var data_heat=[];
-    var arr = []
-    var data = {{corr_data|safe}}
-    Object.keys(data).forEach(function(key) {
-    labels.push(key);
-     arr = [];
-    Object.keys(data[key]).forEach(function(key2) {
-    arr.push(data[key][key2]);
-    })
-    data_heat.push(arr)
-    })
+       
         $(document).ready(function(){
             $("#mapButton").click(function(){
                 $("#mapData").show();
@@ -869,8 +861,26 @@
                 var elem = $("#theFile");
                 elem.click();
             });
-            
+            $("#theFile").change(function(){
+                var id = Math.round(new Date().getTime() + Math.random());
+                document.getElementById("random_name").value = id
+ document.getElementById("form").submit();
+            })
         });
+        // console.log({{elem|safe}})
+        var labels = []
+   var data_heat=[];
+    var arr = []
+    var data = {{corr_data|safe}}
+    Object.keys(data).forEach(function(key) {
+    labels.push(key);
+     arr = [];
+    Object.keys(data[key]).forEach(function(key2) {
+    arr.push(data[key][key2]);
+    })
+    data_heat.push(arr)
+    })
+
         var data = [
   {
     z: data_heat,
@@ -914,7 +924,6 @@ Object.keys(csv).forEach(function(key) {
 })
 counter = 0;
 Object.keys(csv).forEach(function(key) {
-  console.log(csv[key])
     Object.keys(csv[key]).forEach(function(key2) {
 $("#row"+counter).append(`<td class="filterable-cell right-data">`+csv[key][key2]+`</td>`)
 counter++;

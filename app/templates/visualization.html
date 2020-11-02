@@ -99,29 +99,30 @@
                 <div id="mapData">
                     <form action = "javascript:;" id="add_map_data_row_form">
                         <div class="row select-options">
-                            <div class="col-lg-4 mb-5">
+                            <div class="col-lg-6 mb-5">
                                 <label class="select-name">Select Field</label>
                                 <div class="select">
                                     <select name="select_field" id="slct_field" required>
-                                        <option selected disabled>Choose an option</option>
-                                        <option value="Field 1">Option 1</option>
-                                        <option value="Field 2">Option 2</option>
-                                        <option value="Field 3">Option 3</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-4 mb-5">
+                            <div class="col-lg-6 mb-5">
                                 <label class="select-name">Select Type</label>
                                 <div class="select">
                                     <select name="select_type" id="slct_type" required>
-                                        <option selected disabled>Choose an option</option>
-                                        <option value="Type">Option 1</option>
-                                        <option value="Type">Option 2</option>
-                                        <option value="Type">Option 3</option>
+                                        <option value="Full Address">Full Address</option>
+                                        <option value="ZipCode">ZipCode</option>
+                                        <option value="City">City</option>
+                                        <option value="State">State</option>
+                                        <option value="Country">Country</option>
+                                        <option value="Continent">Continent</option>
+                                        <option value="URL">URL</option>
+                                        <option value="Date">Date</option>
+                                        <option value="Family">Family</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-4 mb-5">
+                            <!-- <div class="col-lg-4 mb-5">
                                 <label class="select-name">Transformation</label>
                                 <div class="select">
                                     <select name="select_transformation" id="slct_transformation" required>
@@ -131,7 +132,7 @@
                                         <option value="Transformation 3">Option 3</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-lg-12 text-center">
                                 <button type="submit" class="btn btn-primary border-0 mb-4">Add Data</button>
                             </div>
@@ -142,31 +143,15 @@
                             <div class="col-lg-12">
                                 <table class="table">
                                     <tbody id="map_data_table">
-                                        <!-- <tr class="d-flex white-space">
-                                            <td class="filterable-cell">Field 1</td>
-                                            <td class="filterable-cell"><img src="images/arrow.png"></td>
-                                            <td class="filterable-cell">Type</td>
-                                            <td class="filterable-cell"><img src="images/arrow.png"></td>
-                                            <td class="filterable-cell">Transformation</td>
+                                        <tr class="d-flex white-space" >
+                                          <td class="filterable-cell">
+                                            <div class="alert alert-danger text-center" id="error">You need to select at least two variables in a family</div>
+                                          </td>
                                         </tr>
-                                        <tr class="d-flex white-space">
-                                            <td class="filterable-cell">Field 1</td>
-                                            <td class="filterable-cell"><img src="images/arrow.png"></td>
-                                            <td class="filterable-cell">Type</td>
-                                            <td class="filterable-cell"><img src="images/arrow.png"></td>
-                                            <td class="filterable-cell">Transformation</td>
-                                        </tr>
-                                        <tr class="d-flex white-space">
-                                            <td class="filterable-cell">Field 1</td>
-                                            <td class="filterable-cell"><img src="images/arrow.png"></td>
-                                            <td class="filterable-cell">Type</td>
-                                            <td class="filterable-cell"><img src="images/arrow.png"></td>
-                                            <td class="filterable-cell">Transformation</td>
-                                        </tr> -->
                                     </tbody>
                                 </table>
                                 <div class="submit">
-                                    <button type="button" class="btn">Submit</button>
+                                    <button type="button" class="btn" onclick="values_box()">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -825,7 +810,7 @@
 
 
     <script>
-       
+   var obj = {};       
         $(document).ready(function(){
             $("#mapButton").click(function(){
                 $("#mapData").show();
@@ -835,26 +820,35 @@
             $('#add_map_data_row_form').submit(function() {
                 // get all the inputs into an array.
                 var $inputs = $('#add_map_data_row_form :input');
-
                 // not sure if you wanted this, but I thought I'd add it.
                 // get an associative array of just the values.
-                var values = {};
+                
+             var values = {};
                 $inputs.each(function() {
                     values[this.name] = $(this).val();
                 });
-                console.log(values);
+                if(values.select_field !== null){
+                    obj[values.select_field] = values.select_type;
+
+                
+                $("select#slct_field :selected").attr("disabled",true)
                 $("#map_data_table").append(`
                     <tr class="d-flex white-space">
                         <td class="filterable-cell">${values.select_field}</td>
                         <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
                         <td class="filterable-cell">${values.select_type}</td>
-                        <td class="filterable-cell"><img src="/static/images/arrow.png"></td>
-                        <td class="filterable-cell">${values.select_transformation}</td>
-                        <td class="filterable-cell"><button type="button" class="btn btn-sm btn-danger map-data-dlt">Delete</button></td>
+                        <td class="filterable-cell"><button type="button" data-name=${values.select_field} class="btn btn-sm btn-danger map-data-dlt">Delete</button></td>
                     </tr>
                 `);
+                }
             });
             $(document).on("click",'.map-data-dlt',function(){
+                $("select#slct_field option:contains("+$(this).attr("data-name")+")").attr("disabled",false);
+                 if(obj[$(this).attr("data-name")] == "Family"){
+                     count_fam=0 ;
+                     document.getElementById("error").style.display = 'none'  
+                 }
+                delete obj[$(this).attr("data-name")];
                 $(this).parent().parent().remove();
             });
             $("#file_btn").click(function(){
@@ -872,6 +866,8 @@
    var data_heat=[];
     var arr = []
     var data = {{corr_data|safe}}
+    var count_fam = 0;
+
     Object.keys(data).forEach(function(key) {
     labels.push(key);
      arr = [];
@@ -915,23 +911,46 @@ var data_count =  {{data_types_dict_count|safe}};
 
  })
 
+
  var csv =  {{top_rows|safe}};
 var counter = 0;
 Object.keys(csv).forEach(function(key) {
-    $("#table_heading").append(`<th class="right-heading">`+key+`</th>`)
+    $("#table_heading").append(`<th class="tbl-heading" scope="col">`+key+`</th>`)
     $("#table_body").append(`<tr class="d-flex white-space" id=row`+counter+`></tr>`)
     counter++;
 })
 counter = 0;
 Object.keys(csv).forEach(function(key) {
     Object.keys(csv[key]).forEach(function(key2) {
-$("#row"+counter).append(`<td class="filterable-cell right-data">`+csv[key][key2]+`</td>`)
+$("#row"+counter).append(`<td class="tbl-data">`+csv[key][key2]+`</td>`)
 counter++;
 if(counter == 10){
     counter =0;
 }
     })
 })
+
+var array_col =  {{column_names|safe}}
+array_col.forEach(function(elem){
+$("#slct_field").append("<option value="+elem+">"+elem+"</option>")
+})
+// console.log({{file_name|safe}})
+
+function values_box(){
+    Object.keys(obj).forEach(function(key) {
+     if(obj[key]=="Family"){
+         count_fam ++;
+     }
+     
+    })
+    if(count_fam == 1){
+       document.getElementById("error").style.display = 'block'     
+     count_fam = 0;
+     }
+     else{
+        document.getElementById("error").style.display = 'none'  
+     }
+}
     </script>
 </body>
 </html>

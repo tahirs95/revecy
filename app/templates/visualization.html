@@ -801,7 +801,11 @@
 
 
     </div>
-
+    <form method="POST" action="/visualization" id="form2">
+        {% csrf_token %}
+        <input type="text" name="mappings" id="mappings" style="display: none;">
+        <input type="text" name="file_name" id="file_name" style="display: none;">
+    </form>
 
     <script src="/static/js/jquery-3.5.1.slim.min.js"></script>
     <script src="/static/js/popper.min.js"></script>
@@ -845,8 +849,13 @@
             $(document).on("click",'.map-data-dlt',function(){
                 $("select#slct_field option:contains("+$(this).attr("data-name")+")").attr("disabled",false);
                  if(obj[$(this).attr("data-name")] == "Family"){
-                     count_fam=0 ;
+                     count_fam-- ;
+                     if(count_fam == 1){
+                        document.getElementById("error").style.display = 'block' 
+                     }
+                     else{
                      document.getElementById("error").style.display = 'none'  
+                     }
                  }
                 delete obj[$(this).attr("data-name")];
                 $(this).parent().parent().remove();
@@ -937,11 +946,11 @@ $("#slct_field").append("<option value="+elem+">"+elem+"</option>")
 // console.log({{file_name|safe}})
 
 function values_box(){
+    count_fam = 0;
     Object.keys(obj).forEach(function(key) {
      if(obj[key]=="Family"){
          count_fam ++;
      }
-     
     })
     if(count_fam == 1){
        document.getElementById("error").style.display = 'block'     
@@ -949,7 +958,11 @@ function values_box(){
      }
      else{
         document.getElementById("error").style.display = 'none'  
-     }
+       document.getElementById("mappings").value = JSON.stringify(obj);
+       document.getElementById("file_name").value = {{file_name|safe}}
+       console.log( document.getElementById("mappings").value, document.getElementById("file_name").value)
+       document.getElementById('form2').submit();
+            }
 }
     </script>
 </body>

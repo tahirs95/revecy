@@ -498,15 +498,13 @@
             </div>
             <div class="col-lg-2">
                 <div class="select w-100">
-                    <select name="slct" id="slct">
-                        <option value="1">Field 1</option>
-                        <option value="2">Field 2</option>
-                        <option value="3">Field 3</option>
+                    <select class="slct_table" data-name="1" id="select1" onchange="table_change(this)">
+                       
                     </select>
                 </div>
                 <h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
-               <table class="table table-borderless">
-               <tbody>
+               <table class="table table-borderless table-responsive">
+               <tbody id="table1">
                    <tr>
                        <td>Americans</td>
                        <td>3.00</td>
@@ -544,15 +542,12 @@
             </div>
             <div class="col-lg-2">
                 <div class="select w-100">
-                <select name="slct" id="slct">
-                    <option value="1">Field 1</option>
-                    <option value="2">Field 2</option>
-                    <option value="3">Field 3</option>
+                <select class="slct_table" data-name="2" id="select2" onchange="table_change(this)">
                 </select>
             </div>
             <h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
-            <table class="table table-borderless">
-                <tbody>
+            <table class="table table-borderless table-responsive">
+                <tbody id="table2">
                     <tr>
                         <td>Americans</td>
                         <td>3.00</td>
@@ -590,15 +585,12 @@
             </div>
             <div class="col-lg-2">
                 <div class="select w-100">
-                <select name="slct" id="slct">
-                    <option value="1">Field 1</option>
-                    <option value="2">Field 2</option>
-                    <option value="3">Field 3</option>
+                <select class="slct_table" data-name="3" id="select3" onchange="table_change(this)">
                 </select>
             </div>
             <h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
-            <table class="table table-borderless">
-                <tbody>
+            <table class="table table-borderless table-responsive">
+                <tbody id="table3">
                     <tr>
                         <td>Americans</td>
                         <td>3.00</td>
@@ -636,15 +628,12 @@
             </div>
             <div class="col-lg-2">
                 <div class="select w-100">
-                    <select name="slct" id="slct">
-                        <option value="1">Field 1</option>
-                        <option value="2">Field 2</option>
-                        <option value="3">Field 3</option>
+                    <select class="slct_table" data-name="4" id="select4" onchange="table_change(this)">
                     </select>
                 </div>
                 <h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
-                <table class="table table-borderless">
-                    <tbody>
+                <table class="table table-borderless table-responsive" >
+                    <tbody id="table4">
                         <tr>
                             <td>Americans</td>
                             <td>3.00</td>
@@ -682,15 +671,12 @@
             </div>
             <div class="col-lg-2">
                 <div class="select w-100">
-                    <select name="slct" id="slct">
-                        <option value="1">Field 1</option>
-                        <option value="2">Field 2</option>
-                        <option value="3">Field 3</option>
+                    <select class="slct_table" data-name="5" id="select5" onchange="table_change(this)">
                     </select>
                 </div>
                 <h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
-                <table class="table table-borderless">
-                    <tbody>
+                <table class="table table-borderless table-responsive" >
+                    <tbody id="table5">
                         <tr>
                             <td>Americans</td>
                             <td>3.00</td>
@@ -942,6 +928,9 @@ if(counter == 10){
 var array_col =  {{column_names|safe}}
 array_col.forEach(function(elem){
 $("#slct_field").append("<option value="+elem+">"+elem+"</option>")
+document.querySelectorAll(".slct_table").forEach(function(item){
+    $(item).append("<option value="+elem+">"+elem+"</option>")
+})
 })
 // console.log({{file_name|safe}})
 
@@ -964,6 +953,24 @@ function values_box(){
        document.getElementById('form2').submit();
             }
 }
+var temp_row = 0;
+var table_data = {{field_summary|safe}}
+    console.log(table_data)
+    function table_change(val){
+   console.log(val.getAttribute('data-name'))
+   console.log(val.value)
+   $("#table"+val.getAttribute('data-name')).html("")
+   
+   Object.keys(table_data[val.value]).forEach(function(key) {
+    // console.log(table_data[val.value][key])
+  $("#table"+val.getAttribute('data-name')).append("<tr id=row_temp"+temp_row+"><tr>")
+  $("#row_temp"+temp_row).append("<td>"+key+"</td>")
+  $("#row_temp"+temp_row).append("<td>"+table_data[val.value][key]+"</td>")
+  temp_row++;
+   
+   })   
+    }
+    
     </script>
 </body>
 </html>

@@ -182,18 +182,26 @@ def visualization(request):
     elif request.method == "POST":
         # random_name = request.body['random_name']
         # print(random_name)
-        csv_file = request.FILES["csv_file"]
-        data = pd.read_csv(csv_file, encoding = 'unicode_escape')
-        all_columns = list(data)
-        print(all_columns)
+        if "csv_file" in request.FILES:
+            csv_file = request.FILES["csv_file"]
+            data = pd.read_csv(csv_file, encoding = 'unicode_escape')
+            file_name = request.POST.get('file_name')
+        else:
+            file_name = request.POST.get('file_name')
+            data = pd.read_csv('{}.csv'.format(file_name), encoding = 'unicode_escape')
 
-        file_name = request.POST.get('file_name')
+        all_columns = list(data)
+        
+        if 'mappings' in request.POST:
+            mappings = request.POST.get('mappings')
+        
         data = data.fillna(0)
         data.to_csv('{}.csv'.format(file_name), index=False)
         top_rows = data.head(10).to_dict()
         shape = list(data.shape)
         memory = (sys.getsizeof(data) / 1024) / 1024
 
+        # Detecting date types count for all fields
         data_types = data.dtypes
         data_types.to_dict() 
         data_types_dict = {}
@@ -285,8 +293,6 @@ def visualization(request):
 
         corr_data = data.corr(method ='pearson').to_dict()
 
-        field_summary
-
         i = 0
         for k, v in unique_items_count_for_str_fields_sorted.items():
             i += 1
@@ -322,4 +328,4 @@ def visualization(request):
         # pie chart (5 fields from str hierarchy)
         gb4 = data.groupby([parent]).agg({numerical_field: ['sum']})
 
-        return render(request, "visualization.html", {'top_rows':top_rows, 'shape':shape, 'memory':memory, 'file_name':file_name, 'corr_data':corr_data, 'data_types_dict_count':dict(data_types_dict_count), 'column_names':all_columns})
+        return render(request, "visualization.html", {'top_rows':top_rows, 'shape':shape, 'memory':memory, 'file_name':file_name, 'corr_data':corr_data, 'data_types_dict_count':dict(data_types_dict_count), 'column_names':all_columns, 'field_summary':field_summary})

@@ -371,6 +371,8 @@ def visualization(request):
             {numerical_field: ["sum"]}
         )
 
+        print(list(field1_agg.to_dict().values())[0])
+
         return render(
             request,
             "visualization.html",
@@ -383,10 +385,10 @@ def visualization(request):
                 "data_types_dict_count": dict(data_types_dict_count),
                 "column_names": all_columns,
                 "field_summary": field_summary,
-                "field1_agg": field1_agg.to_dict(),
-                "field2_agg": field2_agg.to_dict(),
-                "field3_agg": field3_agg.to_dict(),
-                "field4_agg": field4_agg.to_dict(),
-                "field5_agg": field5_agg.to_dict(),
+                "field1_agg": list(field1_agg.to_dict().values())[0],
+                "field2_agg": list(field2_agg.to_dict().values())[0],
+                "field3_agg": list(field3_agg.to_dict().values())[0],
+                "field4_agg": list(field4_agg.to_dict().values())[0],
+                "field5_agg": list(field5_agg.to_dict().values())[0],
             },
         )

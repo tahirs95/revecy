@@ -502,7 +502,6 @@
                        
                     </select>
                 </div>
-                <h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
                <table class="table table-borderless table-responsive">
                <tbody id="table1">
                    <tr>
@@ -539,13 +538,17 @@
                 </tr>
                </tbody>
                </table>
+               <div class="" id="piechart1">
+               </div>
+               <div  id="barchart1"></div>
+               <div  id="horbarchart1"></div>
+
             </div>
             <div class="col-lg-2">
                 <div class="select w-100">
                 <select class="slct_table" data-name="2" id="select2" onchange="table_change(this)">
                 </select>
             </div>
-            <h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
             <table class="table table-borderless table-responsive">
                 <tbody id="table2">
                     <tr>
@@ -582,13 +585,17 @@
                  </tr>
                 </tbody>
                 </table>
+                <div class="" id="piechart2">
+                </div>
+                <div  id="barchart2"></div>
+                <div  id="horbarchart2"></div>
+ 
             </div>
             <div class="col-lg-2">
                 <div class="select w-100">
                 <select class="slct_table" data-name="3" id="select3" onchange="table_change(this)">
                 </select>
             </div>
-            <h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
             <table class="table table-borderless table-responsive">
                 <tbody id="table3">
                     <tr>
@@ -625,13 +632,17 @@
                  </tr>
                 </tbody>
                 </table>
+                <div class="" id="piechart3">
+                </div>
+                <div  id="barchart3"></div>
+                <div  id="horbarchart3"></div>
+ 
             </div>
             <div class="col-lg-2">
                 <div class="select w-100">
                     <select class="slct_table" data-name="4" id="select4" onchange="table_change(this)">
                     </select>
                 </div>
-                <h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
                 <table class="table table-borderless table-responsive" >
                     <tbody id="table4">
                         <tr>
@@ -668,13 +679,17 @@
                      </tr>
                     </tbody>
                     </table>
-            </div>
+                    <div class="" id="piechart4">
+                    </div>
+                    <div  id="barchart4"></div>
+                    <div  id="horbarchart4"></div>
+     
+                </div>
             <div class="col-lg-2">
                 <div class="select w-100">
                     <select class="slct_table" data-name="5" id="select5" onchange="table_change(this)">
                     </select>
                 </div>
-                <h4 class="text-white mt-5">DESCRIPTIVE STATS</h4>
                 <table class="table table-borderless table-responsive" >
                     <tbody id="table5">
                         <tr>
@@ -711,6 +726,11 @@
                      </tr>
                     </tbody>
                     </table>
+                    <div class="" id="piechart5">
+                    </div>
+                    <div  id="barchart5"></div>
+                    <div  id="horbarchart5"></div>
+     
             </div>
             
             </div>
@@ -886,6 +906,11 @@ var layout = {
   title: 'Heat Map',
   yaxis: {
     automargin: true
+  },
+     plot_bgcolor:"#1056c7",
+      paper_bgcolor:"#1056c7",
+      font: {
+    color: 'white'
   }
 };
 Plotly.newPlot('heatmap', data,layout,config);
@@ -970,7 +995,315 @@ var table_data = {{field_summary|safe}}
    
    })   
     }
-    
+
     </script>
+
+{% if field1_agg %}
+<script>
+
+var data_charts= {{field1_agg|safe}}
+var data_charts2= {{field2_agg|safe}}
+var data_charts3= {{field3_agg|safe}}
+var data_charts4= {{field4_agg|safe}}
+var data_charts5= {{field5_agg|safe}}
+
+    var pie_1x=[]
+    var pie_1y=[];
+    var pie_2x=[]
+    var pie_2y=[];
+    var pie_3x=[]
+    var pie_3y=[];
+    var pie_4x=[]
+    var pie_4y=[];
+    var pie_5x=[]
+    var pie_5y=[];
+
+    Object.keys(data_charts).forEach(function(key) {
+      pie_1x.push(key)
+      pie_1y.push(data_charts[key])
+    })   
+    Object.keys(data_charts2).forEach(function(key) {
+      pie_2x.push(key)
+      pie_2y.push(data_charts2[key])
+    })   
+    Object.keys(data_charts3).forEach(function(key) {
+      pie_3x.push(key)
+      pie_3y.push(data_charts3[key])
+    })   
+    Object.keys(data_charts4).forEach(function(key) {
+      pie_4x.push(key)
+      pie_4y.push(data_charts4[key])
+    })   
+    Object.keys(data_charts5).forEach(function(key) {
+      pie_5x.push(key)
+      pie_5y.push(data_charts5[key])
+    })   
+    var data = [{
+  values: pie_1y,
+  labels: pie_1x,
+  type: 'pie',
+  
+}];
+
+var layout= {
+      plot_bgcolor:"#262c37",
+      paper_bgcolor:"#262c37",
+      font: {
+    color: 'white'
+  }
+}
+
+var config = {responsive: true}
+Plotly.newPlot('piechart1',data,layout,config);
+    
+var data = [
+  {
+    x: pie_1x,
+    y: pie_1y,
+    type: 'bar'
+  }
+];
+var config = {responsive: true}
+var layout= {
+      plot_bgcolor:"#262c37",
+      paper_bgcolor:"#262c37",
+      font: {
+    color: 'white'
+  }
+}
+
+Plotly.newPlot('barchart1', data,layout,config);
+
+var data = [{
+  type: 'bar',
+  x: pie_1x,
+  y: pie_1y,
+  orientation: 'h'
+}];
+var config = {responsive: true}
+var layout= {
+      plot_bgcolor:"#262c37",
+      paper_bgcolor:"#262c37",
+      font: {
+    color: 'white'
+  }
+}
+Plotly.newPlot('horbarchart1', data,layout,config);
+
+
+var data = [{
+  values: pie_2y,
+  labels: pie_2x,
+  type: 'pie',
+  
+}];
+
+var layout= {
+      plot_bgcolor:"#262c37",
+      paper_bgcolor:"#262c37",
+      font: {
+    color: 'white'
+  }
+}
+
+var config = {responsive: true}
+Plotly.newPlot('piechart2',data,layout,config);
+    
+var data = [
+  {
+    x: pie_2x,
+    y: pie_2y,
+    type: 'bar'
+  }
+];
+var config = {responsive: true}
+var layout= {
+      plot_bgcolor:"#262c37",
+      paper_bgcolor:"#262c37",
+      font: {
+    color: 'white'
+  }
+}
+
+Plotly.newPlot('barchart2', data,layout,config);
+
+var data = [{
+  type: 'bar',
+  x: pie_2x,
+  y: pie_2y,
+  orientation: 'h'
+}];
+var config = {responsive: true}
+var layout= {
+      plot_bgcolor:"#262c37",
+      paper_bgcolor:"#262c37",
+      font: {
+    color: 'white'
+  }
+}
+Plotly.newPlot('horbarchart2', data,layout,config);
+
+var data = [{
+  values: pie_3y,
+  labels: pie_3x,
+  type: 'pie',
+  
+}];
+
+var layout= {
+      plot_bgcolor:"#262c37",
+      paper_bgcolor:"#262c37",
+      font: {
+    color: 'white'
+  }
+}
+
+var config = {responsive: true}
+Plotly.newPlot('piechart3',data,layout,config);
+    
+var data = [
+  {
+    x: pie_3x,
+    y: pie_3y,
+    type: 'bar'
+  }
+];
+var config = {responsive: true}
+var layout= {
+      plot_bgcolor:"#262c37",
+      paper_bgcolor:"#262c37",
+      font: {
+    color: 'white'
+  }
+}
+
+Plotly.newPlot('barchart3', data,layout,config);
+
+var data = [{
+  type: 'bar',
+  x: pie_3x,
+  y: pie_3y,
+  orientation: 'h'
+}];
+var config = {responsive: true}
+var layout= {
+      plot_bgcolor:"#262c37",
+      paper_bgcolor:"#262c37",
+      font: {
+    color: 'white'
+  }
+}
+Plotly.newPlot('horbarchart3', data,layout,config);
+
+
+var data = [{
+  values: pie_4y,
+  labels: pie_4x,
+  type: 'pie',
+  
+}];
+
+var layout= {
+      plot_bgcolor:"#262c37",
+      paper_bgcolor:"#262c37",
+      font: {
+    color: 'white'
+  }
+}
+
+var config = {responsive: true}
+Plotly.newPlot('piechart4',data,layout,config);
+    
+var data = [
+  {
+    x: pie_4x,
+    y: pie_4y,
+    type: 'bar'
+  }
+];
+var config = {responsive: true}
+var layout= {
+      plot_bgcolor:"#262c37",
+      paper_bgcolor:"#262c37",
+      font: {
+    color: 'white'
+  }
+}
+
+Plotly.newPlot('barchart4', data,layout,config);
+
+var data = [{
+  type: 'bar',
+  x: pie_4x,
+  y: pie_4y,
+  orientation: 'h'
+}];
+var config = {responsive: true}
+var layout= {
+      plot_bgcolor:"#262c37",
+      paper_bgcolor:"#262c37",
+      font: {
+    color: 'white'
+  }
+}
+Plotly.newPlot('horbarchart4', data,layout,config);
+
+var data = [{
+  values: pie_5y,
+  labels: pie_5x,
+  type: 'pie',
+  
+}];
+
+var layout= {
+      plot_bgcolor:"#262c37",
+      paper_bgcolor:"#262c37",
+      font: {
+    color: 'white'
+  }
+}
+
+var config = {responsive: true}
+Plotly.newPlot('piechart5',data,layout,config);
+    
+var data = [
+  {
+    x: pie_5x,
+    y: pie_5y,
+    type: 'bar'
+  }
+];
+var config = {responsive: true}
+var layout= {
+      plot_bgcolor:"#262c37",
+      paper_bgcolor:"#262c37",
+      font: {
+    color: 'white'
+  }
+}
+
+Plotly.newPlot('barchart5', data,layout,config);
+
+var data = [{
+  type: 'bar',
+  x: pie_5x,
+  y: pie_5y,
+  orientation: 'h'
+}];
+var config = {responsive: true}
+var layout= {
+      plot_bgcolor:"#262c37",
+      paper_bgcolor:"#262c37",
+      font: {
+    color: 'white'
+  }
+}
+Plotly.newPlot('horbarchart5', data,layout,config);
+
+
+
+
+</script>
+{% endif %}
 </body>
 </html>

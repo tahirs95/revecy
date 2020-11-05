@@ -371,7 +371,43 @@ def visualization(request):
             {numerical_field: ["sum"]}
         )
 
-        print(list(field1_agg.to_dict().values())[0])
+        field6 = data.groupby([parent, child]).agg(
+            {numerical_field: ["sum"]}
+        )
+        
+        field_6_agg = []
+        for k, v in list(field6.to_dict().values())[0].items():
+            nested_field = []
+            for fields in list(k):
+                nested_field.append(fields)
+            nested_field.append(v)
+            field_6_agg.append(nested_field)
+     
+
+        field7 = data.groupby([parent, grand_child]).agg(
+            {numerical_field: ["sum"]}
+        )
+
+        field_7_agg = []
+        for k, v in list(field7.to_dict().values())[0].items():
+            nested_field = []
+            for fields in list(k):
+                nested_field.append(fields)
+            nested_field.append(v)
+            field_7_agg.append(nested_field)
+        
+
+        field8 = data.groupby([child, grand_child]).agg(
+            {numerical_field: ["sum"]}
+        )
+
+        field_8_agg = []
+        for k, v in list(field8.to_dict().values())[0].items():
+            nested_field = []
+            for fields in list(k):
+                nested_field.append(fields)
+            nested_field.append(v)
+            field_8_agg.append(nested_field)
 
         return render(
             request,
@@ -390,5 +426,8 @@ def visualization(request):
                 "field3_agg": list(field3_agg.to_dict().values())[0],
                 "field4_agg": list(field4_agg.to_dict().values())[0],
                 "field5_agg": list(field5_agg.to_dict().values())[0],
-            },
+                "field6_agg": field_6_agg,
+                "field7_agg": field_7_agg,
+                "field8_agg": field_8_agg,
+            }
         )

@@ -491,12 +491,9 @@
             </div>
         </div>
 
-        <div class="py-5">
+        <div class="py-5 container">
             <div class="row">
-            <div class="col-lg-2">
-            
-            </div>
-            <div class="col-lg-2">
+            <div class="col-lg-4">
                 <div class="select w-100">
                     <select class="slct_table" data-name="1" id="select1" onchange="table_change(this)">
                        
@@ -538,13 +535,14 @@
                 </tr>
                </tbody>
                </table>
-               <div class="" id="piechart1">
+               <div id="piechart1">
                </div>
                <div  id="barchart1"></div>
                <div  id="horbarchart1"></div>
+               <div  id="stackchart1"></div>
 
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-4">
                 <div class="select w-100">
                 <select class="slct_table" data-name="2" id="select2" onchange="table_change(this)">
                 </select>
@@ -591,7 +589,7 @@
                 <div  id="horbarchart2"></div>
  
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-4">
                 <div class="select w-100">
                 <select class="slct_table" data-name="3" id="select3" onchange="table_change(this)">
                 </select>
@@ -632,13 +630,13 @@
                  </tr>
                 </tbody>
                 </table>
-                <div class="" id="piechart3">
+                <div  id="piechart3">
                 </div>
                 <div  id="barchart3"></div>
                 <div  id="horbarchart3"></div>
  
             </div>
-            <div class="col-lg-2">
+            <!-- <div class="col-lg-2">
                 <div class="select w-100">
                     <select class="slct_table" data-name="4" id="select4" onchange="table_change(this)">
                     </select>
@@ -679,8 +677,8 @@
                      </tr>
                     </tbody>
                     </table>
-                    <div class="" id="piechart4">
-                    </div>
+                    <canvas class="" id="piechart4">
+                    </canvas>
                     <div  id="barchart4"></div>
                     <div  id="horbarchart4"></div>
      
@@ -726,12 +724,12 @@
                      </tr>
                     </tbody>
                     </table>
-                    <div class="" id="piechart5">
-                    </div>
+                    <canvas class="" id="piechart5">
+                    </canvas>
                     <div  id="barchart5"></div>
                     <div  id="horbarchart5"></div>
      
-            </div>
+            </div> -->
             
             </div>
             </div>
@@ -817,6 +815,7 @@
     <script src="/static/js/popper.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 
     <script>
@@ -1004,8 +1003,60 @@ var table_data = {{field_summary|safe}}
 var data_charts= {{field1_agg|safe}}
 var data_charts2= {{field2_agg|safe}}
 var data_charts3= {{field3_agg|safe}}
-var data_charts4= {{field4_agg|safe}}
-var data_charts5= {{field5_agg|safe}}
+var data_new = {{field6_agg|safe}}
+var data_new2 = {{field7_agg|safe}}
+var data_new3 = {{field8_agg|safe}}
+var parent1 = [];
+var child1 = [];
+var grandchild1 =[]
+var parent2 = [];
+var child2 = [];
+var grandchild2 =[]
+console.log(data_new2)
+
+ for(var i = 0;i<data_new.length;i++){
+        for(var j = 0;j<data_new[i].length;j++){
+         if(j == 0){
+            if(parent1.indexOf(data_new[i][j]) == -1)
+               {
+                 parent1.push(data_new[i][j])
+               }
+         }
+         else if(j == 1){
+             if(child1.indexOf(data_new[i][j]) == -1)
+               {
+                 child1.push(data_new[i][j])
+               }
+         }
+           
+     }
+ }
+
+ for(var i = 0;i<data_new2.length;i++){
+        for(var j = 0;j<data_new2[i].length;j++){
+         if(j == 0){
+            if(parent2.indexOf(data_new2[i][j]) == -1)
+               {
+                 parent2.push(data_new2[i][j])
+               }
+         }
+         else if(j == 1){
+             if(child2.indexOf(data_new2[i][j]) == -1)
+               {
+                 child2.push(data_new2[i][j])
+               }
+         }
+           
+     }
+ }
+
+ for (var  i = 0 ;i<parent1.length;i++){
+     var temp = [];
+for(var j= i ; j<data_new.length ; j+=child1.length){
+  temp.push(data_new[j][2])
+}
+grandchild1.push(temp)
+ }
 
     var pie_1x=[]
     var pie_1y=[];
@@ -1013,10 +1064,6 @@ var data_charts5= {{field5_agg|safe}}
     var pie_2y=[];
     var pie_3x=[]
     var pie_3y=[];
-    var pie_4x=[]
-    var pie_4y=[];
-    var pie_5x=[]
-    var pie_5y=[];
 
     Object.keys(data_charts).forEach(function(key) {
       pie_1x.push(key)
@@ -1029,14 +1076,6 @@ var data_charts5= {{field5_agg|safe}}
     Object.keys(data_charts3).forEach(function(key) {
       pie_3x.push(key)
       pie_3y.push(data_charts3[key])
-    })   
-    Object.keys(data_charts4).forEach(function(key) {
-      pie_4x.push(key)
-      pie_4y.push(data_charts4[key])
-    })   
-    Object.keys(data_charts5).forEach(function(key) {
-      pie_5x.push(key)
-      pie_5y.push(data_charts5[key])
     })   
     var data = [{
   values: pie_1y,
@@ -1055,7 +1094,7 @@ var layout= {
 
 var config = {responsive: true}
 Plotly.newPlot('piechart1',data,layout,config);
-    
+
 var data = [
   {
     x: pie_1x,
@@ -1108,7 +1147,8 @@ var layout= {
 
 var config = {responsive: true}
 Plotly.newPlot('piechart2',data,layout,config);
-    
+
+
 var data = [
   {
     x: pie_2x,
@@ -1160,7 +1200,9 @@ var layout= {
 
 var config = {responsive: true}
 Plotly.newPlot('piechart3',data,layout,config);
-    
+
+
+
 var data = [
   {
     x: pie_3x,
@@ -1196,114 +1238,179 @@ var layout= {
 Plotly.newPlot('horbarchart3', data,layout,config);
 
 
-var data = [{
-  values: pie_4y,
-  labels: pie_4x,
-  type: 'pie',
+// var data = [{
+//   values: pie_4y,
+//   labels: pie_4x,
+//   type: 'pie',
   
-}];
+// }];
 
-var layout= {
-      plot_bgcolor:"#262c37",
-      paper_bgcolor:"#262c37",
-      font: {
-    color: 'white'
-  }
-}
+// var layout= {
+//       plot_bgcolor:"#262c37",
+//       paper_bgcolor:"#262c37",
+//       font: {
+//     color: 'white'
+//   }
+// }
 
-var config = {responsive: true}
-Plotly.newPlot('piechart4',data,layout,config);
-    
-var data = [
-  {
-    x: pie_4x,
-    y: pie_4y,
-    type: 'bar'
-  }
-];
-var config = {responsive: true}
-var layout= {
-      plot_bgcolor:"#262c37",
-      paper_bgcolor:"#262c37",
-      font: {
-    color: 'white'
-  }
-}
+// var config = {responsive: true}
+// Plotly.newPlot('piechart4',data,layout,config);
 
-Plotly.newPlot('barchart4', data,layout,config);
-
-var data = [{
-  type: 'bar',
-  x: pie_4x,
-  y: pie_4y,
-  orientation: 'h'
-}];
-var config = {responsive: true}
-var layout= {
-      plot_bgcolor:"#262c37",
-      paper_bgcolor:"#262c37",
-      font: {
-    color: 'white'
-  }
-}
-Plotly.newPlot('horbarchart4', data,layout,config);
-
-var data = [{
-  values: pie_5y,
-  labels: pie_5x,
-  type: 'pie',
   
-}];
+// var ctx = document.getElementById('piechart4').getContext('2d');
+// var Data = {
+//     labels: pie_4x,
+//     datasets: [
+//         {
+//             data: pie_4y,
+//             backgroundColor: [
+//                 "#FF6384",
+//                 "#63FF84",
+//                 "#84FF63",
+//                 "red"
+//             ]
+//         }]
+// };
 
-var layout= {
-      plot_bgcolor:"#262c37",
-      paper_bgcolor:"#262c37",
-      font: {
-    color: 'white'
-  }
-}
+// var myPieChart = new Chart(ctx, {
+//     type: 'pie',
+//     data: Data,
+// }); 
+// var data = [
+//   {
+//     x: pie_4x,
+//     y: pie_4y,
+//     type: 'bar'
+//   }
+// ];
+// var config = {responsive: true}
+// var layout= {
+//       plot_bgcolor:"#262c37",
+//       paper_bgcolor:"#262c37",
+//       font: {
+//     color: 'white'
+//   }
+// }
 
-var config = {responsive: true}
-Plotly.newPlot('piechart5',data,layout,config);
+// Plotly.newPlot('barchart4', data,layout,config);
+
+// var data = [{
+//   type: 'bar',
+//   x: pie_4x,
+//   y: pie_4y,
+//   orientation: 'h'
+// }];
+// var config = {responsive: true}
+// var layout= {
+//       plot_bgcolor:"#262c37",
+//       paper_bgcolor:"#262c37",
+//       font: {
+//     color: 'white'
+//   }
+// }
+// Plotly.newPlot('horbarchart4', data,layout,config);
+
+// var data = [{
+//   values: pie_5y,
+//   labels: pie_5x,
+//   type: 'pie',
+  
+// }];
+
+// var layout= {
+//       plot_bgcolor:"#262c37",
+//       paper_bgcolor:"#262c37",
+//       font: {
+//     color: 'white'
+//   },
+  
+// }
+
+// var config = {responsive: true}
+// Plotly.newPlot('piechart5',data,layout,config);
     
-var data = [
-  {
-    x: pie_5x,
-    y: pie_5y,
-    type: 'bar'
-  }
-];
-var config = {responsive: true}
-var layout= {
-      plot_bgcolor:"#262c37",
-      paper_bgcolor:"#262c37",
-      font: {
-    color: 'white'
-  }
+// var ctx = document.getElementById('piechart5').getContext('2d');
+// var Data = {
+//     labels: pie_5x,
+//     datasets: [
+//         {
+//             data: pie_5y,
+//             backgroundColor: [
+//                 "#FF6384",
+//                 "#63FF84",
+//                 "#84FF63",
+//                 "red",
+//                 "yellow",
+//                 "blue"
+//             ]
+//         }]
+// };
+
+// var myPieChart = new Chart(ctx, {
+//     type: 'pie',
+//     data: Data,
+// });
+
+// var data = [
+//   {
+//     x: pie_5x,
+//     y: pie_5y,
+//     type: 'bar'
+//   }
+// ];
+// var config = {responsive: true}
+// var layout= {
+//       plot_bgcolor:"#262c37",
+//       paper_bgcolor:"#262c37",
+//       font: {
+//     color: 'white'
+//   }
+// }
+
+// Plotly.newPlot('barchart5', data,layout,config);
+
+// var data = [{
+//   type: 'bar',
+//   x: pie_5x,
+//   y: pie_5y,
+//   orientation: 'h'
+// }];
+// var config = {responsive: true}
+// var layout= {
+//       plot_bgcolor:"#262c37",
+//       paper_bgcolor:"#262c37",
+//       font: {
+//     color: 'white'
+//   }
+// }
+// Plotly.newPlot('horbarchart5', data,layout,config);
+
+
+
+
+var traces1 = []
+for (var i =0 ; i<parent1.length;i++){
+    var obj ={
+        x: child1,
+  y: grandchild1[i],
+  name: parent1[i],
+  type: 'bar'       
+    }
+    traces1.push(obj)
 }
 
-Plotly.newPlot('barchart5', data,layout,config);
 
-var data = [{
-  type: 'bar',
-  x: pie_5x,
-  y: pie_5y,
-  orientation: 'h'
-}];
-var config = {responsive: true}
-var layout= {
-      plot_bgcolor:"#262c37",
-      paper_bgcolor:"#262c37",
-      font: {
-    color: 'white'
-  }
-}
-Plotly.newPlot('horbarchart5', data,layout,config);
+var data = traces1;
 
+var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
+       paper_bgcolor:"#262c37",
+       font: {
+     color: 'white'}
+};
 
+Plotly.newPlot('stackchart1', data, layout);
 
-
-</script>
+ </script>
 {% endif %}
 </body>
 </html>

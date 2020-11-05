@@ -634,6 +634,8 @@
                 </div>
                 <div  id="barchart3"></div>
                 <div  id="horbarchart3"></div>
+                <div  id="stackchart3"></div>
+
  
             </div>
             <!-- <div class="col-lg-2">
@@ -1009,9 +1011,9 @@ var data_new3 = {{field8_agg|safe}}
 var parent1 = [];
 var child1 = [];
 var grandchild1 =[]
-var parent2 = [];
-var child2 = [];
-var grandchild2 =[]
+var parent3 = [];
+var child3 = [];
+var grandchild3 =[]
 console.log(data_new2)
 
  for(var i = 0;i<data_new.length;i++){
@@ -1032,18 +1034,18 @@ console.log(data_new2)
      }
  }
 
- for(var i = 0;i<data_new2.length;i++){
-        for(var j = 0;j<data_new2[i].length;j++){
+ for(var i = 0;i<data_new3.length;i++){
+        for(var j = 0;j<data_new3[i].length;j++){
          if(j == 0){
-            if(parent2.indexOf(data_new2[i][j]) == -1)
+            if(parent3.indexOf(data_new3[i][j]) == -1)
                {
-                 parent2.push(data_new2[i][j])
+                 parent3.push(data_new3[i][j])
                }
          }
          else if(j == 1){
-             if(child2.indexOf(data_new2[i][j]) == -1)
+             if(child3.indexOf(data_new3[i][j]) == -1)
                {
-                 child2.push(data_new2[i][j])
+                 child3.push(data_new3[i][j])
                }
          }
            
@@ -1058,6 +1060,13 @@ for(var j= i ; j<data_new.length ; j+=child1.length){
 grandchild1.push(temp)
  }
 
+ for (var  i = 0 ;i<parent3.length;i++){
+     var temp = [];
+for(var j= i ; j<data_new3.length ; j+=child3.length){
+  temp.push(data_new3[j][2])
+}
+grandchild3.push(temp)
+ }
     var pie_1x=[]
     var pie_1y=[];
     var pie_2x=[]
@@ -1409,6 +1418,29 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
 };
 
 Plotly.newPlot('stackchart1', data, layout);
+
+
+var traces3 = []
+for (var i =0 ; i<parent3.length;i++){
+    var obj ={
+        x: child3,
+  y: grandchild3[i],
+  name: parent3[i],
+  type: 'bar'       
+    }
+    traces3.push(obj)
+}
+
+
+var data = traces3;
+
+var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
+       paper_bgcolor:"#262c37",
+       font: {
+     color: 'white'}
+};
+
+Plotly.newPlot('stackchart3', data, layout);
 
  </script>
 {% endif %}

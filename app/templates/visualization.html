@@ -589,6 +589,8 @@
                 </div>
                 <div  id="barchart2"></div>
                 <div  id="horbarchart2"></div>
+                <div  id="stackchart2"></div>
+                <div  id="horstackchart2"></div>
  
             </div>
             <div class="col-lg-4">
@@ -1014,10 +1016,12 @@ var data_new3 = {{field8_agg|safe}}
 var parent1 = [];
 var child1 = [];
 var grandchild1 =[]
+var parent2 = [];
+var child2 = [];
+var grandchild2 =[]
 var parent3 = [];
 var child3 = [];
 var grandchild3 =[]
-console.log(data_new2)
 
  for(var i = 0;i<data_new.length;i++){
         for(var j = 0;j<data_new[i].length;j++){
@@ -1031,6 +1035,24 @@ console.log(data_new2)
              if(child1.indexOf(data_new[i][j]) == -1)
                {
                  child1.push(data_new[i][j])
+               }
+         }
+           
+     }
+ }
+
+ for(var i = 0;i<data_new2.length;i++){
+        for(var j = 0;j<data_new2[i].length;j++){
+         if(j == 0){
+            if(parent2.indexOf(data_new2[i][j]) == -1)
+               {
+                 parent2.push(data_new2[i][j])
+               }
+         }
+         else if(j == 1){
+             if(child2.indexOf(data_new2[i][j]) == -1)
+               {
+                 child2.push(data_new2[i][j])
                }
          }
            
@@ -1055,21 +1077,31 @@ console.log(data_new2)
      }
  }
 
- for (var  i = 0 ;i<parent1.length;i++){
+ for (var  i = 0 ;i<data_new.length; i=i+child1.length){
      var temp = [];
-for(var j= i ; j<data_new.length ; j+=child1.length){
-  temp.push(data_new[j][2])
-}
-grandchild1.push(temp)
+ for(var j= i ; j < (data_new.length > child1.length+i ? child1.length+i:data_new.length); j++){
+          temp.push(data_new[j][2])
+ }
+  grandchild1.push(temp)
  }
 
- for (var  i = 0 ;i<parent3.length;i++){
+ for (var  i = 0 ;i<data_new2.length; i=i+child2.length){
      var temp = [];
-for(var j= i ; j<data_new3.length ; j+=child3.length){
-  temp.push(data_new3[j][2])
-}
-grandchild3.push(temp)
+ for(var j= i ; j < (data_new2.length > child2.length+i ? child2.length+i:data_new2.length); j++){
+          temp.push(data_new2[j][2])
+
  }
+  grandchild2.push(temp)
+ }
+
+ for (var  i = 0 ;i<data_new3.length; i=i+child3.length){
+     var temp = [];
+ for(var j= i ; j < (data_new3.length > child3.length+i ? child3.length+i:data_new3.length); j++){
+          temp.push(data_new3[j][2])
+ }
+  grandchild3.push(temp)
+ }
+
     var pie_1x=[]
     var pie_1y=[];
     var pie_2x=[]
@@ -1399,7 +1431,6 @@ Plotly.newPlot('horbarchart3', data,layout,config);
 
 
 
-
 var traces1 = []
 for (var i =0 ; i<parent1.length;i++){
     var obj ={
@@ -1421,6 +1452,29 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
 };
 
 Plotly.newPlot('stackchart1', data, layout, {displayModeBar: false});
+
+var traces2 = []
+for (var i =0 ; i<parent2.length;i++){
+    var obj ={
+        x: child2,
+  y: grandchild2[i],
+  name: parent2[i],
+  type: 'bar'       
+    }
+    traces2.push(obj)
+}
+
+
+console.log(traces2)
+var data = traces2;
+var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
+       paper_bgcolor:"#262c37",
+       font: {
+     color: 'white'}
+};
+
+Plotly.newPlot('stackchart2', data, layout, {displayModeBar: false});
+
 
 
 var traces3 = []
@@ -1467,6 +1521,30 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
 };
 
 Plotly.newPlot('horstackchart1', data, layout, {displayModeBar: false});
+
+traces2=[]
+for (var i =0 ; i<parent2.length;i++){
+    var obj ={
+        x: grandchild2[i],
+  y: child2,
+  name: parent2[i],
+  orientation: 'h',
+  type: 'bar'       
+    }
+    traces2.push(obj)
+}
+
+
+var data = traces2;
+
+var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
+       paper_bgcolor:"#262c37",
+       font: {
+     color: 'white'}
+};
+
+Plotly.newPlot('horstackchart2', data, layout, {displayModeBar: false});
+
 traces3=[]
 for (var i =0 ; i<parent3.length;i++){
     var obj ={

@@ -1448,8 +1448,8 @@ Plotly.newPlot('stackchart3', data, layout, {displayModeBar: false});
 traces1=[]
 for (var i =0 ; i<parent1.length;i++){
     var obj ={
-        x: child1,
-  y: grandchild1[i],
+        x: grandchild1[i],
+  y: child1,
   name: parent1[i],
   orientation: 'h',
   type: 'bar'       
@@ -1470,8 +1470,8 @@ Plotly.newPlot('horstackchart1', data, layout, {displayModeBar: false});
 traces3=[]
 for (var i =0 ; i<parent3.length;i++){
     var obj ={
-        x: child3,
-  y: grandchild3[i],
+        x: grandchild3[i],
+  y: child3,
   name: parent3[i],
   orientation: 'h',
   type: 'bar'       

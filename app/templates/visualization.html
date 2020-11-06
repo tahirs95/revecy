@@ -540,6 +540,8 @@
                <div  id="barchart1"></div>
                <div  id="horbarchart1"></div>
                <div  id="stackchart1"></div>
+               <div  id="horstackchart1"></div>
+
 
             </div>
             <div class="col-lg-4">
@@ -635,6 +637,7 @@
                 <div  id="barchart3"></div>
                 <div  id="horbarchart3"></div>
                 <div  id="stackchart3"></div>
+                <div  id="horstackchart3"></div>
 
  
             </div>
@@ -816,7 +819,7 @@
     <script src="/static/js/jquery-3.5.1.slim.min.js"></script>
     <script src="/static/js/popper.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
-    <script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 
@@ -902,7 +905,7 @@
      
   }
 ];
-var config = {responsive: true}
+var config = {responsive: true,displayModeBar: false}
 var layout = {
   title: 'Heat Map',
   yaxis: {
@@ -1101,7 +1104,7 @@ var layout= {
   }
 }
 
-var config = {responsive: true}
+var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('piechart1',data,layout,config);
 
 var data = [
@@ -1111,7 +1114,7 @@ var data = [
     type: 'bar'
   }
 ];
-var config = {responsive: true}
+var config = {responsive: true,displayModeBar: false}
 var layout= {
       plot_bgcolor:"#262c37",
       paper_bgcolor:"#262c37",
@@ -1128,7 +1131,7 @@ var data = [{
   y: pie_1y,
   orientation: 'h'
 }];
-var config = {responsive: true}
+var config = {responsive: true,displayModeBar: false}
 var layout= {
       plot_bgcolor:"#262c37",
       paper_bgcolor:"#262c37",
@@ -1154,7 +1157,7 @@ var layout= {
   }
 }
 
-var config = {responsive: true}
+var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('piechart2',data,layout,config);
 
 
@@ -1165,7 +1168,7 @@ var data = [
     type: 'bar'
   }
 ];
-var config = {responsive: true}
+var config = {responsive: true,displayModeBar: false}
 var layout= {
       plot_bgcolor:"#262c37",
       paper_bgcolor:"#262c37",
@@ -1182,7 +1185,7 @@ var data = [{
   y: pie_2y,
   orientation: 'h'
 }];
-var config = {responsive: true}
+var config = {responsive: true,displayModeBar: false}
 var layout= {
       plot_bgcolor:"#262c37",
       paper_bgcolor:"#262c37",
@@ -1207,7 +1210,7 @@ var layout= {
   }
 }
 
-var config = {responsive: true}
+var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('piechart3',data,layout,config);
 
 
@@ -1219,7 +1222,7 @@ var data = [
     type: 'bar'
   }
 ];
-var config = {responsive: true}
+var config = {responsive: true,displayModeBar: false}
 var layout= {
       plot_bgcolor:"#262c37",
       paper_bgcolor:"#262c37",
@@ -1236,7 +1239,7 @@ var data = [{
   y: pie_3y,
   orientation: 'h'
 }];
-var config = {responsive: true}
+var config = {responsive: true,displayModeBar: false}
 var layout= {
       plot_bgcolor:"#262c37",
       paper_bgcolor:"#262c37",
@@ -1417,7 +1420,7 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
      color: 'white'}
 };
 
-Plotly.newPlot('stackchart1', data, layout);
+Plotly.newPlot('stackchart1', data, layout, {displayModeBar: false});
 
 
 var traces3 = []
@@ -1440,7 +1443,53 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
      color: 'white'}
 };
 
-Plotly.newPlot('stackchart3', data, layout);
+Plotly.newPlot('stackchart3', data, layout, {displayModeBar: false});
+
+traces1=[]
+for (var i =0 ; i<parent1.length;i++){
+    var obj ={
+        x: child1,
+  y: grandchild1[i],
+  name: parent1[i],
+  orientation: 'h',
+  type: 'bar'       
+    }
+    traces1.push(obj)
+}
+
+
+var data = traces1;
+
+var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
+       paper_bgcolor:"#262c37",
+       font: {
+     color: 'white'}
+};
+
+Plotly.newPlot('horstackchart1', data, layout, {displayModeBar: false});
+traces3=[]
+for (var i =0 ; i<parent3.length;i++){
+    var obj ={
+        x: child3,
+  y: grandchild3[i],
+  name: parent3[i],
+  orientation: 'h',
+  type: 'bar'       
+    }
+    traces3.push(obj)
+}
+
+
+var data = traces3;
+
+var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
+       paper_bgcolor:"#262c37",
+       font: {
+     color: 'white'}
+};
+
+Plotly.newPlot('horstackchart3', data, layout, {displayModeBar: false});
+
 
  </script>
 {% endif %}

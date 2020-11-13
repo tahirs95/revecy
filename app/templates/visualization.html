@@ -541,6 +541,8 @@
                <div  id="horbarchart1"></div>
                <div  id="stackchart1"></div>
                <div  id="horstackchart1"></div>
+               <div  id="sunburst1"></div>
+               <div  id="linechart1"></div>
 
 
             </div>
@@ -591,6 +593,7 @@
                 <div  id="horbarchart2"></div>
                 <div  id="stackchart2"></div>
                 <div  id="horstackchart2"></div>
+                <div id="linechart2"></div>
  
             </div>
             <div class="col-lg-4">
@@ -640,6 +643,7 @@
                 <div  id="horbarchart3"></div>
                 <div  id="stackchart3"></div>
                 <div  id="horstackchart3"></div>
+                <div id="linechart3"></div>
 
  
             </div>
@@ -1023,6 +1027,8 @@ var parent3 = [];
 var child3 = [];
 var grandchild3 =[]
 
+console.log(data_new)
+
  for(var i = 0;i<data_new.length;i++){
         for(var j = 0;j<data_new[i].length;j++){
          if(j == 0){
@@ -1101,6 +1107,33 @@ var grandchild3 =[]
  }
   grandchild3.push(temp)
  }
+
+var sun_parent1 = [];
+var sun_child1 = []
+var sun_grandchild1 = []
+for (var i = 0;i<data_new.length;i++){
+    console.log(i)
+    sun_parent1.push(data_new[i][0])
+}
+
+console.log(sun_parent1)
+
+// for ( var i = 0 ; i< data_new.length ; i++){
+//     for(var j = 0; j<data_new[i].length;j++){
+//         if(j == 0){
+//             sun_parent1.push(String(data_new[i][j]))
+//         }
+//         else if(j == 1){
+//             sun_child1.push(data_new[i][j])
+//         }
+//         else{
+//             sun_grandchild1.push(data_new[i][j])
+//         }
+//     }
+// }
+
+console.log(sun_parent1,sun_child1,sun_grandchild1)
+
 
     var pie_1x=[]
     var pie_1y=[];
@@ -1450,8 +1483,8 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        font: {
      color: 'white'}
 };
-
-Plotly.newPlot('stackchart1', data, layout, {displayModeBar: false});
+var config = {responsive: true,displayModeBar: false}
+Plotly.newPlot('stackchart1', data, layout,config);
 
 var traces2 = []
 for (var i =0 ; i<parent2.length;i++){
@@ -1472,8 +1505,8 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        font: {
      color: 'white'}
 };
-
-Plotly.newPlot('stackchart2', data, layout, {displayModeBar: false});
+var config = {responsive: true,displayModeBar: false}
+Plotly.newPlot('stackchart2', data, layout,config);
 
 
 
@@ -1496,8 +1529,8 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        font: {
      color: 'white'}
 };
-
-Plotly.newPlot('stackchart3', data, layout, {displayModeBar: false});
+var config = {responsive: true,displayModeBar: false}
+Plotly.newPlot('stackchart3', data, layout,config);
 
 traces1=[]
 for (var i =0 ; i<parent1.length;i++){
@@ -1519,8 +1552,8 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        font: {
      color: 'white'}
 };
-
-Plotly.newPlot('horstackchart1', data, layout, {displayModeBar: false});
+var config = {responsive: true,displayModeBar: false}
+Plotly.newPlot('horstackchart1', data, layout,config);
 
 traces2=[]
 for (var i =0 ; i<parent2.length;i++){
@@ -1542,8 +1575,8 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        font: {
      color: 'white'}
 };
-
-Plotly.newPlot('horstackchart2', data, layout, {displayModeBar: false});
+var config = {responsive: true,displayModeBar: false}
+Plotly.newPlot('horstackchart2', data, layout,config);
 
 traces3=[]
 for (var i =0 ; i<parent3.length;i++){
@@ -1565,8 +1598,114 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        font: {
      color: 'white'}
 };
+var config = {responsive: true,displayModeBar: false}
+Plotly.newPlot('horstackchart3', data, layout,config);
 
-Plotly.newPlot('horstackchart3', data, layout, {displayModeBar: false});
+
+var data = [{
+  type: "sunburst",
+
+  //Parent child Ids for data mapping
+  ids: [2003, 2004, 2005, 'Large', 'Medium', 'Small', 'Large', 'Medium', 'Small', 'Large', 'Medium', 'Small'],
+ 
+  values:  [101589, 134851, 47880, 9632, 59711, 32246, 10037, 75332, 49482, 5166, 25292, 17422],
+  labels: [2003, 2004, 2005, 'Large', 'Medium', 'Small', 'Large', 'Medium', 'Small', 'Large', 'Medium', 'Small'],
+  parents: ['', '', '', 2003, 2003, 2003, 2004, 2004, 2004, 2005, 2005, 2005],
+  outsidetextfont: {size: 20, color: "#377eb8"},
+  // leaf: {opacity: 0.4},
+  marker: {line: {width: 2}},
+}];
+
+var layout = {
+   margin: {l: 0, r: 0, b: 0, t:0},
+   sunburstcolorway:["#636efa","#ef553b","#00cc96"],
+    plot_bgcolor:"#262c37",
+        paper_bgcolor:"#262c37",
+        font: {
+      color: 'white'
+        }
+ };
+
+ var config = {responsive: true}
+ Plotly.newPlot('sunburst1', data, layout,config);
+
+console.log({{sb_ids|safe}})
+Plotly.newPlot('myDiv', data, layout);
+
+traces1=[]
+for (var i =0 ; i<parent1.length;i++){
+    var obj ={
+        x:child1,
+        y:grandchild1[i],
+  name: parent1[i],
+  type: 'scatter'       
+    }
+    traces1.push(obj)
+}
+
+
+
+var data = traces1;
+
+var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
+       paper_bgcolor:"#262c37",
+       font: {
+     color: 'white'}
+};
+var config = {responsive: true,displayModeBar: false}
+
+
+Plotly.newPlot('linechart1', data,layout,config);
+
+traces2=[]
+for (var i =0 ; i<parent2.length;i++){
+    var obj ={
+        x:child2,
+        y:grandchild2[i],
+  name: parent2[i],
+  type: 'scatter'       
+    }
+    traces2.push(obj)
+}
+
+
+
+var data = traces2;
+
+var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
+       paper_bgcolor:"#262c37",
+       font: {
+     color: 'white'}
+};
+var config = {responsive: true,displayModeBar: false}
+
+
+Plotly.newPlot('linechart2', data,layout,config);
+
+traces3=[]
+for (var i =0 ; i<parent3.length;i++){
+    var obj ={
+        x:child3,
+        y:grandchild3[i],
+  name: parent3[i],
+  type: 'scatter'       
+    }
+    traces3.push(obj)
+}
+
+
+
+var data = traces3;
+
+var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
+       paper_bgcolor:"#262c37",
+       font: {
+     color: 'white'}
+};
+var config = {responsive: true,displayModeBar: false}
+
+
+Plotly.newPlot('linechart3', data,layout,config);
 
 
  </script>

@@ -348,7 +348,7 @@ def visualization(request):
         # print(gb3)
 
         # gb4 = data.groupby([parent]).agg({numerical_field: ['sum']})
-        
+
         if "field1" in request.POST:
             parent = request.POST.get("field1")
         field1_agg = data.groupby([parent]).agg({numerical_field: ["sum"]})
@@ -371,43 +371,91 @@ def visualization(request):
             {numerical_field: ["sum"]}
         )
 
-        field6 = data.groupby([parent, child]).agg(
-            {numerical_field: ["sum"]}
-        )
-        
+        field6 = data.groupby([parent, child]).agg({numerical_field: ["sum"]})
+
         field_6_agg = []
-        for k, v in list(field6.to_dict().values())[0].items():
+        for k, v in list(field6.to_dict().sb_values())[0].items():
             nested_field = []
             for fields in list(k):
                 nested_field.append(fields)
             nested_field.append(v)
             field_6_agg.append(nested_field)
-     
 
-        field7 = data.groupby([parent, grand_child]).agg(
-            {numerical_field: ["sum"]}
-        )
+        field7 = data.groupby([parent, grand_child]).agg({numerical_field: ["sum"]})
 
         field_7_agg = []
-        for k, v in list(field7.to_dict().values())[0].items():
+        for k, v in list(field7.to_dict().sb_values())[0].items():
             nested_field = []
             for fields in list(k):
                 nested_field.append(fields)
             nested_field.append(v)
             field_7_agg.append(nested_field)
-        
 
-        field8 = data.groupby([child, grand_child]).agg(
+        field8 = data.groupby([parent, child, grand_child]).agg(
             {numerical_field: ["sum"]}
         )
 
         field_8_agg = []
-        for k, v in list(field8.to_dict().values())[0].items():
+        for k, v in list(field8.to_dict().sb_values())[0].items():
             nested_field = []
             for fields in list(k):
                 nested_field.append(fields)
             nested_field.append(v)
             field_8_agg.append(nested_field)
+
+        sb_1 = (
+            data.groupby([parent, child, grand_child, great_grand_child])
+            .agg({numerical_field: ["sum"]})
+            .to_dict()
+        )
+
+        sb_2 = (
+            data.groupby([parent, child, grand_child])
+            .agg({numerical_field: ["sum"]})
+            .to_dict()
+        )
+        sb_3 = data.groupby([parent, child]).agg({numerical_field: ["sum"]}).to_dict()
+
+        sb_4 = data.groupby([parent]).agg({numerical_field: ["sum"]}).to_dict()
+
+        u_parents = sorted(list(set(data[parent].dropna())))
+        u_children = sorted(list(set(data[child].dropna())))
+        u_grand_children = sorted(list(set(data[grand_child].dropna())))
+        u_great_grand_children = sorted(list(set(data[great_grand_child].dropna())))
+
+        sb_ids = []
+        sb_labels = []
+        sb_values = []
+        sb_parents = []
+        for p in u_parents:
+            sb_values.append(sb_4[("MSRP", "sum")][p])
+            sb_labels.append(p)
+            sb_parents.append("")
+            sb_ids.append(p)
+        for p in u_parents:
+            for i, c in enumerate(u_children):
+                sb_ids.append(str(p) + str(c))
+                sb_parents.append(p)
+                sb_labels.append(c)
+                sb_values.append(sb_3[("MSRP", "sum")][tuple([p, c])])
+                for gc in u_grand_children:
+                    try:
+                        sb_values.append((sb_2[("MSRP", "sum")][tuple([p, c, gc])]))
+                    except:
+                        sb_values.append(1)
+                    sb_labels.append(gc)
+                    sb_parents.append(str(p) + str(c))
+                    sb_ids.append(str(p) + str(c) + str(gc))
+                    for ggc in u_great_grand_children:
+                        try:
+                            sb_values.append(
+                                (sb_1[("MSRP", "sum")][tuple([p, c, gc, ggc])])
+                            )
+                        except:
+                            sb_values.append(1)
+                        sb_labels.append(ggc)
+                        sb_parents.append(str(p) + str(c) + str(gc))
+                        sb_ids.append(str(p) + str(c) + str(gc) + str(ggc))
 
         return render(
             request,
@@ -421,13 +469,17 @@ def visualization(request):
                 "data_types_dict_count": dict(data_types_dict_count),
                 "column_names": all_columns,
                 "field_summary": field_summary,
-                "field1_agg": list(field1_agg.to_dict().values())[0],
-                "field2_agg": list(field2_agg.to_dict().values())[0],
-                "field3_agg": list(field3_agg.to_dict().values())[0],
-                "field4_agg": list(field4_agg.to_dict().values())[0],
-                "field5_agg": list(field5_agg.to_dict().values())[0],
+                "field1_agg": list(field1_agg.to_dict().sb_values())[0],
+                "field2_agg": list(field2_agg.to_dict().sb_values())[0],
+                "field3_agg": list(field3_agg.to_dict().sb_values())[0],
+                "field4_agg": list(field4_agg.to_dict().sb_values())[0],
+                "field5_agg": list(field5_agg.to_dict().sb_values())[0],
                 "field6_agg": field_6_agg,
                 "field7_agg": field_7_agg,
                 "field8_agg": field_8_agg,
-            }
+                "sb_ids": sb_ids,
+                "sb_labels": sb_labels,
+                "sb_values": sb_values,
+                "sb_parents": sb_parents
+            },
         )

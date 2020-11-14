@@ -457,6 +457,11 @@ def visualization(request):
                         sb_parents.append(str(p) + str(c) + str(gc))
                         sb_ids.append(str(p) + str(c) + str(gc) + str(ggc))
 
+        hist_parent_dict = {}
+        for u_p in u_parents:
+            hist_parent = data[data[parent] == u_p]
+            hist_parent_dict[u_p] = list(hist_parent[numerical_field])
+
         return render(
             request,
             "visualization.html",
@@ -480,6 +485,7 @@ def visualization(request):
                 "sb_ids": sb_ids,
                 "sb_labels": sb_labels,
                 "sb_values": sb_values,
-                "sb_parents": sb_parents
+                "sb_parents": sb_parents,
+                "hist_parent_dict": hist_parent_dict
             },
         )

@@ -374,7 +374,8 @@ def visualization(request):
         field6 = data.groupby([parent, child]).agg({numerical_field: ["sum"]})
 
         field_6_agg = []
-        for k, v in list(field6.to_dict().sb_values())[0].items():
+        
+        for k, v in list(field6.to_dict().values())[0].items():
             nested_field = []
             for fields in list(k):
                 nested_field.append(fields)
@@ -384,7 +385,7 @@ def visualization(request):
         field7 = data.groupby([parent, grand_child]).agg({numerical_field: ["sum"]})
 
         field_7_agg = []
-        for k, v in list(field7.to_dict().sb_values())[0].items():
+        for k, v in list(field7.to_dict().values())[0].items():
             nested_field = []
             for fields in list(k):
                 nested_field.append(fields)
@@ -396,7 +397,7 @@ def visualization(request):
         )
 
         field_8_agg = []
-        for k, v in list(field8.to_dict().sb_values())[0].items():
+        for k, v in list(field8.to_dict().values())[0].items():
             nested_field = []
             for fields in list(k):
                 nested_field.append(fields)
@@ -474,18 +475,18 @@ def visualization(request):
                 "data_types_dict_count": dict(data_types_dict_count),
                 "column_names": all_columns,
                 "field_summary": field_summary,
-                "field1_agg": list(field1_agg.to_dict().sb_values())[0],
-                "field2_agg": list(field2_agg.to_dict().sb_values())[0],
-                "field3_agg": list(field3_agg.to_dict().sb_values())[0],
-                "field4_agg": list(field4_agg.to_dict().sb_values())[0],
-                "field5_agg": list(field5_agg.to_dict().sb_values())[0],
+                "field1_agg": list(field1_agg.to_dict().values())[0],
+                "field2_agg": list(field2_agg.to_dict().values())[0],
+                "field3_agg": list(field3_agg.to_dict().values())[0],
+                "field4_agg": list(field4_agg.to_dict().values())[0],
+                "field5_agg": list(field5_agg.to_dict().values())[0],
                 "field6_agg": field_6_agg,
                 "field7_agg": field_7_agg,
                 "field8_agg": field_8_agg,
-                "sb_ids": sb_ids,
-                "sb_labels": sb_labels,
-                "sb_values": sb_values,
-                "sb_parents": sb_parents,
+                # "sb_ids": sb_ids,
+                # "sb_labels": sb_labels,
+                # "sb_values": sb_values,
+                # "sb_parents": sb_parents,
                 "hist_parent_dict": hist_parent_dict
             },
         )

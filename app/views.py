@@ -479,6 +479,16 @@ def visualization(request):
         for u_p in u_parents:
             hist_parent = data[data[parent] == u_p]
             hist_parent_dict[u_p] = list(hist_parent[numerical_field])
+        
+        hist_children_dict = {}
+        for u_c in u_children:
+            hist_children = data[data[child] == u_c]
+            hist_children_dict[u_p] = list(hist_children[numerical_field])
+        
+        hist_grand_children_dict = {}
+        for u_g_c in u_grand_children:
+            hist_grand_children = data[data[grand_child] == u_g_c]
+            hist_grand_children_dict[u_g_c] = list(hist_grand_children[numerical_field])
 
         return render(
             request,
@@ -504,6 +514,8 @@ def visualization(request):
                 "sb_labels": sb_labels,
                 "sb_values": sb_values,
                 "sb_parents": sb_parents,
-                "hist_parent_dict": hist_parent_dict
+                "hist_parent_dict": hist_parent_dict,
+                "hist_children_dict": hist_children_dict,
+                "hist_grand_children_dict": hist_grand_children_dict
             },
         )

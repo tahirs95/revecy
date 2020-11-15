@@ -543,6 +543,7 @@
                <div  id="horstackchart1"></div>
                <div  id="sunburst1"></div>
                <div  id="linechart1"></div>
+               <div  id="histogram1"></div>
 
 
             </div>
@@ -593,6 +594,7 @@
                 <div  id="horbarchart2"></div>
                 <div  id="stackchart2"></div>
                 <div  id="horstackchart2"></div>
+                <div id="sunburst2"></div>
                 <div id="linechart2"></div>
  
             </div>
@@ -643,6 +645,7 @@
                 <div  id="horbarchart3"></div>
                 <div  id="stackchart3"></div>
                 <div  id="horstackchart3"></div>
+                <div id="sunburst3"></div>
                 <div id="linechart3"></div>
 
  
@@ -1606,11 +1609,11 @@ var data = [{
   type: "sunburst",
 
   //Parent child Ids for data mapping
-  ids: [2003, 2004, 2005, 'Large', 'Medium', 'Small', 'Large', 'Medium', 'Small', 'Large', 'Medium', 'Small'],
+  ids: {{sb_ids|safe}},
  
-  values:  [101589, 134851, 47880, 9632, 59711, 32246, 10037, 75332, 49482, 5166, 25292, 17422],
-  labels: [2003, 2004, 2005, 'Large', 'Medium', 'Small', 'Large', 'Medium', 'Small', 'Large', 'Medium', 'Small'],
-  parents: ['', '', '', 2003, 2003, 2003, 2004, 2004, 2004, 2005, 2005, 2005],
+  values:{{sb_values|safe}},
+  labels: {{sb_labels|safe}},
+  parents: {{sb_parents|safe}},
   outsidetextfont: {size: 20, color: "#377eb8"},
   // leaf: {opacity: 0.4},
   marker: {line: {width: 2}},
@@ -1626,11 +1629,12 @@ var layout = {
         }
  };
 
- var config = {responsive: true}
+ var config = {responsive: true,displayModeBar: false}
  Plotly.newPlot('sunburst1', data, layout,config);
+ Plotly.newPlot('sunburst2', data, layout,config);
+ Plotly.newPlot('sunburst3', data, layout,config);
 
-console.log({{sb_ids|safe}})
-Plotly.newPlot('myDiv', data, layout);
+// Plotly.newPlot('myDiv', data, layout);
 
 traces1=[]
 for (var i =0 ; i<parent1.length;i++){
@@ -1706,6 +1710,30 @@ var config = {responsive: true,displayModeBar: false}
 
 
 Plotly.newPlot('linechart3', data,layout,config);
+
+var histo =  {{hist_parent_dict|safe}}
+
+traces1 = [];
+Object.keys(histo).forEach(function(key) {
+ var obj = {
+     x:histo[key],
+     type:"histogram",
+     name:key
+ }
+ traces1.push(obj)
+
+})
+
+ var data = traces1
+ 
+var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
+       paper_bgcolor:"#262c37",
+       font: {
+     color: 'white'}
+};
+var config = {responsive: true,displayModeBar: false}
+Plotly.newPlot('histogram1', data,layout,config);
+
 
 
  </script>

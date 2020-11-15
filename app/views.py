@@ -419,29 +419,46 @@ def visualization(request):
 
         sb_4 = data.groupby([parent]).agg({numerical_field: ["sum"]}).to_dict()
 
-        u_parents = sorted(list(set(data[parent].dropna())))
-        u_children = sorted(list(set(data[child].dropna())))
-        u_grand_children = sorted(list(set(data[grand_child].dropna())))
-        u_great_grand_children = sorted(list(set(data[great_grand_child].dropna())))
+        u_parents = list(set(data[parent]))
+        if 0 in u_parents:
+            u_parents.remove(0)
+        u_parents = sorted(u_parents)
+
+        u_children = list(set(data[child]))
+        if 0 in u_parents:
+            u_children.remove(0)
+        u_children = sorted(u_children)
+
+        u_grand_children = list(set(data[grand_child]))
+        if 0 in u_parents:
+            u_grand_children.remove(0)
+        u_grand_children = sorted(u_grand_children)
+
+        u_great_grand_children = list(set(data[great_grand_child]))
+        if 0 in u_great_grand_children:
+            u_great_grand_children.remove(0)
+        u_great_grand_children = sorted(u_great_grand_children)
 
         sb_ids = []
         sb_labels = []
         sb_values = []
         sb_parents = []
+
         for p in u_parents:
             sb_values.append(sb_4[("MSRP", "sum")][p])
             sb_labels.append(p)
             sb_parents.append("")
             sb_ids.append(p)
+
         for p in u_parents:
             for i, c in enumerate(u_children):
                 sb_ids.append(str(p) + str(c))
                 sb_parents.append(p)
                 sb_labels.append(c)
-                sb_values.append(sb_3[("MSRP", "sum")][tuple([p, c])])
+                sb_values.append(sb_3[(numerical_field, "sum")][tuple([p, c])])
                 for gc in u_grand_children:
                     try:
-                        sb_values.append((sb_2[("MSRP", "sum")][tuple([p, c, gc])]))
+                        sb_values.append((sb_2[(numerical_field, "sum")][tuple([p, c, gc])]))
                     except:
                         sb_values.append(1)
                     sb_labels.append(gc)
@@ -450,7 +467,7 @@ def visualization(request):
                     for ggc in u_great_grand_children:
                         try:
                             sb_values.append(
-                                (sb_1[("MSRP", "sum")][tuple([p, c, gc, ggc])])
+                                (sb_1[(numerical_field, "sum")][tuple([p, c, gc, ggc])])
                             )
                         except:
                             sb_values.append(1)
@@ -483,10 +500,10 @@ def visualization(request):
                 "field6_agg": field_6_agg,
                 "field7_agg": field_7_agg,
                 "field8_agg": field_8_agg,
-                # "sb_ids": sb_ids,
-                # "sb_labels": sb_labels,
-                # "sb_values": sb_values,
-                # "sb_parents": sb_parents,
+                "sb_ids": sb_ids,
+                "sb_labels": sb_labels,
+                "sb_values": sb_values,
+                "sb_parents": sb_parents,
                 "hist_parent_dict": hist_parent_dict
             },
         )

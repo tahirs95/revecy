@@ -596,6 +596,7 @@
                 <div  id="horstackchart2"></div>
                 <div id="sunburst2"></div>
                 <div id="linechart2"></div>
+                <div id="histogram2"></div>
  
             </div>
             <div class="col-lg-4">
@@ -647,6 +648,7 @@
                 <div  id="horstackchart3"></div>
                 <div id="sunburst3"></div>
                 <div id="linechart3"></div>
+                <div id="histogram3"></div>
 
  
             </div>
@@ -1711,12 +1713,14 @@ var config = {responsive: true,displayModeBar: false}
 
 Plotly.newPlot('linechart3', data,layout,config);
 
-var histo =  {{hist_parent_dict|safe}}
+var histog1 =  {{hist_parent_dict|safe}}
+var histog2 = {{hist_children_dict|safe}}
+var histog3 = {{hist_grand_children_dict|safe}}
 
 traces1 = [];
-Object.keys(histo).forEach(function(key) {
+Object.keys(histog1).forEach(function(key) {
  var obj = {
-     x:histo[key],
+     x:histog1[key],
      type:"histogram",
      name:key
  }
@@ -1734,6 +1738,50 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
 var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('histogram1', data,layout,config);
 
+
+traces2 = [];
+console.log(histog2)
+Object.keys(histog2).forEach(function(key) {
+ var obj = {
+     x:histog2[key],
+     type:"histogram",
+     name:key
+ }
+ traces2.push(obj)
+
+})
+
+ var data = traces2
+ 
+var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
+       paper_bgcolor:"#262c37",
+       font: {
+     color: 'white'}
+};
+var config = {responsive: true,displayModeBar: false}
+Plotly.newPlot('histogram2', data,layout,config);
+
+
+traces3 = [];
+Object.keys(histog3).forEach(function(key) {
+ var obj = {
+     x:histog3[key],
+     type:"histogram",
+     name:key
+ }
+ traces3.push(obj)
+
+})
+
+ var data = traces3
+ 
+var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
+       paper_bgcolor:"#262c37",
+       font: {
+     color: 'white'}
+};
+var config = {responsive: true,displayModeBar: false}
+Plotly.newPlot('histogram3', data,layout,config);
 
 
  </script>

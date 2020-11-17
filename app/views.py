@@ -490,6 +490,10 @@ def visualization(request):
             hist_grand_children = data[data[grand_child] == u_g_c]
             hist_grand_children_dict[u_g_c] = list(hist_grand_children[numerical_field])
 
+        bubble_plot_1 = data.groupby([parent, child]).agg({numerical_field: ['sum']}).to_dict() 
+        bubble_plot_2 = data.groupby([parent, child]).agg({numerical_field: ['mean']}).to_dict() 
+        bubble_plot_3 = data.groupby([parent, child]).agg({numerical_field: ['count']}).to_dict() 
+
         return render(
             request,
             "visualization.html",
@@ -516,6 +520,9 @@ def visualization(request):
                 "sb_parents": sb_parents,
                 "hist_parent_dict": hist_parent_dict,
                 "hist_children_dict": hist_children_dict,
-                "hist_grand_children_dict": hist_grand_children_dict
+                "hist_grand_children_dict": hist_grand_children_dict,
+                "bubble_plot_1": bubble_plot_1,
+                "bubble_plot_2": bubble_plot_2,
+                "bubble_plot_3": bubble_plot_3
             },
         )

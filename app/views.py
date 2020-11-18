@@ -404,6 +404,7 @@ def visualization(request):
             nested_field.append(v)
             field_8_agg.append(nested_field)
 
+        # Sunburst
         sb_1 = (
             data.groupby([parent, child, grand_child, great_grand_child])
             .agg({numerical_field: ["sum"]})
@@ -475,6 +476,8 @@ def visualization(request):
                         sb_parents.append(str(p) + str(c) + str(gc))
                         sb_ids.append(str(p) + str(c) + str(gc) + str(ggc))
 
+
+        # Histogram
         hist_parent_dict = {}
         for u_p in u_parents:
             hist_parent = data[data[parent] == u_p]
@@ -490,9 +493,34 @@ def visualization(request):
             hist_grand_children = data[data[grand_child] == u_g_c]
             hist_grand_children_dict[u_g_c] = list(hist_grand_children[numerical_field])
 
+        # Bubble Plot
         bubble_plot_1 = data.groupby([parent, child]).agg({numerical_field: ['sum']}).to_dict() 
         bubble_plot_2 = data.groupby([parent, child]).agg({numerical_field: ['mean']}).to_dict() 
         bubble_plot_3 = data.groupby([parent, child]).agg({numerical_field: ['count']}).to_dict() 
+
+        bubble_plot_1_agg = []
+        for k, v in list(bubble_plot_1.values())[0].items():
+            nested_field = []
+            for fields in list(k):
+                nested_field.append(fields)
+            nested_field.append(v)
+            bubble_plot_1_agg.append(nested_field)
+        
+        bubble_plot_2_agg = []
+        for k, v in list(bubble_plot_2.values())[0].items():
+            nested_field = []
+            for fields in list(k):
+                nested_field.append(fields)
+            nested_field.append(v)
+            bubble_plot_2_agg.append(nested_field)
+        
+        bubble_plot_3_agg = []
+        for k, v in list(bubble_plot_3.values())[0].items():
+            nested_field = []
+            for fields in list(k):
+                nested_field.append(fields)
+            nested_field.append(v)
+            bubble_plot_3_agg.append(nested_field)
 
         return render(
             request,
@@ -521,8 +549,8 @@ def visualization(request):
                 "hist_parent_dict": hist_parent_dict,
                 "hist_children_dict": hist_children_dict,
                 "hist_grand_children_dict": hist_grand_children_dict,
-                "bubble_plot_1": bubble_plot_1,
-                "bubble_plot_2": bubble_plot_2,
-                "bubble_plot_3": bubble_plot_3
+                "bubble_plot_sum": bubble_plot_1_agg,
+                "bubble_plot_mean": bubble_plot_2_agg,
+                "bubble_plot_count": bubble_plot_3_agg
             },
         )

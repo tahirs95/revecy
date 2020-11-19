@@ -545,6 +545,7 @@
                <div  id="linechart1"></div>
                <div  id="histogram1"></div>
                <div  id="boxplot1"></div>
+               <div  id="bubblechart1"></div>
 
 
             </div>
@@ -991,7 +992,7 @@ function values_box(){
      else{
         document.getElementById("error").style.display = 'none'  
        document.getElementById("mappings").value = JSON.stringify(obj);
-       document.getElementById("file_name").value = "{{file_name|safe}}"
+       document.getElementById("file_name").value = {{file_name|safe}}
        console.log( document.getElementById("mappings").value, document.getElementById("file_name").value)
        document.getElementById('form2').submit();
             }
@@ -1864,6 +1865,49 @@ Plotly.newPlot('boxplot3', data, layout,config);
 //  Object.keys(bubble).forEach(function(key) {
 // console.log(key)
 //  })
+var bubble_data = {{bubble_plot|safe}}
+
+console.log(bubble_data)
+var data_bubble ={}
+var count_bubble=0;
+var key_count = 0;
+var keys= [];
+Object.keys(bubble_data).forEach(function(key) {
+   key_count++;
+   keys.push(key)
+    Object.keys(bubble_data[key]).forEach(function(key2) {
+        data_bubble[count_bubble] = bubble_data[key][key2]
+          count_bubble++;
+    })
+})
+
+console.log(count_bubble , data_bubble)
+traces1 = []
+temp_var = 0;
+for(var i = 0;i<count_bubble;i+=key_count){
+    var obj = {
+  x: [data_bubble[i].reduce((a, b) => a + b, 0)],
+  y: [key_count],
+  name:keys[temp_var],
+  mode: 'markers',
+  marker: {
+    size:  [data_bubble[i+2].reduce((a, b) => a + b, 0)]
+  }
+};
+temp_var++;
+traces1.push(obj)
+}
+console.log(traces1)
+var data = traces1;
+var layout = {
+    plot_bgcolor:"#262c37",
+       paper_bgcolor:"#262c37",
+       font: {
+     color: 'white'
+       }
+};
+var config = {responsive: true,displayModeBar: false}
+Plotly.newPlot('bubblechart1', data, layout,config);
  </script>
 {% endif %}
 </body>

@@ -991,7 +991,7 @@ function values_box(){
      else{
         document.getElementById("error").style.display = 'none'  
        document.getElementById("mappings").value = JSON.stringify(obj);
-       document.getElementById("file_name").value = {{file_name|safe}}
+       document.getElementById("file_name").value = "{{file_name|safe}}"
        console.log( document.getElementById("mappings").value, document.getElementById("file_name").value)
        document.getElementById('form2').submit();
             }

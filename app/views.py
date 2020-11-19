@@ -45,9 +45,9 @@ def send_email(request):
 
 def visualization(request):
     if request.method == "GET":
-        csv_file = "dataset.csv"
-        data = pd.read_csv(csv_file, encoding="unicode_escape")
-        file_name = None
+        file_name = "dataset"
+        data = pd.read_csv("{}.csv".format(file_name), encoding="unicode_escape")
+        # file_name = None
 
     elif request.method == "POST":
         # random_name = request.body['random_name']
@@ -61,6 +61,8 @@ def visualization(request):
 
         if "mappings" in request.POST:
             mappings = request.POST.get("mappings")
+        else:
+            mappings = None
 
         data.to_csv("{}.csv".format(file_name), index=False)
 
@@ -183,6 +185,7 @@ def visualization(request):
         {numerical_field: ["mean", "sum", "count"]}
     )
 
+    # Pie chart, Bar chart
     if "field1" in request.POST:
         parent = request.POST.get("field1")
     field1_agg = data.groupby([parent]).agg({numerical_field: ["sum"]})
@@ -195,16 +198,7 @@ def visualization(request):
         grand_child = request.POST.get("field3")
     field3_agg = data.groupby([grand_child]).agg({numerical_field: ["sum"]})
 
-    if "field4" in request.POST:
-        great_grand_child = request.POST.get("field4")
-    field4_agg = data.groupby([great_grand_child]).agg({numerical_field: ["sum"]})
-
-    if "field5" in request.POST:
-        great_great_grand_child = request.POST.get("field5")
-    field5_agg = data.groupby([great_great_grand_child]).agg(
-        {numerical_field: ["sum"]}
-    )
-
+    # Stack bar graph/ line chart
     field6 = data.groupby([parent, child]).agg({numerical_field: ["sum"]})
 
     field_6_agg = []
@@ -344,12 +338,11 @@ def visualization(request):
             random_numerical_fields[2]: list(bubble_plot_parent[random_numerical_fields[2]])
         }
     
-    print(bubble_plot)
-
     return render(
         request,
         "visualization.html",
-        {
+        {   
+            "mappings":mappings,
             "top_rows": top_rows,
             "shape": shape,
             "memory": memory,
@@ -361,8 +354,6 @@ def visualization(request):
             "field1_agg": list(field1_agg.to_dict().values())[0],
             "field2_agg": list(field2_agg.to_dict().values())[0],
             "field3_agg": list(field3_agg.to_dict().values())[0],
-            "field4_agg": list(field4_agg.to_dict().values())[0],
-            "field5_agg": list(field5_agg.to_dict().values())[0],
             "field6_agg": field_6_agg,
             "field7_agg": field_7_agg,
             "field8_agg": field_8_agg,

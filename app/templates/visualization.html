@@ -1886,12 +1886,12 @@ traces1 = []
 temp_var = 0;
 for(var i = 0;i<count_bubble;i+=key_count){
     var obj = {
-  x: [data_bubble[i].reduce((a, b) => a + b, 0)],
-  y: [key_count],
+  x: [data_bubble[i].reduce((a, b) => a + b, 0)/data_bubble[i].length],
+  y: [data_bubble[i+1].length],
   name:keys[temp_var],
   mode: 'markers',
   marker: {
-    size:  [data_bubble[i+2].reduce((a, b) => a + b, 0)]
+    size:  [data_bubble[i+2].reduce((a, b) => a + b, 0)/5000]
   }
 };
 temp_var++;

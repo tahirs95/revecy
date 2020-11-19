@@ -330,7 +330,7 @@ def visualization(request):
     # Bubble Plot
     all_numerical_fields = []
     for k, v in data_types_dict.items():
-        if v == 'int' and k not in ["year_index", "week_index", "month_index", "quarter_index", "day_index", "QTR_ID", "MONTH_ID"]:
+        if v == 'int' and k not in ["year_index", "week_index", "month_index", "quarter_index", "day_index", "QTR_ID", "MONTH_ID", "YEAR_ID"]:
             all_numerical_fields.append(k)
     
     random_numerical_fields = random.sample(all_numerical_fields, 3)

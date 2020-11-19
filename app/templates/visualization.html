@@ -544,6 +544,7 @@
                <div  id="sunburst1"></div>
                <div  id="linechart1"></div>
                <div  id="histogram1"></div>
+               <div  id="boxplot1"></div>
 
 
             </div>
@@ -597,6 +598,7 @@
                 <div id="sunburst2"></div>
                 <div id="linechart2"></div>
                 <div id="histogram2"></div>
+                <div id="boxplot2"></div>
  
             </div>
             <div class="col-lg-4">
@@ -649,6 +651,7 @@
                 <div id="sunburst3"></div>
                 <div id="linechart3"></div>
                 <div id="histogram3"></div>
+                <div id="boxplot3"></div>
 
  
             </div>
@@ -1717,7 +1720,9 @@ var histog1 =  {{hist_parent_dict|safe}}
 var histog2 = {{hist_children_dict|safe}}
 var histog3 = {{hist_grand_children_dict|safe}}
 
+console.log(histog1)
 traces1 = [];
+
 Object.keys(histog1).forEach(function(key) {
  var obj = {
      x:histog1[key],
@@ -1783,7 +1788,82 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
 var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('histogram3', data,layout,config);
 
+traces1 = [];
 
+Object.keys(histog1).forEach(function(key) {
+ var obj = {
+    y: histog1[key],
+  type: 'box',
+  name: key
+ }
+ traces1.push(obj)
+
+})
+
+var data = traces1;
+
+var layout = {
+    plot_bgcolor:"#262c37",
+       paper_bgcolor:"#262c37",
+       font: {
+     color: 'white'
+       }
+};
+var config = {responsive: true,displayModeBar: false}
+Plotly.newPlot('boxplot1', data, layout,config);
+
+traces2 = [];
+
+Object.keys(histog2).forEach(function(key) {
+ var obj = {
+    y: histog2[key],
+  type: 'box',
+  name: key
+ }
+ traces2.push(obj)
+
+})
+
+var data = traces2;
+
+var layout = {
+    plot_bgcolor:"#262c37",
+       paper_bgcolor:"#262c37",
+       font: {
+     color: 'white'
+       }
+};
+var config = {responsive: true,displayModeBar: false}
+Plotly.newPlot('boxplot2', data, layout,config);
+
+traces3 = [];
+
+Object.keys(histog3).forEach(function(key) {
+ var obj = {
+    y: histog3[key],
+  type: 'box',
+  name: key
+ }
+ traces3.push(obj)
+
+})
+
+var data = traces3;
+
+var layout = {
+    plot_bgcolor:"#262c37",
+       paper_bgcolor:"#262c37",
+       font: {
+     color: 'white'
+       }
+};
+var config = {responsive: true,displayModeBar: false}
+Plotly.newPlot('boxplot3', data, layout,config);
+
+//  var bubble =  {{bubble_plot_sum|safe}}
+//  Object.keys(bubble).forEach(function(key) {
+// console.log(key)
+//  })
  </script>
 {% endif %}
 </body>

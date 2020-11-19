@@ -47,7 +47,7 @@ def visualization(request):
     if request.method == "GET":
         file_name = "dataset"
         data = pd.read_csv("{}.csv".format(file_name), encoding="unicode_escape")
-        # file_name = None
+        mappings = None
 
     elif request.method == "POST":
         # random_name = request.body['random_name']

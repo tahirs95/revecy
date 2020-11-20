@@ -47,7 +47,7 @@ def visualization(request):
     if request.method == "GET":
         file_name = "dataset"
         data = pd.read_csv("{}.csv".format(file_name), encoding="unicode_escape")
-        mappings = None
+        mappings = ""
 
     elif request.method == "POST":
         # random_name = request.body['random_name']
@@ -62,10 +62,10 @@ def visualization(request):
         if "mappings" in request.POST:
             mappings = request.POST.get("mappings")
         else:
-            mappings = None
+            mappings = ""
 
         data.to_csv("{}.csv".format(file_name), index=False)
-
+        print(mappings)
     data = data.fillna(0)
     all_columns = list(data)
     top_rows = data.head(10).to_dict()

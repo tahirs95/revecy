@@ -504,9 +504,10 @@
         </div>
 
         <div class="py-5 container">
+            <form action="/visualization" method="POST" id="form_graphs">
+                {% csrf_token %}
             <div class="row">
             <div class="col-lg-4">
-               
                 
                <table class="table table-borderless table-responsive">
                <tbody id="table1">
@@ -524,7 +525,7 @@
                <div  id="boxplot1"></div>
                <div  id="bubblechart1"></div>
                <div class="select w-100">
-                <select class="slct_table" data-name="1" id="select1" onchange="table_change(this)">
+                <select class="slct_table" data-name="1" name="field1" id="select1" onchange="table_change(this)">
                    
                 </select>
             </div>
@@ -549,7 +550,7 @@
                 <div id="boxplot2"></div>
                 <div id="bubblechart2"></div>
                 <div class="select w-100">
-                    <select class="slct_table" data-name="2" id="select2" onchange="table_change(this)">
+                    <select class="slct_table" data-name="2" name="field2" id="select2" onchange="table_change(this)">
                     </select>
                 </div>
             </div>
@@ -572,7 +573,7 @@
                 <div id="boxplot3"></div>
                 <div id="bubblechart3"></div>
                 <div class="select w-100">
-                    <select class="slct_table" data-name="3" id="select3" onchange="table_change(this)">
+                    <select class="slct_table" data-name="3" id="select3" name="field3" onchange="table_change(this)">
                     </select>
                 </div>
             </div>
@@ -674,9 +675,10 @@
             </div>
             <div class="row">
                 <div class="submit mt-4">
-                    <button type="button" class="btn" id="submit_chart">Submit</button>
+                    <button type="submit" class="btn" id="submit_chart">Submit</button>
                 </div>
             </div>
+        </form>
             </div>
 
         <div class="revecy banner py-5">
@@ -779,6 +781,11 @@
     })      
 
   }
+  $("#form_graphs").append(`<input type="text" name="mappings" style="display:none" id="mappings_graphs">`)
+  $("#form_graphs").append(`<input type="text" name="file_name" style="display:none" id="file_graphs">`)
+  document.getElementById("mappings_graphs").value = JSON.stringify(mappings);
+  document.getElementById("file_graphs").value = "{{file_name|safe}}"
+
 </script>
 {% endif %}
     <script>

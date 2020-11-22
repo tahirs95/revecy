@@ -787,6 +787,12 @@
   document.getElementById("file_graphs").value = "{{file_name|safe}}"
 
 </script>
+{% else %}
+<script>
+  $("#form_graphs").append(`<input type="text" name="file_name" style="display:none" id="file_graphs">`)
+  document.getElementById("file_graphs").value = "{{file_name|safe}}"
+</script>
+
 {% endif %}
     <script>
   

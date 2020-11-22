@@ -259,12 +259,12 @@ def visualization(request):
     u_parents = sorted(u_parents)
 
     u_children = list(set(data[child]))
-    if 0 in u_parents:
+    if 0 in u_children:
         u_children.remove(0)
     u_children = sorted(u_children)
 
     u_grand_children = list(set(data[grand_child]))
-    if 0 in u_parents:
+    if 0 in u_grand_children:
         u_grand_children.remove(0)
     print(u_grand_children)
     u_grand_children = sorted(u_grand_children)
@@ -346,7 +346,7 @@ def visualization(request):
             random_numerical_fields[1]: list(bubble_plot_parent[random_numerical_fields[1]]),
             random_numerical_fields[2]: list(bubble_plot_parent[random_numerical_fields[2]])
         }
-    print(mappings)
+    print(file_name)
     return render(
         request,
         "visualization.html",

@@ -65,7 +65,6 @@ def visualization(request):
             mappings = ""
 
         data.to_csv("{}.csv".format(file_name), index=False)
-        print(mappings)
     data = data.fillna(0)
     all_columns = list(data)
     top_rows = data.head(10).to_dict()
@@ -88,6 +87,7 @@ def visualization(request):
         elif "float" in str(v):
             data_types_dict[k] = "float"
             data_types_dict_count["float"] += 1
+    
 
     data_types_dict_count["date"] = 1
     for i, row in data.iterrows():
@@ -100,6 +100,11 @@ def visualization(request):
             data_types_dict[k] = "datetime"
         except:
             continue
+    
+    string_columns = []
+    for k, v in data_types_dict.items():
+        if v == "str":
+            string_columns.append(k)
 
     # Detecting date type field
     for k, v in data_types_dict.items():
@@ -261,6 +266,7 @@ def visualization(request):
     u_grand_children = list(set(data[grand_child]))
     if 0 in u_parents:
         u_grand_children.remove(0)
+    print(u_grand_children)
     u_grand_children = sorted(u_grand_children)
 
     u_great_grand_children = list(set(data[great_grand_child]))
@@ -284,7 +290,10 @@ def visualization(request):
             sb_ids.append(str(p) + str(c))
             sb_parents.append(p)
             sb_labels.append(c)
-            sb_values.append(sb_3[(numerical_field, "sum")][tuple([p, c])])
+            try:
+                sb_values.append(sb_3[(numerical_field, "sum")][tuple([p, c])])
+            except:
+                sb_values.append(1)
             for gc in u_grand_children:
                 try:
                     sb_values.append((sb_2[(numerical_field, "sum")][tuple([p, c, gc])]))
@@ -337,7 +346,7 @@ def visualization(request):
             random_numerical_fields[1]: list(bubble_plot_parent[random_numerical_fields[1]]),
             random_numerical_fields[2]: list(bubble_plot_parent[random_numerical_fields[2]])
         }
-    
+    print(mappings)
     return render(
         request,
         "visualization.html",
@@ -349,7 +358,7 @@ def visualization(request):
             "file_name": file_name,
             "corr_data": corr_data,
             "data_types_dict_count": dict(data_types_dict_count),
-            "column_names": all_columns,
+            "column_names": string_columns,
             "field_summary": field_summary,
             "field1_agg": list(field1_agg.to_dict().values())[0],
             "field2_agg": list(field2_agg.to_dict().values())[0],

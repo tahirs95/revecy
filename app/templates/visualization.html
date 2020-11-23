@@ -509,7 +509,7 @@
             <div class="row">
             <div class="col-lg-4">
                 
-               <table class="table table-borderless table-responsive">
+               <table class="table table-borderless table-responsive table_height_custom">
                <tbody id="table1">
                                   </tbody>
                </table>
@@ -518,12 +518,12 @@
                <div  id="barchart1"></div>
                <div  id="horbarchart1"></div>
                <div  id="stackchart1"></div>
-               <div  id="horstackchart1"></div>
-               <div  id="sunburst1"></div>
-               <div  id="linechart1"></div>
+                <div  id="horstackchart1"></div>
+               <!-- <div  id="sunburst1"></div> -->
+                <div  id="linechart1"></div>
                <div  id="histogram1"></div>
                <div  id="boxplot1"></div>
-               <div  id="bubblechart1"></div>
+               <div  id="bubblechart1"></div> 
                <div class="select w-100">
                 <select class="slct_table" data-name="1" name="field1" id="select1" onchange="table_change(this)">
                    
@@ -533,7 +533,7 @@
             </div>
             <div class="col-lg-4">
                 
-            <table class="table table-borderless table-responsive">
+            <table class="table table-borderless table-responsive  table_height_custom">
                 <tbody id="table2">
                    
                 </tbody>
@@ -542,21 +542,21 @@
                 </div>
                 <div  id="barchart2"></div>
                 <div  id="horbarchart2"></div>
-                <div  id="stackchart2"></div>
-                <div  id="horstackchart2"></div>
-                <div id="sunburst2"></div>
-                <div id="linechart2"></div>
-                <div id="histogram2"></div>
-                <div id="boxplot2"></div>
+                <div  id="stackchart2"></div> 
+                 <div  id="horstackchart2"></div> 
+                <!-- <div id="sunburst2"></div> -->
+                 <div id="linechart2"></div> 
+                 <div id="histogram2"></div> 
+                 <div id="boxplot2"></div> 
                 <div id="bubblechart2"></div>
                 <div class="select w-100">
                     <select class="slct_table" data-name="2" name="field2" id="select2" onchange="table_change(this)">
                     </select>
                 </div>
             </div>
-            <div class="col-lg-4">
+             <div class="col-lg-4">
                 
-            <table class="table table-borderless table-responsive">
+            <table class="table table-borderless table-responsive  table_height_custom">
                 <tbody id="table3">
                    
                 </tbody>
@@ -565,18 +565,18 @@
                 </div>
                 <div  id="barchart3"></div>
                 <div  id="horbarchart3"></div>
-                <div  id="stackchart3"></div>
-                <div  id="horstackchart3"></div>
-                <div id="sunburst3"></div>
+                 <div  id="stackchart3"></div> 
+                 <div  id="horstackchart3"></div> 
+                <!-- <div id="sunburst3"></div> -->
                 <div id="linechart3"></div>
-                <div id="histogram3"></div>
-                <div id="boxplot3"></div>
+                 <div id="histogram3"></div>
+                 <div id="boxplot3"></div>
                 <div id="bubblechart3"></div>
                 <div class="select w-100">
                     <select class="slct_table" data-name="3" id="select3" name="field3" onchange="table_change(this)">
                     </select>
                 </div>
-            </div>
+            </div> 
             <!-- <div class="col-lg-2">
                 <div class="select w-100">
                     <select class="slct_table" data-name="4" id="select4" onchange="table_change(this)">
@@ -1105,19 +1105,19 @@ for (var i = 0;i<data_new.length;i++){
 
 console.log(sun_parent1)
 
-// for ( var i = 0 ; i< data_new.length ; i++){
-//     for(var j = 0; j<data_new[i].length;j++){
-//         if(j == 0){
-//             sun_parent1.push(String(data_new[i][j]))
-//         }
-//         else if(j == 1){
-//             sun_child1.push(data_new[i][j])
-//         }
-//         else{
-//             sun_grandchild1.push(data_new[i][j])
-//         }
-//     }
-// }
+for ( var i = 0 ; i< data_new.length ; i++){
+    for(var j = 0; j<data_new[i].length;j++){
+        if(j == 0){
+            sun_parent1.push(String(data_new[i][j]))
+        }
+        else if(j == 1){
+            sun_child1.push(data_new[i][j])
+        }
+        else{
+            sun_grandchild1.push(data_new[i][j])
+        }
+    }
+}
 
 console.log(sun_parent1,sun_child1,sun_grandchild1)
 
@@ -1153,6 +1153,12 @@ var layout= {
       paper_bgcolor:"#262c37",
       font: {
     color: 'white'
+  },
+  yaxis: {
+    automargin: true
+  },
+  xaxis: {
+    automargin: true
   }
 }
 
@@ -1206,6 +1212,12 @@ var layout= {
       paper_bgcolor:"#262c37",
       font: {
     color: 'white'
+  },
+  yaxis: {
+    automargin: true
+  },
+  xaxis: {
+    automargin: true
   }
 }
 
@@ -1259,6 +1271,12 @@ var layout= {
       paper_bgcolor:"#262c37",
       font: {
     color: 'white'
+  },
+  yaxis: {
+    automargin: true
+  },
+  xaxis: {
+    automargin: true
   }
 }
 
@@ -1589,34 +1607,34 @@ var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('horstackchart3', data, layout,config);
 
 
-var data = [{
-  type: "sunburst",
+// var data = [{
+//   type: "sunburst",
 
-  //Parent child Ids for data mapping
-  ids: {{sb_ids|safe}},
+//   //Parent child Ids for data mapping
+//   ids: {{sb_ids|safe}},
  
-  values:{{sb_values|safe}},
-  labels: {{sb_labels|safe}},
-  parents: {{sb_parents|safe}},
-  outsidetextfont: {size: 20, color: "#377eb8"},
-  // leaf: {opacity: 0.4},
-  marker: {line: {width: 2}},
-}];
+//   values:{{sb_values|safe}},
+//   labels: {{sb_labels|safe}},
+//   parents: {{sb_parents|safe}},
+//   outsidetextfont: {size: 20, color: "#377eb8"},
+//   // leaf: {opacity: 0.4},
+//   marker: {line: {width: 2}},
+// }];
 
-var layout = {
-   margin: {l: 0, r: 0, b: 0, t:0},
-   sunburstcolorway:["#636efa","#ef553b","#00cc96"],
-    plot_bgcolor:"#262c37",
-        paper_bgcolor:"#262c37",
-        font: {
-      color: 'white'
-        }
- };
+// var layout = {
+//    margin: {l: 0, r: 0, b: 0, t:0},
+//    sunburstcolorway:["#636efa","#ef553b","#00cc96"],
+//     plot_bgcolor:"#262c37",
+//         paper_bgcolor:"#262c37",
+//         font: {
+//       color: 'white'
+//         }
+//  };
 
- var config = {responsive: true,displayModeBar: false}
- Plotly.newPlot('sunburst1', data, layout,config);
- Plotly.newPlot('sunburst2', data, layout,config);
- Plotly.newPlot('sunburst3', data, layout,config);
+//  var config = {responsive: true,displayModeBar: false}
+//  Plotly.newPlot('sunburst1', data, layout,config);
+//  Plotly.newPlot('sunburst2', data, layout,config);
+//  Plotly.newPlot('sunburst3', data, layout,config);
 
 // Plotly.newPlot('myDiv', data, layout);
 
@@ -1839,13 +1857,9 @@ var layout = {
 var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('boxplot3', data, layout,config);
 
-//  var bubble =  {{bubble_plot_sum|safe}}
-//  Object.keys(bubble).forEach(function(key) {
-// console.log(key)
-//  })
+
 var bubble_data = {{bubble_plot|safe}}
 
-console.log(bubble_data)
 var data_bubble ={}
 var count_bubble=0;
 var key_count = 0;

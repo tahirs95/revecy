@@ -728,3 +728,7 @@ select {
 #error{
     display: none;
 }
+
+.table_height_custom{
+    height: 300px !important;
+}

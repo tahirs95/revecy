@@ -379,6 +379,5 @@ def visualization(request):
             "hist_children_dict": hist_children_dict,
             "hist_grand_children_dict": hist_grand_children_dict,
             "bubble_plot": bubble_plot,
-            "bubble_plot_marker_normalized": bubble_plot_marker_normalized
         },
     )

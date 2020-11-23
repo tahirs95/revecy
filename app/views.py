@@ -193,14 +193,20 @@ def visualization(request):
     # Pie chart, Bar chart
     if "field1" in request.POST:
         parent = request.POST.get("field1")
+    else:
+        parent = "STATUS"
     field1_agg = data.groupby([parent]).agg({numerical_field: ["sum"]})
 
     if "field2" in request.POST:
         child = request.POST.get("field2")
+    else:
+        child = "STATUS"
     field2_agg = data.groupby([child]).agg({numerical_field: ["sum"]})
 
     if "field3" in request.POST:
         grand_child = request.POST.get("field3")
+    else:
+        grand_child = "STATUS"
     field3_agg = data.groupby([grand_child]).agg({numerical_field: ["sum"]})
 
     if "field4" in request.POST:

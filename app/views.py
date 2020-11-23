@@ -225,7 +225,7 @@ def visualization(request):
         nested_field.append(v)
         field_7_agg.append(nested_field)
 
-    field8 = data.groupby([parent, child, grand_child]).agg(
+    field8 = data.groupby([child, grand_child]).agg(
         {numerical_field: ["sum"]}
     )
 
@@ -244,14 +244,14 @@ def visualization(request):
     #     .to_dict()
     # )
 
-    # sb_2 = (
-    #     data.groupby([parent, child, grand_child])
-    #     .agg({numerical_field: ["sum"]})
-    #     .to_dict()
-    # )
-    # sb_3 = data.groupby([parent, child]).agg({numerical_field: ["sum"]}).to_dict()
+    sb_2 = (
+        data.groupby([parent, child, grand_child])
+        .agg({numerical_field: ["sum"]})
+        .to_dict()
+    )
+    sb_3 = data.groupby([parent, child]).agg({numerical_field: ["sum"]}).to_dict()
 
-    # sb_4 = data.groupby([parent]).agg({numerical_field: ["sum"]}).to_dict()
+    sb_4 = data.groupby([parent]).agg({numerical_field: ["sum"]}).to_dict()
 
     u_parents = list(set(data[parent]))
     if 0 in u_parents:
@@ -273,47 +273,51 @@ def visualization(request):
         u_great_grand_children.remove(0)
         u_great_grand_children = sorted(u_great_grand_children)
 
-    # sb_ids = []
-    # sb_labels = []
-    # sb_values = []
-    # sb_parents = []
+    sb_ids = []
+    sb_labels = []
+    sb_values = []
+    sb_parents = []
 
-    # for p in u_parents:
-    #     sb_values.append(sb_4[("MSRP", "sum")][p])
-    #     sb_labels.append(p)
-    #     sb_parents.append("")
-    #     sb_ids.append(p)
+    for p in u_parents:
+        sb_values.append(sb_4[("MSRP", "sum")][p])
+        sb_labels.append(p)
+        sb_parents.append("")
+        sb_ids.append(p)
 
-    # for p in u_parents:
-    #     for i, c in enumerate(u_children):
-    #         sb_ids.append(str(p) + str(c))
-    #         sb_parents.append(p)
-    #         sb_labels.append(c)
-    #         try:
-    #             sb_values.append(sb_3[(numerical_field, "sum")][tuple([p, c])])
-    #         except:
-    #             sb_values.append(1)
-    #         for gc in u_grand_children:
-    #             try:
-    #                 sb_values.append((sb_2[(numerical_field, "sum")][tuple([p, c, gc])]))
-    #             except:
-    #                 sb_values.append(1)
-    #             sb_labels.append(gc)
-    #             sb_parents.append(str(p) + str(c))
-    #             sb_ids.append(str(p) + str(c) + str(gc))
-    #             for ggc in u_great_grand_children:
-    #                 try:
-    #                     sb_values.append(
-    #                         (sb_1[(numerical_field, "sum")][tuple([p, c, gc, ggc])])
-    #                     )
-    #                 except:
-    #                     sb_values.append(1)
-    #                 sb_labels.append(ggc)
-    #                 sb_parents.append(str(p) + str(c) + str(gc))
-    #                 sb_ids.append(str(p) + str(c) + str(gc) + str(ggc))
+    for p in u_parents:
+        for i, c in enumerate(u_children):
+            sb_ids.append(str(p) + str(c))
+            sb_parents.append(p)
+            sb_labels.append(c)
+            try:
+                sb_values.append(sb_3[(numerical_field, "sum")][tuple([p, c])])
+            except:
+                sb_values.append(1)
+            for gc in u_grand_children:
+                try:
+                    sb_values.append((sb_2[(numerical_field, "sum")][tuple([p, c, gc])]))
+                except:
+                    sb_values.append(1)
+                sb_labels.append(gc)
+                sb_parents.append(str(p) + str(c))
+                sb_ids.append(str(p) + str(c) + str(gc))
+                # for ggc in u_great_grand_children:
+                #     try:
+                #         sb_values.append(
+                #             (sb_1[(numerical_field, "sum")][tuple([p, c, gc, ggc])])
+                #         )
+                #     except:
+                #         sb_values.append(1)
+                #     sb_labels.append(ggc)
+                #     sb_parents.append(str(p) + str(c) + str(gc))
+                #     sb_ids.append(str(p) + str(c) + str(gc) + str(ggc))
 
 
     # Histogram
+    print(u_parents)
+    print(u_children)
+    print(u_grand_children)
+
     hist_parent_dict = {}
     for u_p in u_parents:
         hist_parent = data[data[parent] == u_p]
@@ -322,8 +326,8 @@ def visualization(request):
     hist_children_dict = {}
     for u_c in u_children:
         hist_children = data[data[child] == u_c]
-        hist_children_dict[u_p] = list(hist_children[numerical_field])
-    
+        hist_children_dict[u_c] = list(hist_children[numerical_field])
+
     hist_grand_children_dict = {}
     for u_g_c in u_grand_children:
         hist_grand_children = data[data[grand_child] == u_g_c]
@@ -365,10 +369,10 @@ def visualization(request):
             "field6_agg": field_6_agg,
             "field7_agg": field_7_agg,
             "field8_agg": field_8_agg,
-            # "sb_ids": sb_ids,
-            # "sb_labels": sb_labels,
-            # "sb_values": sb_values,
-            # "sb_parents": sb_parents,
+            "sb_ids": sb_ids,
+            "sb_labels": sb_labels,
+            "sb_values": sb_values,
+            "sb_parents": sb_parents,
             "hist_parent_dict": hist_parent_dict,
             "hist_children_dict": hist_children_dict,
             "hist_grand_children_dict": hist_grand_children_dict,

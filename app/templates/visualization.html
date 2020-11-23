@@ -519,7 +519,7 @@
                <div  id="horbarchart1"></div>
                <div  id="stackchart1"></div>
                 <div  id="horstackchart1"></div>
-               <!-- <div  id="sunburst1"></div> -->
+               <div  id="sunburst1"></div>
                 <div  id="linechart1"></div>
                <div  id="histogram1"></div>
                <div  id="boxplot1"></div>
@@ -544,7 +544,7 @@
                 <div  id="horbarchart2"></div>
                 <div  id="stackchart2"></div> 
                  <div  id="horstackchart2"></div> 
-                <!-- <div id="sunburst2"></div> -->
+                <div id="sunburst2"></div>
                  <div id="linechart2"></div> 
                  <div id="histogram2"></div> 
                  <div id="boxplot2"></div> 
@@ -567,7 +567,7 @@
                 <div  id="horbarchart3"></div>
                  <div  id="stackchart3"></div> 
                  <div  id="horstackchart3"></div> 
-                <!-- <div id="sunburst3"></div> -->
+                <div id="sunburst3"></div>
                 <div id="linechart3"></div>
                  <div id="histogram3"></div>
                  <div id="boxplot3"></div>
@@ -1119,7 +1119,9 @@ for ( var i = 0 ; i< data_new.length ; i++){
     }
 }
 
-console.log(sun_parent1,sun_child1,sun_grandchild1)
+console.log(parent1,child1,grandchild1)
+console.log(parent2,child2,grandchild2)
+console.log(parent3,child3,grandchild3)
 
 
     var pie_1x=[]
@@ -1607,34 +1609,34 @@ var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('horstackchart3', data, layout,config);
 
 
-// var data = [{
-//   type: "sunburst",
+var data = [{
+  type: "sunburst",
 
-//   //Parent child Ids for data mapping
-//   ids: {{sb_ids|safe}},
+  //Parent child Ids for data mapping
+  ids: {{sb_ids|safe}},
  
-//   values:{{sb_values|safe}},
-//   labels: {{sb_labels|safe}},
-//   parents: {{sb_parents|safe}},
-//   outsidetextfont: {size: 20, color: "#377eb8"},
-//   // leaf: {opacity: 0.4},
-//   marker: {line: {width: 2}},
-// }];
+  values:{{sb_values|safe}},
+  labels: {{sb_labels|safe}},
+  parents: {{sb_parents|safe}},
+  outsidetextfont: {size: 20, color: "#377eb8"},
+  // leaf: {opacity: 0.4},
+  marker: {line: {width: 2}},
+}];
 
-// var layout = {
-//    margin: {l: 0, r: 0, b: 0, t:0},
-//    sunburstcolorway:["#636efa","#ef553b","#00cc96"],
-//     plot_bgcolor:"#262c37",
-//         paper_bgcolor:"#262c37",
-//         font: {
-//       color: 'white'
-//         }
-//  };
+var layout = {
+   margin: {l: 0, r: 0, b: 0, t:0},
+   sunburstcolorway:["#636efa","#ef553b","#00cc96"],
+    plot_bgcolor:"#262c37",
+        paper_bgcolor:"#262c37",
+        font: {
+      color: 'white'
+        }
+ };
 
-//  var config = {responsive: true,displayModeBar: false}
-//  Plotly.newPlot('sunburst1', data, layout,config);
-//  Plotly.newPlot('sunburst2', data, layout,config);
-//  Plotly.newPlot('sunburst3', data, layout,config);
+ var config = {responsive: true,displayModeBar: false}
+ Plotly.newPlot('sunburst1', data, layout,config);
+ Plotly.newPlot('sunburst2', data, layout,config);
+ Plotly.newPlot('sunburst3', data, layout,config);
 
 // Plotly.newPlot('myDiv', data, layout);
 

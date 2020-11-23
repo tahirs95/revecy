@@ -203,6 +203,9 @@ def visualization(request):
         grand_child = request.POST.get("field3")
     field3_agg = data.groupby([grand_child]).agg({numerical_field: ["sum"]})
 
+    if "field4" in request.POST:
+        numerical_field = request.POST.get("field4")
+
     # Stack bar graph/ line chart
     field6 = data.groupby([parent, child]).agg({numerical_field: ["sum"]})
 
@@ -314,10 +317,6 @@ def visualization(request):
 
 
     # Histogram
-    print(u_parents)
-    print(u_children)
-    print(u_grand_children)
-
     hist_parent_dict = {}
     for u_p in u_parents:
         hist_parent = data[data[parent] == u_p]
@@ -349,11 +348,14 @@ def visualization(request):
             random_numerical_fields[1]: list(bubble_plot_parent[random_numerical_fields[1]]),
             random_numerical_fields[2]: list(bubble_plot_parent[random_numerical_fields[2]])
         }
-    # print(file_name)
+    
     return render(
         request,
         "visualization.html",
-        {   
+        {   "parent": parent,
+            "child": child,
+            "grand_child":grand_child,
+            "numerical_field": numerical_field,
             "mappings":mappings,
             "top_rows": top_rows,
             "shape": shape,
@@ -377,5 +379,6 @@ def visualization(request):
             "hist_children_dict": hist_children_dict,
             "hist_grand_children_dict": hist_grand_children_dict,
             "bubble_plot": bubble_plot,
+            "bubble_plot_marker_normalized": bubble_plot_marker_normalized
         },
     )

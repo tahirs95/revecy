@@ -507,17 +507,18 @@
             <form action="/visualization" method="POST" id="form_graphs">
                 {% csrf_token %}
             <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h3 class="font-weight-bold text-white mb-3">Plotting {{parent}}, {{child}}, {{grand_child}}</h3>
+                 </div>
             <div class="col-lg-4">
                 
                <table class="table table-borderless table-responsive table_height_custom">
               <thead>
                 <tr>
-                    <td>
-                        Field
+                    <td class="font-weight-bold">
+                        {{parent}}
                     </td>
-                    <td>
-                     Name
-                 </td>
+                    
                 </tr>
 
               </thead>                   
@@ -535,11 +536,6 @@
                <div  id="histogram1"></div>
                <div  id="boxplot1"></div>
                <div  id="bubblechart1"></div> 
-               <div class="select w-100">
-                <select class="slct_table" data-name="1" name="field1" id="select1" onchange="table_change(this)">
-                   
-                </select>
-            </div>
 
             </div>
             <div class="col-lg-4">
@@ -547,12 +543,10 @@
             <table class="table table-borderless table-responsive  table_height_custom">
                 <thead>
                     <tr>
-                        <td>
-                            Field
+                        <td class="font-weight-bold">
+                           {{child}}
                         </td>
-                        <td>
-                         Name
-                     </td>
+                        
                     </tr>
     
                   </thead>
@@ -571,22 +565,17 @@
                  <div id="histogram2"></div> 
                  <div id="boxplot2"></div> 
                 <div id="bubblechart2"></div>
-                <div class="select w-100">
-                    <select class="slct_table" data-name="2" name="field2" id="select2" onchange="table_change(this)">
-                    </select>
-                </div>
+                
             </div>
              <div class="col-lg-4">
                 
             <table class="table table-borderless table-responsive  table_height_custom">
                 <thead>
                     <tr>
-                        <td>
-                            Field
+                        <td class="font-weight-bold">
+                            {{grand_child}}
                         </td>
-                        <td>
-                         Name
-                     </td>
+                        
                     </tr>
     
                   </thead>
@@ -605,109 +594,56 @@
                  <div id="histogram3"></div>
                  <div id="boxplot3"></div>
                 <div id="bubblechart3"></div>
-                <div class="select w-100">
-                    <select class="slct_table" data-name="3" id="select3" name="field3" onchange="table_change(this)">
-                    </select>
-                </div>
+                
             </div> 
-            <!-- <div class="col-lg-2">
-                <div class="select w-100">
-                    <select class="slct_table" data-name="4" id="select4" onchange="table_change(this)">
-                    </select>
-                </div>
-                <table class="table table-borderless table-responsive" >
-                    <tbody id="table4">
-                        <tr>
-                            <td>Americans</td>
-                            <td>3.00</td>
-                        </tr>
-                        <tr>
-                         <td>Cappuccino</td>
-                         <td>3.00</td>
-                     </tr>
-                     <tr>
-                         <td>Double Espresso</td>
-                         <td>3.00</td>
-                     </tr>
-                     <tr>
-                         <td>Latte</td>
-                         <td>3.00</td>
-                     </tr>
-                     <tr>
-                         <td>Macchiato</td>
-                         <td>3.00</td>
-                     </tr>
-                     <tr>
-                         <td>Mint Chocolate</td>
-                         <td>3.00</td>
-                     </tr>
-                     <tr>
-                         <td>Mocha</td>
-                         <td>3.00</td>
-                     </tr>
-                     <tr>
-                         <td>White Mocha</td>
-                         <td>3.00</td>
-                     </tr>
-                    </tbody>
-                    </table>
-                    <canvas class="" id="piechart4">
-                    </canvas>
-                    <div  id="barchart4"></div>
-                    <div  id="horbarchart4"></div>
-     
-                </div>
-            <div class="col-lg-2">
-                <div class="select w-100">
-                    <select class="slct_table" data-name="5" id="select5" onchange="table_change(this)">
-                    </select>
-                </div>
-                <table class="table table-borderless table-responsive" >
-                    <tbody id="table5">
-                        <tr>
-                            <td>Americans</td>
-                            <td>3.00</td>
-                        </tr>
-                        <tr>
-                         <td>Cappuccino</td>
-                         <td>3.00</td>
-                     </tr>
-                     <tr>
-                         <td>Double Espresso</td>
-                         <td>3.00</td>
-                     </tr>
-                     <tr>
-                         <td>Latte</td>
-                         <td>3.00</td>
-                     </tr>
-                     <tr>
-                         <td>Macchiato</td>
-                         <td>3.00</td>
-                     </tr>
-                     <tr>
-                         <td>Mint Chocolate</td>
-                         <td>3.00</td>
-                     </tr>
-                     <tr>
-                         <td>Mocha</td>
-                         <td>3.00</td>
-                     </tr>
-                     <tr>
-                         <td>White Mocha</td>
-                         <td>3.00</td>
-                     </tr>
-                    </tbody>
-                    </table>
-                    <canvas class="" id="piechart5">
-                    </canvas>
-                    <div  id="barchart5"></div>
-                    <div  id="horbarchart5"></div>
-     
-            </div> -->
             
             </div>
             <div class="row">
-                <div class="submit mt-4">
+                <div class="col-lg-12 mb-3">
+                    <h5 class="text-white font-weight-bold">Select Dimensions</h5>
+                </div>
+                <div class="col-lg-4">
+                <div class="select w-100">
+                <select class="slct_table" data-name="1" name="field1" id="select1" onchange="table_change(this)">
+                    {% for item in column_names %}
+                    <option value="{{item}}">{{item}}</option>
+               {% endfor %}
+                </select>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="select w-100 ">
+                <select class="slct_table" data-name="2" name="field2" id="select2" onchange="table_change(this)">
+                    {% for item in column_names %}
+                    <option value="{{item}}">{{item}}</option>
+               {% endfor %}
+                </select>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="select w-100">
+                <select class="slct_table" data-name="3" name="field3" id="select3" onchange="table_change(this)">
+                    {% for item in column_names %}
+                    <option value="{{item}}">{{item}}</option>
+               {% endfor %}
+                </select>
+                </div>
+                </div>
+            </div>
+            <div class="row mt-4 ">
+                <div class="col-lg-12 mb-3">
+                    <h5 class="text-white font-weight-bold">Select Metric</h5>
+                </div>
+                <div class="col-lg-4">
+                    <div class="select w-100">
+                    <select class="slct_table" id="select4" name="field4" >
+                        {% for item in numerical_columns %}
+                             <option value="{{item}}">{{item}}</option>
+                        {% endfor %}
+                    </select>
+                    </div>
+                    </div>
+                <div class="submit col-lg-4">
                     <button type="submit" class="btn" id="submit_chart">Submit</button>
                 </div>
             </div>
@@ -959,13 +895,6 @@ if(counter == 10){
     })
 })
 
-var array_col =  {{column_names|safe}}
-array_col.forEach(function(elem){
-$("#slct_field").append("<option value="+elem+">"+elem+"</option>")
-document.querySelectorAll(".slct_table").forEach(function(item){
-    $(item).append("<option value="+elem+">"+elem+"</option>")
-})
-})
 // console.log({{file_name|safe}})
 
 function values_box(){
@@ -989,29 +918,29 @@ function values_box(){
 }
 var temp_row = 0;
 var table_data = {{field_summary|safe}}
-Object.keys(table_data["ORDERNUMBER"]).forEach(function(key) {
+Object.keys(table_data["STATUS"]).forEach(function(key) {
     // console.log(table_data[val.value][key])
   $("#table1").append("<tr id=row_temp"+temp_row+"><tr>")
   $("#row_temp"+temp_row).append("<td>"+key+"</td>")
-  $("#row_temp"+temp_row).append("<td>"+table_data["ORDERNUMBER"][key]+"</td>")
+  $("#row_temp"+temp_row).append("<td>"+table_data["STATUS"][key]+"</td>")
   temp_row++;
    })
-   Object.keys(table_data["ORDERNUMBER"]).forEach(function(key) {
+   Object.keys(table_data["STATUS"]).forEach(function(key) {
     // console.log(table_data[val.value][key])
   $("#table2").append("<tr id=row_temp"+temp_row+"><tr>")
   $("#row_temp"+temp_row).append("<td>"+key+"</td>")
-  $("#row_temp"+temp_row).append("<td>"+table_data["ORDERNUMBER"][key]+"</td>")
+  $("#row_temp"+temp_row).append("<td>"+table_data["STATUS"][key]+"</td>")
   temp_row++;
    })
-   Object.keys(table_data["ORDERNUMBER"]).forEach(function(key) {
+   Object.keys(table_data["STATUS"]).forEach(function(key) {
     // console.log(table_data[val.value][key])
   $("#table3").append("<tr id=row_temp"+temp_row+"><tr>")
   $("#row_temp"+temp_row).append("<td>"+key+"</td>")
-  $("#row_temp"+temp_row).append("<td>"+table_data["ORDERNUMBER"][key]+"</td>")
+  $("#row_temp"+temp_row).append("<td>"+table_data["STATUS"][key]+"</td>")
   temp_row++;
    })
     function table_change(val){
-        document.getElementById("submit_chart").innerText = "Submit Changes"
+        document.getElementById("submit_chart").innerText = "Plot Charts"
    console.log(val.getAttribute('data-name'))
    console.log(val.value)
    $("#table"+val.getAttribute('data-name')).html("")
@@ -1027,6 +956,36 @@ Object.keys(table_data["ORDERNUMBER"]).forEach(function(key) {
     }
 
     </script>
+
+{% if parent %}
+<script>
+    document.getElementById("select1").value = "{{parent|safe}}"
+    document.getElementById("select2").value = "{{child|safe}}"
+    document.getElementById("select3").value = "{{grand_child|safe}}"
+    Object.keys(table_data["{{parent|safe}}"]).forEach(function(key) {
+    // console.log(table_data[val.value][key])
+  $("#table1").append("<tr id=row_temp"+temp_row+"><tr>")
+  $("#row_temp"+temp_row).append("<td>"+key+"</td>")
+  $("#row_temp"+temp_row).append("<td>"+table_data["{{parent|safe}}"][key]+"</td>")
+  temp_row++;
+   })
+   Object.keys(table_data["{{child|safe}}"]).forEach(function(key) {
+    // console.log(table_data[val.value][key])
+  $("#table2").append("<tr id=row_temp"+temp_row+"><tr>")
+  $("#row_temp"+temp_row).append("<td>"+key+"</td>")
+  $("#row_temp"+temp_row).append("<td>"+table_data["{{child|safe}}"][key]+"</td>")
+  temp_row++;
+   })
+   Object.keys(table_data["{{grand_child|safe}}"]).forEach(function(key) {
+    // console.log(table_data[val.value][key])
+  $("#table3").append("<tr id=row_temp"+temp_row+"><tr>")
+  $("#row_temp"+temp_row).append("<td>"+key+"</td>")
+  $("#row_temp"+temp_row).append("<td>"+table_data["{{grand_child|safe}}"][key]+"</td>")
+  temp_row++;
+   })
+
+</script>
+{% endif %}
 
 {% if field1_agg %}
 <script>
@@ -1353,155 +1312,6 @@ var layout= {
   }
 }
 Plotly.newPlot('horbarchart3', data,layout,config);
-
-
-// var data = [{
-//   values: pie_4y,
-//   labels: pie_4x,
-//   type: 'pie',
-  
-// }];
-
-// var layout= {
-//       plot_bgcolor:"#262c37",
-//       paper_bgcolor:"#262c37",
-//       font: {
-//     color: 'white'
-//   }
-// }
-
-// var config = {responsive: true}
-// Plotly.newPlot('piechart4',data,layout,config);
-
-  
-// var ctx = document.getElementById('piechart4').getContext('2d');
-// var Data = {
-//     labels: pie_4x,
-//     datasets: [
-//         {
-//             data: pie_4y,
-//             backgroundColor: [
-//                 "#FF6384",
-//                 "#63FF84",
-//                 "#84FF63",
-//                 "red"
-//             ]
-//         }]
-// };
-
-// var myPieChart = new Chart(ctx, {
-//     type: 'pie',
-//     data: Data,
-// }); 
-// var data = [
-//   {
-//     x: pie_4x,
-//     y: pie_4y,
-//     type: 'bar'
-//   }
-// ];
-// var config = {responsive: true}
-// var layout= {
-//       plot_bgcolor:"#262c37",
-//       paper_bgcolor:"#262c37",
-//       font: {
-//     color: 'white'
-//   }
-// }
-
-// Plotly.newPlot('barchart4', data,layout,config);
-
-// var data = [{
-//   type: 'bar',
-//   x: pie_4x,
-//   y: pie_4y,
-//   orientation: 'h'
-// }];
-// var config = {responsive: true}
-// var layout= {
-//       plot_bgcolor:"#262c37",
-//       paper_bgcolor:"#262c37",
-//       font: {
-//     color: 'white'
-//   }
-// }
-// Plotly.newPlot('horbarchart4', data,layout,config);
-
-// var data = [{
-//   values: pie_5y,
-//   labels: pie_5x,
-//   type: 'pie',
-  
-// }];
-
-// var layout= {
-//       plot_bgcolor:"#262c37",
-//       paper_bgcolor:"#262c37",
-//       font: {
-//     color: 'white'
-//   },
-  
-// }
-
-// var config = {responsive: true}
-// Plotly.newPlot('piechart5',data,layout,config);
-    
-// var ctx = document.getElementById('piechart5').getContext('2d');
-// var Data = {
-//     labels: pie_5x,
-//     datasets: [
-//         {
-//             data: pie_5y,
-//             backgroundColor: [
-//                 "#FF6384",
-//                 "#63FF84",
-//                 "#84FF63",
-//                 "red",
-//                 "yellow",
-//                 "blue"
-//             ]
-//         }]
-// };
-
-// var myPieChart = new Chart(ctx, {
-//     type: 'pie',
-//     data: Data,
-// });
-
-// var data = [
-//   {
-//     x: pie_5x,
-//     y: pie_5y,
-//     type: 'bar'
-//   }
-// ];
-// var config = {responsive: true}
-// var layout= {
-//       plot_bgcolor:"#262c37",
-//       paper_bgcolor:"#262c37",
-//       font: {
-//     color: 'white'
-//   }
-// }
-
-// Plotly.newPlot('barchart5', data,layout,config);
-
-// var data = [{
-//   type: 'bar',
-//   x: pie_5x,
-//   y: pie_5y,
-//   orientation: 'h'
-// }];
-// var config = {responsive: true}
-// var layout= {
-//       plot_bgcolor:"#262c37",
-//       paper_bgcolor:"#262c37",
-//       font: {
-//     color: 'white'
-//   }
-// }
-// Plotly.newPlot('horbarchart5', data,layout,config);
-
 
 
 var traces1 = []
@@ -1909,16 +1719,20 @@ Object.keys(bubble_data).forEach(function(key) {
 })
 
 console.log(count_bubble , data_bubble)
+var num = data_bubble[i+2].reduce((a, b) => a + b, 0)
+var sum =  parseInt((num.toString()).substring(0,3))
+console.log(sum)
 traces1 = []
 temp_var = 0;
 for(var i = 0;i<count_bubble;i+=key_count){
     var obj = {
   x: [data_bubble[i].reduce((a, b) => a + b, 0)/data_bubble[i].length],
-  y: [data_bubble[i+1].length],
+  y: [sum],
   name:keys[temp_var],
   mode: 'markers',
   marker: {
-    size:  [data_bubble[i+2].reduce((a, b) => a + b, 0)/5000]
+    size:  [data_bubble[i+2].reduce((a, b) => a + b, 0)/10000]
+  
   }
 };
 temp_var++;

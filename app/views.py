@@ -293,7 +293,7 @@ def visualization(request):
     sb_parents = []
 
     for p in u_parents:
-        sb_values.append(sb_4[("MSRP", "sum")][p])
+        sb_values.append(sb_4[(numerical_field, "sum")][p])
         sb_labels.append(p)
         sb_parents.append("")
         sb_ids.append(p)

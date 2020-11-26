@@ -105,6 +105,11 @@ def visualization(request):
     for k, v in data_types_dict.items():
         if v == "str":
             string_columns.append(k)
+    
+    numerical_columns = []
+    for k, v in data_types_dict.items():
+        if v == "int":
+            numerical_columns.append(k)
 
     # Detecting date type field
     for k, v in data_types_dict.items():
@@ -354,7 +359,7 @@ def visualization(request):
             random_numerical_fields[1]: list(bubble_plot_parent[random_numerical_fields[1]]),
             random_numerical_fields[2]: list(bubble_plot_parent[random_numerical_fields[2]])
         }
-    
+    print(numerical_columns)
     return render(
         request,
         "visualization.html",
@@ -370,6 +375,7 @@ def visualization(request):
             "corr_data": corr_data,
             "data_types_dict_count": dict(data_types_dict_count),
             "column_names": string_columns,
+            "numerical_columns": numerical_columns,
             "field_summary": field_summary,
             "field1_agg": list(field1_agg.to_dict().values())[0],
             "field2_agg": list(field2_agg.to_dict().values())[0],

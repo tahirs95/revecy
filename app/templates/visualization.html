@@ -508,7 +508,7 @@
                 {% csrf_token %}
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h3 class="font-weight-bold text-white mb-3">Plotting {{parent}}, {{child}}, {{grand_child}}</h3>
+                    <h3 class="font-weight-bold text-white mb-3">Plotting {{parent}}, {{child}}, {{grand_child}} and {{numerical_field}}</h3>
                  </div>
             <div class="col-lg-4">
                 
@@ -528,14 +528,22 @@
                <div id="piechart1">
                </div>
                <div  id="barchart1"></div>
+               <p class="text-center x_axis_label">{{parent}}</p>
                <div  id="horbarchart1"></div>
+               <p class="text-center x_axis_label">{{parent}}</p>
                <div  id="stackchart1"></div>
+               <p class="text-center x_axis_label">{{parent}}</p>
                 <div  id="horstackchart1"></div>
+                <p class="text-center x_axis_label">{{parent}}</p>
                <div  id="sunburst1"></div>
                 <div  id="linechart1"></div>
+                <p class="text-center x_axis_label">{{parent}}</p>
                <div  id="histogram1"></div>
+               <p class="text-center x_axis_label">{{parent}}</p>
                <div  id="boxplot1"></div>
-               <div  id="bubblechart1"></div> 
+               <p class="text-center x_axis_label">{{parent}}</p>
+               <div  id="bubblechart1"></div>
+               <p class="text-center x_axis_label">{{parent}}</p> 
 
             </div>
             <div class="col-lg-4">
@@ -557,15 +565,23 @@
                 <div class="" id="piechart2">
                 </div>
                 <div  id="barchart2"></div>
+                <p class="text-center x_axis_label">{{child}}</p>
                 <div  id="horbarchart2"></div>
+                <p class="text-center x_axis_label">{{child}}</p>
                 <div  id="stackchart2"></div> 
+                <p class="text-center x_axis_label">{{child}}</p>
                  <div  id="horstackchart2"></div> 
+                 <p class="text-center x_axis_label">{{child}}</p>
                 <div id="sunburst2"></div>
                  <div id="linechart2"></div> 
+                 <p class="text-center x_axis_label">{{child}}</p>
                  <div id="histogram2"></div> 
+                 <p class="text-center x_axis_label">{{child}}</p>
                  <div id="boxplot2"></div> 
+                 <p class="text-center x_axis_label">{{child}}</p>
                 <div id="bubblechart2"></div>
-                
+                <p class="text-center x_axis_label">{{child}}</p>
+
             </div>
              <div class="col-lg-4">
                 
@@ -586,14 +602,22 @@
                 <div  id="piechart3">
                 </div>
                 <div  id="barchart3"></div>
+                <p class="text-center x_axis_label">{{grand_child}}</p>
                 <div  id="horbarchart3"></div>
+                <p class="text-center x_axis_label">{{grand_child}}</p>
                  <div  id="stackchart3"></div> 
+                 <p class="text-center x_axis_label">{{grand_child}}</p>
                  <div  id="horstackchart3"></div> 
+                 <p class="text-center x_axis_label">{{grand_child}}</p>
                 <div id="sunburst3"></div>
                 <div id="linechart3"></div>
+                <p class="text-center x_axis_label">{{grand_child}}</p>
                  <div id="histogram3"></div>
+                 <p class="text-center x_axis_label">{{grand_child}}</p>
                  <div id="boxplot3"></div>
+                 <p class="text-center x_axis_label">{{grand_child}}</p>
                 <div id="bubblechart3"></div>
+                <p class="text-center x_axis_label">{{grand_child}}</p>
                 
             </div> 
             
@@ -962,6 +986,7 @@ Object.keys(table_data["STATUS"]).forEach(function(key) {
     document.getElementById("select1").value = "{{parent|safe}}"
     document.getElementById("select2").value = "{{child|safe}}"
     document.getElementById("select3").value = "{{grand_child|safe}}"
+    document.getElementById("select4").value = "{{numerical_field|safe}}"
     Object.keys(table_data["{{parent|safe}}"]).forEach(function(key) {
     // console.log(table_data[val.value][key])
   $("#table1").append("<tr id=row_temp"+temp_row+"><tr>")
@@ -1148,11 +1173,16 @@ var layout= {
       font: {
     color: 'white'
   },
+ 
   yaxis: {
-    automargin: true
-  },
-  xaxis: {
-    automargin: true
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#7f7f7f'
+      }
+    }
   }
 }
 
@@ -1172,6 +1202,16 @@ var layout= {
       paper_bgcolor:"#262c37",
       font: {
     color: 'white'
+  },
+  yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
   }
 }
 
@@ -1189,6 +1229,16 @@ var layout= {
       paper_bgcolor:"#262c37",
       font: {
     color: 'white'
+  },
+  yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
   }
 }
 Plotly.newPlot('horbarchart1', data,layout,config);
@@ -1232,6 +1282,16 @@ var layout= {
       paper_bgcolor:"#262c37",
       font: {
     color: 'white'
+  },
+  yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
   }
 }
 
@@ -1249,6 +1309,16 @@ var layout= {
       paper_bgcolor:"#262c37",
       font: {
     color: 'white'
+  },
+  yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
   }
 }
 Plotly.newPlot('horbarchart2', data,layout,config);
@@ -1292,6 +1362,16 @@ var layout= {
       paper_bgcolor:"#262c37",
       font: {
     color: 'white'
+  },
+  yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
   }
 }
 
@@ -1309,6 +1389,16 @@ var layout= {
       paper_bgcolor:"#262c37",
       font: {
     color: 'white'
+  },
+  yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
   }
 }
 Plotly.newPlot('horbarchart3', data,layout,config);
@@ -1331,7 +1421,17 @@ var data = traces1;
 var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
-     color: 'white'}
+     color: 'white'},
+     yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
 };
 var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('stackchart1', data, layout,config);
@@ -1353,7 +1453,17 @@ var data = traces2;
 var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
-     color: 'white'}
+     color: 'white'},
+     yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
 };
 var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('stackchart2', data, layout,config);
@@ -1377,7 +1487,17 @@ var data = traces3;
 var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
-     color: 'white'}
+     color: 'white'},
+     yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
 };
 var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('stackchart3', data, layout,config);
@@ -1400,7 +1520,17 @@ var data = traces1;
 var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
-     color: 'white'}
+     color: 'white'},
+     yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
 };
 var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('horstackchart1', data, layout,config);
@@ -1423,7 +1553,17 @@ var data = traces2;
 var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
-     color: 'white'}
+     color: 'white'},
+     yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
 };
 var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('horstackchart2', data, layout,config);
@@ -1446,7 +1586,17 @@ var data = traces3;
 var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
-     color: 'white'}
+     color: 'white'},
+     yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
 };
 var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('horstackchart3', data, layout,config);
@@ -1473,7 +1623,17 @@ var layout = {
         paper_bgcolor:"#262c37",
         font: {
       color: 'white'
-        }
+        },
+        yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
  };
 
  var config = {responsive: true,displayModeBar: false}
@@ -1501,7 +1661,17 @@ var data = traces1;
 var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
-     color: 'white'}
+     color: 'white'},
+     yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
 };
 var config = {responsive: true,displayModeBar: false}
 
@@ -1526,7 +1696,17 @@ var data = traces2;
 var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
-     color: 'white'}
+     color: 'white'},
+     yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
 };
 var config = {responsive: true,displayModeBar: false}
 
@@ -1551,7 +1731,17 @@ var data = traces3;
 var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
-     color: 'white'}
+     color: 'white'},
+     yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
 };
 var config = {responsive: true,displayModeBar: false}
 
@@ -1580,7 +1770,17 @@ Object.keys(histog1).forEach(function(key) {
 var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
-     color: 'white'}
+     color: 'white'},
+     yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
 };
 var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('histogram1', data,layout,config);
@@ -1603,7 +1803,17 @@ Object.keys(histog2).forEach(function(key) {
 var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
-     color: 'white'}
+     color: 'white'},
+     yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
 };
 var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('histogram2', data,layout,config);
@@ -1625,7 +1835,17 @@ Object.keys(histog3).forEach(function(key) {
 var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
-     color: 'white'}
+     color: 'white'},
+     yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
 };
 var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('histogram3', data,layout,config);
@@ -1649,7 +1869,17 @@ var layout = {
        paper_bgcolor:"#262c37",
        font: {
      color: 'white'
-       }
+       },
+       yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
 };
 var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('boxplot1', data, layout,config);
@@ -1673,7 +1903,17 @@ var layout = {
        paper_bgcolor:"#262c37",
        font: {
      color: 'white'
-       }
+       },
+       yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
 };
 var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('boxplot2', data, layout,config);
@@ -1697,14 +1937,24 @@ var layout = {
        paper_bgcolor:"#262c37",
        font: {
      color: 'white'
-       }
+       },
+       yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
 };
 var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('boxplot3', data, layout,config);
 
 
 var bubble_data = {{bubble_plot|safe}}
-
+console.log("bubble",bubble_data)
 var data_bubble ={}
 var count_bubble=0;
 var key_count = 0;
@@ -1719,19 +1969,21 @@ Object.keys(bubble_data).forEach(function(key) {
 })
 
 console.log(count_bubble , data_bubble)
-var num = data_bubble[i+2].reduce((a, b) => a + b, 0)
-var sum =  parseInt((num.toString()).substring(0,3))
-console.log(sum)
+var num1 = data_bubble[i+2].reduce((a, b) => a + b, 0)
+var sum1 =  parseInt((num1.toString()).substring(0,3))
+var num2 = data_bubble[i+1].reduce((a, b) => a + b, 0)
+var sum2 =  parseInt((num2.toString()).substring(0,3))
+var sum = sum1>sum2? sum1:sum2;
 traces1 = []
 temp_var = 0;
 for(var i = 0;i<count_bubble;i+=key_count){
     var obj = {
   x: [data_bubble[i].reduce((a, b) => a + b, 0)/data_bubble[i].length],
-  y: [sum],
+  y: [data_bubble[i+1].length],
   name:keys[temp_var],
   mode: 'markers',
   marker: {
-    size:  [data_bubble[i+2].reduce((a, b) => a + b, 0)/10000]
+    size:  [data_bubble[i+2].reduce((a, b) => a + b, 0)/sum]
   
   }
 };
@@ -1745,7 +1997,17 @@ var layout = {
        paper_bgcolor:"#262c37",
        font: {
      color: 'white'
-       }
+       },
+       yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
 };
 var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('bubblechart1', data, layout,config);

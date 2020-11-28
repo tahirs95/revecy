@@ -2159,7 +2159,19 @@ var num1 = data_bubble[i+2].reduce((a, b) => a + b, 0)
 var sum1 =  parseInt((num1.toString()).substring(0,3))
 var num2 = data_bubble[i+1].reduce((a, b) => a + b, 0)
 var sum2 =  parseInt((num2.toString()).substring(0,3))
-var sum = sum1>sum2? sum1:sum2;
+var num3 = data_bubble[i+2].reduce((a, b) => a + b, 0)
+var sum3 =  parseInt((num3.toString()).substring(0,3))
+var sum;
+if(sum1>sum2 && sum1 > sum3){
+  sum = sum1
+}
+else if(sum2>sum1 && sum2 >sum3){
+  sum = sum2
+}
+else{
+  sum = sum3;
+}
+console.log(sum)
 traces1 = []
 temp_var = 0;
 for(var i = 0;i<count_bubble;i+=key_count){

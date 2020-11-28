@@ -528,22 +528,14 @@
                <div id="piechart1">
                </div>
                <div  id="barchart1"></div>
-               <p class="text-center x_axis_label">{{parent}}</p>
                <div  id="horbarchart1"></div>
-               <p class="text-center x_axis_label">{{parent}}</p>
                <div  id="stackchart1"></div>
-               <p class="text-center x_axis_label">{{parent}}</p>
                 <div  id="horstackchart1"></div>
-                <p class="text-center x_axis_label">{{parent}}</p>
                <div  id="sunburst1"></div>
                 <div  id="linechart1"></div>
-                <p class="text-center x_axis_label">{{parent}}</p>
                <div  id="histogram1"></div>
-               <p class="text-center x_axis_label">{{parent}}</p>
                <div  id="boxplot1"></div>
-               <p class="text-center x_axis_label">{{parent}}</p>
                <div  id="bubblechart1"></div>
-               <p class="text-center x_axis_label">{{parent}}</p> 
 
             </div>
             <div class="col-lg-4">
@@ -565,22 +557,14 @@
                 <div class="" id="piechart2">
                 </div>
                 <div  id="barchart2"></div>
-                <p class="text-center x_axis_label">{{child}}</p>
                 <div  id="horbarchart2"></div>
-                <p class="text-center x_axis_label">{{child}}</p>
                 <div  id="stackchart2"></div> 
-                <p class="text-center x_axis_label">{{child}}</p>
                  <div  id="horstackchart2"></div> 
-                 <p class="text-center x_axis_label">{{child}}</p>
                 <div id="sunburst2"></div>
                  <div id="linechart2"></div> 
-                 <p class="text-center x_axis_label">{{child}}</p>
                  <div id="histogram2"></div> 
-                 <p class="text-center x_axis_label">{{child}}</p>
                  <div id="boxplot2"></div> 
-                 <p class="text-center x_axis_label">{{child}}</p>
                 <div id="bubblechart2"></div>
-                <p class="text-center x_axis_label">{{child}}</p>
 
             </div>
              <div class="col-lg-4">
@@ -602,22 +586,14 @@
                 <div  id="piechart3">
                 </div>
                 <div  id="barchart3"></div>
-                <p class="text-center x_axis_label">{{grand_child}}</p>
                 <div  id="horbarchart3"></div>
-                <p class="text-center x_axis_label">{{grand_child}}</p>
                  <div  id="stackchart3"></div> 
-                 <p class="text-center x_axis_label">{{grand_child}}</p>
                  <div  id="horstackchart3"></div> 
-                 <p class="text-center x_axis_label">{{grand_child}}</p>
                 <div id="sunburst3"></div>
                 <div id="linechart3"></div>
-                <p class="text-center x_axis_label">{{grand_child}}</p>
                  <div id="histogram3"></div>
-                 <p class="text-center x_axis_label">{{grand_child}}</p>
                  <div id="boxplot3"></div>
-                 <p class="text-center x_axis_label">{{grand_child}}</p>
                 <div id="bubblechart3"></div>
-                <p class="text-center x_axis_label">{{grand_child}}</p>
                 
             </div> 
             
@@ -1180,7 +1156,7 @@ var layout= {
       font: {
         family: 'Courier New, monospace',
         size: 18,
-        color: '#7f7f7f'
+        color: '#FFFFFF'
       }
     }
   }
@@ -1202,6 +1178,16 @@ var layout= {
       paper_bgcolor:"#262c37",
       font: {
     color: 'white'
+  },
+  xaxis: {
+    title: {
+      text: '{{parent|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
   },
   yaxis: {
     title: {
@@ -1229,6 +1215,16 @@ var layout= {
       paper_bgcolor:"#262c37",
       font: {
     color: 'white'
+  },
+  xaxis: {
+    title: {
+      text: '{{parent|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
   },
   yaxis: {
     title: {
@@ -1283,6 +1279,16 @@ var layout= {
       font: {
     color: 'white'
   },
+  xaxis: {
+    title: {
+      text: '{{child|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
   yaxis: {
     title: {
       text: '{{numerical_field|safe}}',
@@ -1309,6 +1315,16 @@ var layout= {
       paper_bgcolor:"#262c37",
       font: {
     color: 'white'
+  },
+  xaxis: {
+    title: {
+      text: '{{child|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
   },
   yaxis: {
     title: {
@@ -1363,6 +1379,16 @@ var layout= {
       font: {
     color: 'white'
   },
+  xaxis: {
+    title: {
+      text: '{{grand_child|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
   yaxis: {
     title: {
       text: '{{numerical_field|safe}}',
@@ -1389,6 +1415,16 @@ var layout= {
       paper_bgcolor:"#262c37",
       font: {
     color: 'white'
+  },
+  xaxis: {
+    title: {
+      text: '{{grand_child|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
   },
   yaxis: {
     title: {
@@ -1422,6 +1458,16 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
      color: 'white'},
+     xaxis: {
+    title: {
+      text: '{{parent|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
      yaxis: {
     title: {
       text: '{{numerical_field|safe}}',
@@ -1454,6 +1500,16 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
      color: 'white'},
+     xaxis: {
+    title: {
+      text: '{{child|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
      yaxis: {
     title: {
       text: '{{numerical_field|safe}}',
@@ -1488,6 +1544,16 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
      color: 'white'},
+     xaxis: {
+    title: {
+      text: '{{grand_child|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
      yaxis: {
     title: {
       text: '{{numerical_field|safe}}',
@@ -1521,6 +1587,16 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
      color: 'white'},
+     xaxis: {
+    title: {
+      text: '{{parent|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
      yaxis: {
     title: {
       text: '{{numerical_field|safe}}',
@@ -1554,6 +1630,16 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
      color: 'white'},
+     xaxis: {
+    title: {
+      text: '{{child|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
      yaxis: {
     title: {
       text: '{{numerical_field|safe}}',
@@ -1587,6 +1673,16 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
      color: 'white'},
+     xaxis: {
+    title: {
+      text: '{{grand_child|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
      yaxis: {
     title: {
       text: '{{numerical_field|safe}}',
@@ -1662,6 +1758,16 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
      color: 'white'},
+     xaxis: {
+    title: {
+      text: '{{parent|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
      yaxis: {
     title: {
       text: '{{numerical_field|safe}}',
@@ -1697,6 +1803,16 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
      color: 'white'},
+     xaxis: {
+    title: {
+      text: '{{child|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
      yaxis: {
     title: {
       text: '{{numerical_field|safe}}',
@@ -1732,6 +1848,16 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
      color: 'white'},
+     xaxis: {
+    title: {
+      text: '{{grand_child|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
      yaxis: {
     title: {
       text: '{{numerical_field|safe}}',
@@ -1771,6 +1897,16 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
      color: 'white'},
+     xaxis: {
+    title: {
+      text: '{{parent|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
      yaxis: {
     title: {
       text: '{{numerical_field|safe}}',
@@ -1804,6 +1940,16 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
      color: 'white'},
+     xaxis: {
+    title: {
+      text: '{{child|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
      yaxis: {
     title: {
       text: '{{numerical_field|safe}}',
@@ -1836,6 +1982,16 @@ var layout = {barmode: 'stack', plot_bgcolor:"#262c37",
        paper_bgcolor:"#262c37",
        font: {
      color: 'white'},
+     xaxis: {
+    title: {
+      text: '{{grand_child|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
      yaxis: {
     title: {
       text: '{{numerical_field|safe}}',
@@ -1870,6 +2026,16 @@ var layout = {
        font: {
      color: 'white'
        },
+       xaxis: {
+    title: {
+      text: '{{parent|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
        yaxis: {
     title: {
       text: '{{numerical_field|safe}}',
@@ -1904,6 +2070,16 @@ var layout = {
        font: {
      color: 'white'
        },
+       xaxis: {
+    title: {
+      text: '{{child|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
        yaxis: {
     title: {
       text: '{{numerical_field|safe}}',
@@ -1938,6 +2114,16 @@ var layout = {
        font: {
      color: 'white'
        },
+       xaxis: {
+    title: {
+      text: '{{grand_child|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
        yaxis: {
     title: {
       text: '{{numerical_field|safe}}',
@@ -1998,6 +2184,16 @@ var layout = {
        font: {
      color: 'white'
        },
+       xaxis: {
+    title: {
+      text: '{{parent|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
        yaxis: {
     title: {
       text: '{{numerical_field|safe}}',
@@ -2011,7 +2207,61 @@ var layout = {
 };
 var config = {responsive: true,displayModeBar: false}
 Plotly.newPlot('bubblechart1', data, layout,config);
+var layout = {
+    plot_bgcolor:"#262c37",
+       paper_bgcolor:"#262c37",
+       font: {
+     color: 'white'
+       },
+       xaxis: {
+    title: {
+      text: '{{child|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
+       yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
+};
 Plotly.newPlot('bubblechart2', data, layout,config);
+var layout = {
+    plot_bgcolor:"#262c37",
+       paper_bgcolor:"#262c37",
+       font: {
+     color: 'white'
+       },
+       xaxis: {
+    title: {
+      text: '{{grand_child|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    },
+  },
+       yaxis: {
+    title: {
+      text: '{{numerical_field|safe}}',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: '#FFFFFF'
+      }
+    }
+  }
+};
 Plotly.newPlot('bubblechart3', data, layout,config);
 
  </script>

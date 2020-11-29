@@ -133,6 +133,9 @@ html,body{
 .button{
     position: relative;
 }
+.lower_case{
+    text-transform: lowercase;
+}
 .button button{
     font-family: Montserrat-Regular;
     border: 1px solid #fff;

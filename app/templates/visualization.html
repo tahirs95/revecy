@@ -115,6 +115,9 @@
                                 <label class="select-name">Select Field</label>
                                 <div class="select">
                                     <select name="select_field" id="slct_field" required>
+                                      {% for item in column_names %}
+                    <option value="{{item}}">{{item}}</option>
+               {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -508,7 +511,7 @@
                 {% csrf_token %}
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h3 class="font-weight-bold text-white mb-3">Plotting {{parent}}, {{child}}, {{grand_child}} and {{numerical_field}}</h3>
+                    <h3 class="font-weight-bold text-white mb-3">Plotting <span class="lower_case">{{parent}}</span>, <span class="lower_case">{{child}}</span>, <span class="lower_case">{{grand_child}}</span> and <span class="lower_case">{{numerical_field}}</span></h3>
                  </div>
             <div class="col-lg-4">
                 

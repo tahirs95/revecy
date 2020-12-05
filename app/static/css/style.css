@@ -133,6 +133,9 @@ html,body{
 .button{
     position: relative;
 }
+.lower_case{
+    text-transform: lowercase;
+}
 .button button{
     font-family: Montserrat-Regular;
     border: 1px solid #fff;
@@ -731,4 +734,10 @@ select {
 
 .table_height_custom{
     height: 350px !important;
+}
+
+.x_axis_label{
+    font-family: 'Courier New, monospace';
+    font-size: 18 !important;
+    color: white;   
 }

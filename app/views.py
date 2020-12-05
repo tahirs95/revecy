@@ -87,6 +87,9 @@ def visualization(request):
         elif "float" in str(v):
             data_types_dict[k] = "float"
             data_types_dict_count["float"] += 1
+        elif "bool" in str(v):
+            data_types_dict[k] = "bool"
+            data_types_dict_count["bool"] += 1
     
 
     data_types_dict_count["date"] = 1
@@ -130,7 +133,7 @@ def visualization(request):
     data = data.sort_values(date_type_field).reset_index(drop=True)
 
     for index, row in data.iterrows():
-        dt = row["ORDERDATE"]
+        dt = row[date_type_field]
 
         if index == 0:
             first_month = dt.month
@@ -157,6 +160,10 @@ def visualization(request):
             field_summary[k]["populated_ratio"] = not_null[k]
             field_summary[k]["unique_values"] = len(data[k].unique())
             unique_items_count_for_str_fields[k] = len(data[k].unique())
+        elif data_types_dict[k] == "bool":
+            field_summary[k]["populated_ratio"] = not_null[k]
+            field_summary[k]["unique_values"] = len(data[k].unique())
+            # unique_items_count_for_str_fields[k] = len(data[k].unique())
         elif data_types_dict[k] == "int" or data_types_dict[k] == "float":
             field_summary[k]["populated_ratio"] = not_null[k]
             field_summary[k]["unique_values"] = len(data[k].unique())
@@ -164,7 +171,7 @@ def visualization(request):
             field_summary[k]["std"] = data[k].std()
             field_summary[k]["min"] = data[k].min()
             field_summary[k]["max"] = data[k].max()
-            unique_items_count_for_str_fields[k] = len(data[k].unique())
+            # unique_items_count_for_str_fields[k] = len(data[k].unique())
         elif data_types_dict[k] == "datetime":
             field_summary[k]["populated_ratio"] = not_null[k]
             field_summary[k]["unique_values"] = len(data[k].unique())
@@ -173,8 +180,7 @@ def visualization(request):
         sorted(unique_items_count_for_str_fields.items(), key=lambda x: x[1])
     )
     unique_items_count_for_str_fields_sorted
-
-    corr_data = data.corr(method="pearson").to_dict()
+    corr_data = data.corr(method="pearson").fillna(0).to_dict()
 
     i = 0
     for k, v in unique_items_count_for_str_fields_sorted.items():
@@ -190,7 +196,7 @@ def visualization(request):
         elif i == 5:
             great_great_grand_child = k
 
-    numerical_field = "MSRP"
+    numerical_field = numerical_columns[0]
     gb1 = data.groupby([parent, child]).agg(
         {numerical_field: ["mean", "sum", "count"]}
     )
@@ -198,20 +204,20 @@ def visualization(request):
     # Pie chart, Bar chart
     if "field1" in request.POST:
         parent = request.POST.get("field1")
-    else:
-        parent = "STATUS"
+    # else:
+    #     parent = "STATUS"
     field1_agg = data.groupby([parent]).agg({numerical_field: ["sum"]})
 
     if "field2" in request.POST:
         child = request.POST.get("field2")
-    else:
-        child = "STATUS"
+    # else:
+    #     child = "STATUS"
     field2_agg = data.groupby([child]).agg({numerical_field: ["sum"]})
 
     if "field3" in request.POST:
         grand_child = request.POST.get("field3")
-    else:
-        grand_child = "STATUS"
+    # else:
+    #     grand_child = "STATUS"
     field3_agg = data.groupby([grand_child]).agg({numerical_field: ["sum"]})
 
     if "field4" in request.POST:
@@ -359,7 +365,7 @@ def visualization(request):
             random_numerical_fields[1]: list(bubble_plot_parent[random_numerical_fields[1]]),
             random_numerical_fields[2]: list(bubble_plot_parent[random_numerical_fields[2]])
         }
-    print(numerical_columns)
+    print(top_rows)
     return render(
         request,
         "visualization.html",

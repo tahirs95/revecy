@@ -733,6 +733,8 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
+    {{top_rows|json_script:"foobar"}}
+
 {% if mappings %}
 <script>
 
@@ -877,8 +879,8 @@ var data_count =  {{data_types_dict_count|safe}};
  })
 
 
- var csv =  {{top_rows|safe}};
 var counter = 0;
+var csv = JSON.parse(document.getElementById("foobar").innerHTML);
 Object.keys(csv).forEach(function(key) {
     $("#table_heading").append(`<th class="tbl-heading" scope="col">`+key+`</th>`)
     $("#table_body").append(`<tr class="d-flex white-space" id=row`+counter+`></tr>`)
@@ -918,27 +920,27 @@ function values_box(){
 }
 var temp_row = 0;
 var table_data = {{field_summary|safe}}
-Object.keys(table_data["STATUS"]).forEach(function(key) {
-    // console.log(table_data[val.value][key])
-  $("#table1").append("<tr id=row_temp"+temp_row+"><tr>")
-  $("#row_temp"+temp_row).append("<td>"+key+"</td>")
-  $("#row_temp"+temp_row).append("<td>"+table_data["STATUS"][key]+"</td>")
-  temp_row++;
-   })
-   Object.keys(table_data["STATUS"]).forEach(function(key) {
-    // console.log(table_data[val.value][key])
-  $("#table2").append("<tr id=row_temp"+temp_row+"><tr>")
-  $("#row_temp"+temp_row).append("<td>"+key+"</td>")
-  $("#row_temp"+temp_row).append("<td>"+table_data["STATUS"][key]+"</td>")
-  temp_row++;
-   })
-   Object.keys(table_data["STATUS"]).forEach(function(key) {
-    // console.log(table_data[val.value][key])
-  $("#table3").append("<tr id=row_temp"+temp_row+"><tr>")
-  $("#row_temp"+temp_row).append("<td>"+key+"</td>")
-  $("#row_temp"+temp_row).append("<td>"+table_data["STATUS"][key]+"</td>")
-  temp_row++;
-   })
+// Object.keys(table_data["STATUS"]).forEach(function(key) {
+//     // console.log(table_data[val.value][key])
+//   $("#table1").append("<tr id=row_temp"+temp_row+"><tr>")
+//   $("#row_temp"+temp_row).append("<td>"+key+"</td>")
+//   $("#row_temp"+temp_row).append("<td>"+table_data["STATUS"][key]+"</td>")
+//   temp_row++;
+//    })
+//    Object.keys(table_data["STATUS"]).forEach(function(key) {
+//     // console.log(table_data[val.value][key])
+//   $("#table2").append("<tr id=row_temp"+temp_row+"><tr>")
+//   $("#row_temp"+temp_row).append("<td>"+key+"</td>")
+//   $("#row_temp"+temp_row).append("<td>"+table_data["STATUS"][key]+"</td>")
+//   temp_row++;
+//    })
+//    Object.keys(table_data["STATUS"]).forEach(function(key) {
+//     // console.log(table_data[val.value][key])
+//   $("#table3").append("<tr id=row_temp"+temp_row+"><tr>")
+//   $("#row_temp"+temp_row).append("<td>"+key+"</td>")
+//   $("#row_temp"+temp_row).append("<td>"+table_data["STATUS"][key]+"</td>")
+//   temp_row++;
+//    })
     function table_change(val){
         document.getElementById("submit_chart").innerText = "Plot Charts"
    console.log(val.getAttribute('data-name'))

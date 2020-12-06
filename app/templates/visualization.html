@@ -2160,12 +2160,12 @@ Object.keys(bubble_data).forEach(function(key) {
     })
 })
 
-console.log(count_bubble , data_bubble)
-var num1 = data_bubble[i+2].reduce((a, b) => a + b, 0)
+console.log("arr",count_bubble , data_bubble)
+var num1 = data_bubble[0].reduce((a, b) => a + b, 0)
 var sum1 =  parseInt((num1.toString()).substring(0,3))
-var num2 = data_bubble[i+1].reduce((a, b) => a + b, 0)
+var num2 = data_bubble[1].reduce((a, b) => a + b, 0)
 var sum2 =  parseInt((num2.toString()).substring(0,3))
-var num3 = data_bubble[i+2].reduce((a, b) => a + b, 0)
+var num3 = data_bubble[2].reduce((a, b) => a + b, 0)
 var sum3 =  parseInt((num3.toString()).substring(0,3))
 var sum;
 if(sum1>sum2 && sum1 > sum3){
@@ -2180,8 +2180,23 @@ else{
 console.log(sum)
 traces1 = []
 temp_var = 0;
-for(var i = 0;i<count_bubble;i+=key_count){
-    var obj = {
+console.log("key",key_count)
+  if(key_count == 1){
+    var obj = {      
+  x: [data_bubble[0].reduce((a, b) => a + b, 0)/data_bubble[i].length],
+  y: [data_bubble[1].length],
+  name:keys[temp_var],
+  mode: 'markers',
+  marker: {
+    size:  [data_bubble[2].reduce((a, b) => a + b, 0)/sum]
+  
+  }
+};
+traces1.push(obj)
+  }
+  else{
+for(var i = 0; i< count_bubble;i+=key_count){
+    var obj = {      
   x: [data_bubble[i].reduce((a, b) => a + b, 0)/data_bubble[i].length],
   y: [data_bubble[i+1].length],
   name:keys[temp_var],
@@ -2191,9 +2206,11 @@ for(var i = 0;i<count_bubble;i+=key_count){
   
   }
 };
+}
 temp_var++;
 traces1.push(obj)
 }
+
 console.log(traces1)
 var data = traces1;
 var layout = {

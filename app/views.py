@@ -99,11 +99,11 @@ def visualization(request):
 
     for k, v in sample_data.items():
         try:
-            dt = parser.parse(v)
+            # dt = parser.parse(str(v))
+            d = pd.to_datetime(str(v))
             data_types_dict[k] = "datetime"
         except:
             continue
-    
     string_columns = []
     for k, v in data_types_dict.items():
         if v == "str":
@@ -127,7 +127,7 @@ def visualization(request):
     data["year_index"] = None
 
     for index, row in data.iterrows():
-        dt = parser.parse(row[date_type_field])
+        dt = parser.parse(str(row[date_type_field]))
         data[date_type_field][index] = dt
 
     data = data.sort_values(date_type_field).reset_index(drop=True)

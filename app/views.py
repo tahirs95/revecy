@@ -40,6 +40,8 @@ def send_email(request):
             name, phone, user_email, message
         )
         email("Registration Completed", message, ["inquiry@revecy.com"])
+        return JsonResponse({"message": "Email sent."})
+    else:
         return JsonResponse({"message": "only POST request is entertained"})
 
 

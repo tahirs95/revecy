@@ -506,7 +506,16 @@ html,body{
     flex-wrap: wrap;
   }
   #contact{
-      width: 90%;
+      width: 100%;
+  }
+  .modal-header{
+      border-bottom: none !important;
+  }
+  .hide{
+      display: none;
+  }
+  .w-90{
+      width: 90% !important;
   }
   .mr-8{
     margin-right: 8px;

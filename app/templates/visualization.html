@@ -80,7 +80,7 @@
                 <div class="col-lg-4 d-flex justify-content-center mt-3">
                     <div class="button">
                         <button type="button" class="btn" id="file_btn">Get Data</button>
-                        <form method="post" action="/visualization" id="form" enctype="multipart/form-data">    
+                        <form method="post" action="/" id="form" enctype="multipart/form-data">    
                             {% csrf_token %}   
                             <input type ="text" name="file_name" id="random_name" style="display:none">                  
                             <input type="file" id="theFile" name="csv_file" accept=".csv"/>
@@ -508,7 +508,7 @@
         </div>
 
         <div class="py-5 container">
-            <form action="/visualization" method="POST" id="form_graphs">
+            <form action="/" method="POST" id="form_graphs">
                 {% csrf_token %}
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -725,7 +725,7 @@
 
 
     </div>
-    <form method="POST" action="/visualization" id="form2">
+    <form method="POST" action="/" id="form2">
         {% csrf_token %}
         <input type="text" name="mappings" id="mappings" style="display: none;">
         <input type="text" name="file_name" id="file_name" style="display: none;">

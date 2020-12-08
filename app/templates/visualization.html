@@ -2155,6 +2155,7 @@ Object.keys(bubble_data).forEach(function(key) {
    key_count++;
    keys.push(key)
     Object.keys(bubble_data[key]).forEach(function(key2) {
+      console.log(key2)
         data_bubble[count_bubble] = bubble_data[key][key2]
           count_bubble++;
     })
@@ -2168,47 +2169,50 @@ var sum2 =  parseInt((num2.toString()).substring(0,3))
 var num3 = data_bubble[2].reduce((a, b) => a + b, 0)
 var sum3 =  parseInt((num3.toString()).substring(0,3))
 var sum;
-if(sum1>sum2 && sum1 > sum3){
-  sum = sum1
-}
-else if(sum2>sum1 && sum2 >sum3){
-  sum = sum2
-}
-else{
-  sum = sum3;
-}
-console.log(sum)
+// if(sum1>sum2 && sum1 > sum3){
+//   sum = sum1
+// }
+// else if(sum2>sum1 && sum2 >sum3){
+//   sum = sum2
+// }
+// else{
+//   sum = sum3;
+// }
+// console.log(sum)
 traces1 = []
 temp_var = 0;
 console.log("key",key_count)
   if(key_count == 1){
     var obj = {      
-  x: [data_bubble[0].reduce((a, b) => a + b, 0)/data_bubble[i].length],
+  x: [data_bubble[0].length],
   y: [data_bubble[1].length],
   name:keys[temp_var],
   mode: 'markers',
   marker: {
-    size:  [data_bubble[2].reduce((a, b) => a + b, 0)/sum]
+    size:  [data_bubble[2].reduce((a, b) => a + b, 0)],
+    sizeref: 2.0 * Math.max(...data_bubble[2]) / (([data_bubble[2].reduce((a, b) => a + b, 0)]/data_bubble[2].length) *2),
   
   }
 };
 traces1.push(obj)
   }
+
   else{
+  console.log(count_bubble)
 for(var i = 0; i< count_bubble;i+=key_count){
     var obj = {      
-  x: [data_bubble[i].reduce((a, b) => a + b, 0)/data_bubble[i].length],
+  x: [data_bubble[i].length],
   y: [data_bubble[i+1].length],
   name:keys[temp_var],
   mode: 'markers',
   marker: {
-    size:  [data_bubble[i+2].reduce((a, b) => a + b, 0)/sum]
-  
+    size:  [data_bubble[i+2].length/ Math.max(...data_bubble[i+2])]
   }
 };
-}
 temp_var++;
 traces1.push(obj)
+}
+
 }
 
 console.log(traces1)

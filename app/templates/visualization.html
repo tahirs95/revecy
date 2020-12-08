@@ -10,7 +10,7 @@
 
     <title>Revecy</title>
 </head>
-<body>
+<body onload="createCaptcha()">
     <div class="bg-clr">
         <div class="revecy pt-3">
             <nav class="navbar navbar-expand-lg navbar-dark navbar-light px-0">
@@ -56,7 +56,7 @@
                         <p class="mt-3 display-4 text-white">Breathe life into your data in minutes and ponder on the real problem
                         </p>
                     </div>
-                    <button class="btn btn-lg mt-5 text-white  btn-outline-light" onclick="window.location.href='/#contact'">Learn More</button>
+                    <button class="btn btn-lg mt-5 text-white  btn-outline-light" data-toggle="modal" data-target="#contact-form">Learn More</button>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 bannerright d-flex justify-content-end">
@@ -662,7 +662,7 @@
                     <div class="w-100">
                         <p class="mt-3 display-4 text-white">At Your Fingure Tips</p>
                     </div>
-                    <button class="btn btn-lg mt-5 text-white  btn-outline-light" onclick="window.location.href='/#contact'">Learn More</button>
+                    <button class="btn btn-lg mt-5 text-white  btn-outline-light" data-toggle="modal" data-target="#contact-form">Learn More</button>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 bannerright d-flex justify-content-end">
@@ -731,7 +731,57 @@
         <input type="text" name="file_name" id="file_name" style="display: none;">
     </form>
 
-    <script src="/static/js/jquery-3.5.1.slim.min.js"></script>
+
+
+    <div class="modal fade" id="contact-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn-close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+             <div class="row">
+              <div class="alert alert-success w-90 mx-auto text-center hide" id="popup">Thank you for contacting us</div>
+              <div class="col-md-12 col-sm-12 equal">
+                <h3 class="display-4 text-left mx-auto" id="contact">Get In <span>Touch</span></h3>
+                <form class="d-flex justify-content-center" onsubmit="validateCaptcha()">
+                    <div class="form-row">
+                        <div class="form-group mt-2 col-12">
+                            <input type="text" class="form-control" placeholder="Name" id="name" required>
+                        </div>
+                        <div class="form-group mt-2 col-12">
+                            <input type="email" class="form-control" placeholder="Email" id="email" required>
+                        </div>
+                        <div class="form-group mt-2 col-12">
+                            <input type="text" class="form-control" placeholder="Phone (xxx-xxx-xxxx)" id="phone"   pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="Pattern xxx-xxx-xxxx" required>
+                        </div>
+                        <div class="form-group mt-2 col-12">
+                            <div class="form-group">
+                                <textarea class="form-control" rows = "3" placeholder="Message" id="message" required></textarea>
+                            </div>
+                        </div>  
+                        <div class="form-group col-12" id="captcha-design">
+                            <div class="form-group">
+                                    <div id="captcha">
+                                    </div>
+                                    <input class="form-control" type="text" placeholder="Captcha" id="cpatchaTextBox" required/>
+                                 
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <button type="submit" class="btn btn-success btn-lg">Send</button>
+                        </div>
+                    </form>
+                    </div>
+             </div>
+          </div>
+         
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/static/js/popper.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -770,7 +820,56 @@
 
 {% endif %}
     <script>
-  
+  var code;
+        function createCaptcha() {
+        //clear the contents of captcha div first 
+        document.getElementById('captcha').innerHTML = "";
+        var charsArray =
+        "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@!#$%^&*";
+        var lengthOtp = 6;
+        var captcha = [];
+        for (var i = 0; i < lengthOtp; i++) {
+            //below code will not allow Repetition of Characters
+            var index = Math.floor(Math.random() * charsArray.length + 1); //get the next character from the array
+            if (captcha.indexOf(charsArray[index]) == -1)
+            captcha.push(charsArray[index]);
+            else i--;
+        }
+        var canv = document.createElement("canvas");
+        canv.id = "captcha";
+        canv.width = 100;
+        canv.height = 50;
+        var ctx = canv.getContext("2d");
+        ctx.font = "25px Georgia";
+        ctx.strokeText(captcha.join(""), 0, 30);
+        //storing captcha so that can validate you can save it somewhere else according to your specific requirements
+        code = captcha.join("");
+        console.log(document.getElementById("captcha"))
+        document.getElementById("captcha").appendChild(canv); // adds the canvas to the body element
+        
+        }
+        function validateCaptcha() {
+        event.preventDefault();
+        debugger
+        if (document.getElementById("cpatchaTextBox").value == code) {
+            var settings = {
+  "url": "/email",
+  "method": "POST",
+  "data": JSON.stringify({"name":document.getElementById("name").value,"phone":document.getElementById("phone").value,"email":document.getElementById("email").value,"message":document.getElementById("message").value}),
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+  document.getElementById("popup").classList.remove("hide");
+  setTimeout(function(){
+    window.location.reload();
+  },3000)
+});
+        }else{
+            alert("Invalid Captcha. try Again");
+            createCaptcha();
+        }
+        }
    var obj_box = {};       
         $(document).ready(function(){
             $("#mapButton").click(function(){
@@ -2189,7 +2288,7 @@ console.log("key",key_count)
   name:keys[temp_var],
   mode: 'markers',
   marker: {
-    size:  [data_bubble[2].reduce((a, b) => a + b, 0)],
+    size:  [data_bubble[2].length],
     sizeref: 2.0 * Math.max(...data_bubble[2]) / (([data_bubble[2].reduce((a, b) => a + b, 0)]/data_bubble[2].length) *2),
   
   }
@@ -2206,7 +2305,8 @@ for(var i = 0; i< count_bubble;i+=key_count){
   name:keys[temp_var],
   mode: 'markers',
   marker: {
-    size:  [data_bubble[i+2].length/ Math.max(...data_bubble[i+2])]
+    size:  [data_bubble[i+2].length],
+    sizeref: 2.0 * Math.max(...data_bubble[i+2]) / (([data_bubble[i+2].reduce((a, b) => a + b, 0)]/data_bubble[i+2].length) *2),
   }
 };
 temp_var++;
